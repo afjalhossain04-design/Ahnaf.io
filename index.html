@@ -1,109 +1,160 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My YouTube Channels</title>
+    <title>Gamers Edge 09 | Pink Edition</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Pink Gradient Background */
-        body {
-            background: linear-gradient(135deg, #2d0a1a 0%, #5e1a3d 100%); 
-            color: #ffe0f0;
-            font-family: 'Segoe UI', Arial, sans-serif;
+        :root {
+            --primary: #FF2D7D; /* Vibrant Pink */
+            --secondary: #FF85B3; /* Soft Pink */
+            --dark: #2D0A15; /* Dark Maroonish Pink */
+            --light: #FFF0F5; /* Lavender Blush */
+            --white: #ffffff;
+        }
+
+        html { scroll-behavior: smooth; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Poppins', sans-serif; background: var(--light); color: var(--dark); }
+
+        /* Keyframes for 1.5s Animation */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 1rem 5%;
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            height: 100vh;
-            margin: 0;
-            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(255, 45, 125, 0.1);
+            position: sticky; top: 0; z-index: 1000;
         }
+        .logo { font-size: 1.5rem; font-weight: 700; color: var(--primary); }
 
-        .container {
+        nav ul { display: flex; list-style: none; }
+        nav ul li { margin-left: 20px; }
+        nav ul li a { text-decoration: none; color: var(--dark); font-weight: 600; transition: 0.3s; }
+        nav ul li a:hover { color: var(--primary); }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: var(--white);
+            padding: 100px 5%;
             text-align: center;
-            max-width: 400px;
-            width: 90%;
-            background: rgba(255, 255, 255, 0.05);
-            padding: 30px;
-            border-radius: 20px;
-            border: 1px solid rgba(255, 105, 180, 0.2);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
         }
+        .hero h1 { font-size: 3rem; animation: fadeInUp 1.5s ease; }
 
-        h1 {
-            margin-bottom: 30px;
-            font-size: 1.8rem;
-            color: #ff85c1;
-            text-shadow: 0 0 10px rgba(255, 133, 193, 0.5);
-            animation: fadeIn 1.5s ease-out;
+        /* Container & Cards */
+        .container { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
+        .section-title { margin: 40px 0 20px; border-left: 6px solid var(--primary); padding-left: 15px; color: var(--primary); }
+
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
+        
+        .card { 
+            background: var(--white); padding: 25px; border-radius: 20px; 
+            box-shadow: 0 10px 30px rgba(255, 45, 125, 0.05);
+            transition: 0.5s ease;
+            animation: fadeInUp 1.5s ease forwards;
         }
+        .card:hover { transform: translateY(-15px); box-shadow: 0 20px 40px rgba(255, 45, 125, 0.2); }
 
-        /* Pink Button Styling */
-        .yt-link {
-            display: block;
-            background: #ff4d94; /* Vibrant Pink */
-            color: white;
-            text-decoration: none;
-            padding: 15px;
-            margin: 12px 0;
-            border-radius: 50px; /* Rounded pill shape */
-            font-weight: bold;
-            font-size: 1rem;
-            border: 2px solid transparent;
-            transition: all 0.3s ease;
-            
-            /* The 1.5s Slide-In Animation */
-            animation: slideUp 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-            opacity: 0;
+        .video-wrapper { 
+            position: relative; padding-bottom: 56.25%; height: 0; 
+            border-radius: 15px; overflow: hidden; background: #000;
         }
+        .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
 
-        /* Staggered entry */
-        .yt-link:nth-child(2) { animation-delay: 0.1s; }
-        .yt-link:nth-child(3) { animation-delay: 0.3s; }
-        .yt-link:nth-child(4) { animation-delay: 0.5s; }
-
-        .yt-link:hover {
-            background: transparent;
-            border-color: #ff85c1;
-            color: #ff85c1;
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(255, 77, 148, 0.4);
+        /* Buttons */
+        .btn { 
+            display: inline-block; background: var(--primary); color: white; 
+            padding: 12px 30px; border-radius: 50px; text-decoration: none; 
+            margin-top: 20px; font-weight: 600; transition: 0.4s;
+            border: 2px solid var(--primary);
         }
+        .btn:hover { background: transparent; color: var(--primary); }
 
-        /* Animation Definitions */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(40px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+        /* Channels Section */
+        .channel-link { color: var(--primary); font-weight: bold; text-decoration: none; }
+        
+        footer { background: var(--dark); color: white; text-align: center; padding: 50px; margin-top: 80px; }
     </style>
 </head>
 <body>
 
+    <header>
+        <div class="logo">GAMERS EDGE 09 🌸</div>
+        <nav>
+            <ul>
+                <li><a href="#channels">Channels</a></li>
+                <li><a href="#videos">Videos</a></li>
+                <li><a href="#downloads">Downloads</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>Welcome to Pink Gaming Paradise</h1>
+        <p>Explore my channels, watch shorts and download exclusive mods</p>
+    </section>
+
     <div class="container">
-        <h1>My YouTube Channels</h1>
+        
+        <h2 id="channels" class="section-title">My YouTube Channels</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>Game Explorer Gamerz</h3>
+                <p>সবচেয়ে লেটেস্ট গেমপ্লে ভিডিওর জন্য।</p>
+                <a href="https://youtube.com/@gameexplorergamerz" target="_blank" class="btn">Visit Channel</a>
+            </div>
+            <div class="card">
+                <h3>Gameverse Explorer</h3>
+                <p>গেমিং মহাবিশ্বের সব রহস্য এখানে।</p>
+                <a href="https://youtube.com/@gameverseexplorergamer" target="_blank" class="btn">Visit Channel</a>
+            </div>
+            <div class="card">
+                <h3>Run Till Craft</h3>
+                <p>ক্র্যাফটিং এবং সারভাইভাল গেমের জন্য।</p>
+                <a href="https://youtube.com/@runtillcraft" target="_blank" class="btn">Visit Channel</a>
+            </div>
+        </div>
 
-        <a href="https://youtube.com/@gameexplorergamerz" class="yt-link" target="_blank">
-            Game Explorer Gamerz
-        </a>
+        <h2 id="videos" class="section-title">Latest Shorts & Reels</h2>
+        <div class="grid">
+            <div class="card">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed?listType=user_uploads&user=gameexplorergamerz"></iframe>
+                </div>
+                <h3 style="margin-top:15px;">Recent Uploads</h3>
+            </div>
+            <div class="card">
+                <h3>Pink Gaming Reels</h3>
+                <p>Instagram ও Facebook রিলস এখানে যোগ করুন।</p>
+                <div style="aspect-ratio: 9/16; background: #ffe4ef; border-radius: 10px; margin-top:10px;"></div>
+            </div>
+        </div>
 
-        <a href="https://youtube.com/@gameverseexplorergamer" class="yt-link" target="_blank">
-            Gameverse Explorer Gamer
-        </a>
+        <h2 id="downloads" class="section-title">Exclusive Downloads</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>Pink Edition Mod Pack</h3>
+                <p>Format: .zip | Size: 1.2GB</p>
+                <a href="#" class="btn">💖 Download Now</a>
+            </div>
+        </div>
 
-        <a href="https://youtube.com/@runtillcraft" class="yt-link" target="_blank">
-            RunTillCraft
-        </a>
     </div>
+
+    <footer>
+        <p>&copy; 2026 Gamers Edge 09 | Pink Aesthetic Hub</p>
+    </footer>
 
 </body>
 </html>
