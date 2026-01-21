@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My YouTube Channels</title>
     <style>
-        /* Basic Page Setup */
+        /* Pink Gradient Background */
         body {
-            background-color: #0f0f0f; /* Dark YouTube theme */
-            color: white;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #2d0a1a 0%, #5e1a3d 100%); 
+            color: #ffe0f0;
+            font-family: 'Segoe UI', Arial, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -22,41 +22,51 @@
             text-align: center;
             max-width: 400px;
             width: 90%;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 105, 180, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
 
         h1 {
             margin-bottom: 30px;
-            font-size: 2rem;
-            /* Animation for the title */
+            font-size: 1.8rem;
+            color: #ff85c1;
+            text-shadow: 0 0 10px rgba(255, 133, 193, 0.5);
             animation: fadeIn 1.5s ease-out;
         }
 
-        /* Link Styling */
+        /* Pink Button Styling */
         .yt-link {
             display: block;
-            background: #ff0000;
+            background: #ff4d94; /* Vibrant Pink */
             color: white;
             text-decoration: none;
             padding: 15px;
-            margin: 10px 0;
-            border-radius: 8px;
+            margin: 12px 0;
+            border-radius: 50px; /* Rounded pill shape */
             font-weight: bold;
-            font-size: 1.1rem;
-            transition: transform 0.3s, background 0.3s;
+            font-size: 1rem;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
             
             /* The 1.5s Slide-In Animation */
-            animation: slideUp 1.5s ease-out forwards;
+            animation: slideUp 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
             opacity: 0;
         }
 
-        /* Staggered delay so they pop in nicely */
-        .yt-link:nth-child(2) { animation-delay: 0.2s; }
-        .yt-link:nth-child(3) { animation-delay: 0.4s; }
-        .yt-link:nth-child(4) { animation-delay: 0.6s; }
+        /* Staggered entry */
+        .yt-link:nth-child(2) { animation-delay: 0.1s; }
+        .yt-link:nth-child(3) { animation-delay: 0.3s; }
+        .yt-link:nth-child(4) { animation-delay: 0.5s; }
 
         .yt-link:hover {
-            background: #cc0000;
-            transform: scale(1.05);
+            background: transparent;
+            border-color: #ff85c1;
+            color: #ff85c1;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 77, 148, 0.4);
         }
 
         /* Animation Definitions */
@@ -68,7 +78,7 @@
         @keyframes slideUp {
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(40px);
             }
             to {
                 opacity: 1;
