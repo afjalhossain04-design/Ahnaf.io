@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="bn">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gamers Edge 09 | All-in-One Gaming Hub</title>
+    <title>Gamers Edge 09 | Animated Hub</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -12,56 +11,105 @@
             --dark: #121212;
             --light: #f4f7f6;
             --white: #ffffff;
+            --accent: #00d4ff;
         }
 
+        /* Smooth Scrolling */
+        html { scroll-behavior: smooth; }
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Poppins', sans-serif; background: var(--light); color: var(--dark); line-height: 1.6; }
+        body { font-family: 'Poppins', sans-serif; background: var(--light); color: var(--dark); overflow-x: hidden; }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideInLeft {
+            from { transform: translateX(-100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        .animate-fade { animation: fadeInUp 0.8s ease-out forwards; }
 
         /* Header */
         header {
-            background: var(--white);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
             padding: 1rem 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             position: sticky; top: 0; z-index: 1000;
+            animation: slideInLeft 0.5s ease;
         }
-        .logo { font-size: 1.5rem; font-weight: 700; color: var(--primary); }
+        .logo { font-size: 1.5rem; font-weight: 700; color: var(--primary); letter-spacing: 1px; }
+
         nav ul { display: flex; list-style: none; }
         nav ul li { margin-left: 20px; }
-        nav ul li a { text-decoration: none; color: var(--dark); font-weight: 500; font-size: 0.9rem; transition: 0.3s; }
-        nav ul li a:hover { color: var(--primary); }
-
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, #1a73e8 0%, #0d47a1 100%);
-            color: var(--white);
-            padding: 80px 5%;
-            text-align: center;
+        nav ul li a { 
+            text-decoration: none; color: var(--dark); font-weight: 500; 
+            position: relative; padding-bottom: 5px;
         }
-        .hero h1 { font-size: 2.5rem; margin-bottom: 10px; }
+        nav ul li a::after {
+            content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px;
+            background: var(--primary); transition: 0.3s;
+        }
+        nav ul li a:hover::after { width: 100%; }
+
+        /* Hero Section with Animation */
+        .hero {
+            background: linear-gradient(135deg, #1a73e8 0%, #00d4ff 100%);
+            color: var(--white);
+            padding: 100px 5%;
+            text-align: center;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+        }
+        .hero h1 { font-size: 3rem; margin-bottom: 15px; animation: fadeInUp 1s ease; }
+        .hero p { font-size: 1.2rem; opacity: 0.9; animation: fadeInUp 1.2s ease; }
 
         /* Content Grid */
         .container { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
-        .section-title { margin-bottom: 30px; border-left: 5px solid var(--primary); padding-left: 15px; }
+        .section-title { margin: 40px 0 20px; border-left: 5px solid var(--primary); padding-left: 15px; }
 
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
-        .card { background: var(--white); padding: 20px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; }
+        
+        /* Card Hover Animations */
+        .card { 
+            background: var(--white); padding: 20px; border-radius: 15px; 
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            opacity: 0; /* for scroll animation */
+            animation: fadeInUp 0.8s ease forwards;
+        }
+        .card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(26, 115, 232, 0.2); }
 
-        /* Video Embed Aspect Ratio */
-        .video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 8px; background: #000; }
+        .video-wrapper { 
+            position: relative; padding-bottom: 56.25%; height: 0; 
+            border-radius: 10px; overflow: hidden; background: #000;
+        }
         .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
 
-        /* Reels/Shorts Grid (Portrait Style) */
-        .reels-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; }
-        .reel-box { aspect-ratio: 9/16; background: #ddd; border-radius: 10px; overflow: hidden; }
+        /* Download Button Animation */
+        .btn { 
+            display: inline-block; background: var(--primary); color: white; 
+            padding: 12px 25px; border-radius: 30px; text-decoration: none; 
+            margin-top: 15px; font-weight: 600; transition: 0.3s;
+            box-shadow: 0 4px 15px rgba(26, 115, 232, 0.3);
+        }
+        .btn:hover { background: var(--dark); transform: scale(1.05); }
 
-        /* Download Buttons */
-        .btn { display: inline-block; background: var(--primary); color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none; margin-top: 10px; font-weight: 600; }
-        .btn:hover { background: #1557b0; }
+        /* Reels Section (Vertical) */
+        .reels-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 15px; }
+        .reel-box { 
+            aspect-ratio: 9/16; background: #eee; border-radius: 12px; 
+            overflow: hidden; border: 2px solid transparent; transition: 0.3s;
+        }
+        .reel-box:hover { border-color: var(--accent); }
 
-        footer { background: var(--dark); color: white; text-align: center; padding: 30px; margin-top: 50px; }
+        footer { background: var(--dark); color: white; text-align: center; padding: 40px; margin-top: 80px; }
     </style>
 </head>
 <body>
@@ -79,21 +127,21 @@
     </header>
 
     <section class="hero">
-        <h1>Welcome to Gaming Edge</h1>
-        <p>Watch latest Reels, Shorts, and Download Game Files</p>
+        <h1>Level Up Your Game</h1>
+        <p>Your Ultimate Destination for Reels, Shorts, and Game Mods</p>
     </section>
 
     <div class="container">
         
-        <h2 id="youtube" class="section-title">YouTube Videos & Shorts</h2>
+        <h2 id="youtube" class="section-title">Latest YouTube Content</h2>
         <div class="grid">
-            <div class="card">
+            <div class="card" style="animation-delay: 0.2s;">
                 <div class="video-wrapper">
-                    <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID"></iframe>
+                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ"></iframe>
                 </div>
-                <h3>Latest Long Video</h3>
+                <h3 style="margin-top:15px;">Epic Gameplay Title</h3>
             </div>
-            <div class="card">
+            <div class="card" style="animation-delay: 0.4s;">
                 <h3>YouTube Shorts</h3>
                 <div class="reels-grid">
                     <div class="reel-box"></div>
@@ -102,38 +150,36 @@
             </div>
         </div>
 
-        <h2 id="facebook" class="section-title">Facebook & Instagram Reels</h2>
+        <h2 id="facebook" class="section-title">Reels & Social Feed</h2>
         <div class="grid">
-            <div class="card">
+            <div class="card" style="animation-delay: 0.6s;">
                 <h3>Facebook Reels</h3>
-                <div class="reel-box">
-                    </div>
+                <div class="reel-box"></div>
             </div>
-            <div class="card">
+            <div class="card" style="animation-delay: 0.8s;">
                 <h3>Instagram Reels</h3>
-                <div class="reel-box">
-                    </div>
+                <div class="reel-box"></div>
             </div>
         </div>
 
-        <h2 id="downloads" class="section-title">Game Files (.rar, .zip, .apk)</h2>
+        <h2 id="downloads" class="section-title">Gaming Assets (.zip, .rar, .apk)</h2>
         <div class="grid">
-            <div class="card">
-                <h3>GTA 5 Mod File</h3>
-                <p>Format: .zip | Size: 450MB</p>
-                <a href="YOUR_GOOGLE_DRIVE_LINK" class="btn">Download Now</a>
+            <div class="card" style="animation-delay: 1s;">
+                <h3>Ultimate Mod Pack</h3>
+                <p>Format: .rar | Size: 1.2GB</p>
+                <a href="#" class="btn">🚀 Download Server 1</a>
             </div>
-            <div class="card">
-                <h3>Gaming Tool APK</h3>
-                <p>Format: .apk | Size: 25MB</p>
-                <a href="YOUR_GOOGLE_DRIVE_LINK" class="btn">Download Now</a>
+            <div class="card" style="animation-delay: 1.2s;">
+                <h3>Game Booster Pro</h3>
+                <p>Format: .apk | Size: 45MB</p>
+                <a href="#" class="btn">📥 Direct Download</a>
             </div>
         </div>
 
     </div>
 
     <footer>
-        <p>&copy; 2026 Gamers Edge 09. Built with GitHub.</p>
+        <p>&copy; 2026 Gamers Edge 09 | Hosted on GitHub Pages</p>
     </footer>
 
 </body>
