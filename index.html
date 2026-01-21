@@ -1,1 +1,140 @@
-<h1>Hello</h1>
+
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gamers Edge 09 | All-in-One Gaming Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1A73E8;
+            --dark: #121212;
+            --light: #f4f7f6;
+            --white: #ffffff;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Poppins', sans-serif; background: var(--light); color: var(--dark); line-height: 1.6; }
+
+        /* Header */
+        header {
+            background: var(--white);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky; top: 0; z-index: 1000;
+        }
+        .logo { font-size: 1.5rem; font-weight: 700; color: var(--primary); }
+        nav ul { display: flex; list-style: none; }
+        nav ul li { margin-left: 20px; }
+        nav ul li a { text-decoration: none; color: var(--dark); font-weight: 500; font-size: 0.9rem; transition: 0.3s; }
+        nav ul li a:hover { color: var(--primary); }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #1a73e8 0%, #0d47a1 100%);
+            color: var(--white);
+            padding: 80px 5%;
+            text-align: center;
+        }
+        .hero h1 { font-size: 2.5rem; margin-bottom: 10px; }
+
+        /* Content Grid */
+        .container { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
+        .section-title { margin-bottom: 30px; border-left: 5px solid var(--primary); padding-left: 15px; }
+
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
+        .card { background: var(--white); padding: 20px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+
+        /* Video Embed Aspect Ratio */
+        .video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 8px; background: #000; }
+        .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+
+        /* Reels/Shorts Grid (Portrait Style) */
+        .reels-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; }
+        .reel-box { aspect-ratio: 9/16; background: #ddd; border-radius: 10px; overflow: hidden; }
+
+        /* Download Buttons */
+        .btn { display: inline-block; background: var(--primary); color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none; margin-top: 10px; font-weight: 600; }
+        .btn:hover { background: #1557b0; }
+
+        footer { background: var(--dark); color: white; text-align: center; padding: 30px; margin-top: 50px; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">GAMERS EDGE 09</div>
+        <nav>
+            <ul>
+                <li><a href="#youtube">YouTube</a></li>
+                <li><a href="#facebook">Facebook</a></li>
+                <li><a href="#instagram">Instagram</a></li>
+                <li><a href="#downloads">Downloads</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>Welcome to Gaming Edge</h1>
+        <p>Watch latest Reels, Shorts, and Download Game Files</p>
+    </section>
+
+    <div class="container">
+        
+        <h2 id="youtube" class="section-title">YouTube Videos & Shorts</h2>
+        <div class="grid">
+            <div class="card">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID"></iframe>
+                </div>
+                <h3>Latest Long Video</h3>
+            </div>
+            <div class="card">
+                <h3>YouTube Shorts</h3>
+                <div class="reels-grid">
+                    <div class="reel-box"></div>
+                    <div class="reel-box"></div>
+                </div>
+            </div>
+        </div>
+
+        <h2 id="facebook" class="section-title">Facebook & Instagram Reels</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>Facebook Reels</h3>
+                <div class="reel-box">
+                    </div>
+            </div>
+            <div class="card">
+                <h3>Instagram Reels</h3>
+                <div class="reel-box">
+                    </div>
+            </div>
+        </div>
+
+        <h2 id="downloads" class="section-title">Game Files (.rar, .zip, .apk)</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>GTA 5 Mod File</h3>
+                <p>Format: .zip | Size: 450MB</p>
+                <a href="YOUR_GOOGLE_DRIVE_LINK" class="btn">Download Now</a>
+            </div>
+            <div class="card">
+                <h3>Gaming Tool APK</h3>
+                <p>Format: .apk | Size: 25MB</p>
+                <a href="YOUR_GOOGLE_DRIVE_LINK" class="btn">Download Now</a>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Gamers Edge 09. Built with GitHub.</p>
+    </footer>
+
+</body>
+</html>
