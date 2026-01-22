@@ -81,13 +81,31 @@ footer{text-align:center;padding:40px;color:#777;border-top:1px solid #222}
 </section><div class="container">
 <div id="channels" class="section"><h2 data-i18n="channels">My Channels</h2></div>
 <div class="grid">
-<div class="card"><i class="fa-brands fa-youtube"></i><h3>Run Till Craft</h3></div>
+<a class="card" href="https://youtube.com/@runtillcraft" target="_blank">
+<i class="fa-brands fa-youtube"></i>
+<h3>Run Till Craft</h3>
+</a><a class="card" href="https://youtube.com/@gameexplorergamerz" target="_blank">
+<i class="fa-brands fa-youtube"></i>
+<h3>Game Explorer Gamerz</h3>
+</a><a class="card" href="https://youtube.com/@gameverseexplorergamer" target="_blank">
+<i class="fa-brands fa-youtube"></i>
+<h3>Gameverse Explorer</h3>
+</a>
+</div>
 <div class="card"><i class="fa-brands fa-youtube"></i><h3>Game Explorer Gamerz</h3></div>
 <div class="card"><i class="fa-brands fa-youtube"></i><h3>Gameverse Explorer</h3></div>
 </div><div id="videos" class="section"><h2 data-i18n="videos">Latest Videos</h2></div>
 <div class="video-grid" id="videoGrid"></div>
-</div><section id="admin">
-<h3>Admin Panel</h3>
+</div><section id="admin" style="display:none;">
+<h3>Admin Control Panel</h3>
+<input id="adminPass" type="password" placeholder="Enter Admin Password">
+<button onclick="unlockAdmin()">Unlock</button>
+<hr style="margin:15px 0;border-color:#333"><label>Primary Color</label> <input type="color" id="themeColor" onchange="changeTheme(this.value)">
+
+<label style="display:block;margin-top:10px">Website Title</label> <input id="siteTitle" placeholder="Website Title"> <button onclick="updateTitle()">Update Title</button>
+
+<hr style="margin:15px 0;border-color:#333">
+<h4>Add Video</h4>
 <input id="vtitle" placeholder="Video Title">
 <input id="vlink" placeholder="YouTube Link">
 <button onclick="addVideo()">Add Video</button>
