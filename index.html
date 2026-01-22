@@ -5,64 +5,69 @@
 <title>AHNAF | GAMERS EDGE 09 OFFICIAL</title>
 <meta name="description" content="Official gaming hub of AHNAF | GAMERS EDGE 09 with live YouTube feed, multilingual support and admin panel."><link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Poppins:wght@300;500;700&family=Fira+Code:wght@500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"><style>
-:root{--primary:#FF2D7D;--bg:#050505;--card:#111;--text:#fff;--dim:#aaa}
+:root{--primary:#FF2D7D;--bg:#050505;--glass:rgba(255,255,255,.08);--border:rgba(255,255,255,.18);--text:#fff;--dim:#aaa}
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:Poppins,sans-serif;background:var(--bg);color:var(--text)}
+body{font-family:Poppins,sans-serif;background:linear-gradient(120deg,#050505,#0a0610);color:var(--text);overflow-x:hidden}
+
+/* GLASS BASE */
+.glass{background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--border)}
 
 /* LOADER */
-#loader{position:fixed;inset:0;background:#050505;display:flex;align-items:center;justify-content:center;z-index:9999}
-#loader h1{font-family:Orbitron;color:var(--primary);animation:pulse 1.2s infinite}
-@keyframes pulse{50%{opacity:.4;transform:scale(.95)}}
+#loader{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:#050505;z-index:9999}
+#loader h1{font-family:Orbitron;color:var(--primary);letter-spacing:2px;animation:pulse 1.3s infinite}
+@keyframes pulse{50%{opacity:.35;transform:scale(.94)}}
 
 /* HEADER */
-header{height:80px;display:flex;align-items:center;justify-content:space-between;padding:0 5%;border-bottom:2px solid var(--primary);position:sticky;top:0;background:#000;z-index:1000}
-.logo{font-family:Orbitron;color:var(--primary);font-weight:900}
-.nav-links{list-style:none;display:flex;gap:25px}
-.nav-links a{color:#fff;text-decoration:none;font-size:.8rem;text-transform:uppercase}
-.menu{display:none;color:var(--primary);font-size:1.4rem}
+header{height:80px;display:flex;align-items:center;justify-content:space-between;padding:0 5%;position:sticky;top:0;z-index:1000}
+header.glass{border-bottom:1px solid var(--border)}
+.logo{font-family:Orbitron;font-weight:900;color:var(--primary)}
+.nav-links{list-style:none;display:flex;gap:30px}
+.nav-links a{color:#fff;text-decoration:none;font-size:.8rem;letter-spacing:1px;position:relative}
+.nav-links a::after{content:"";position:absolute;left:0;bottom:-6px;width:0;height:2px;background:var(--primary);transition:.3s}
+.nav-links a:hover::after{width:100%}
+.menu{display:none;font-size:1.4rem;color:var(--primary)}
 
-.lang-switch button{background:none;border:1px solid var(--primary);color:#fff;font-size:.7rem;margin-left:5px;padding:3px 6px;cursor:pointer}
+.lang-switch button{background:none;border:1px solid var(--border);color:#fff;font-size:.65rem;padding:4px 7px;margin-left:6px;cursor:pointer}
 
 @media(max-width:768px){
 .menu{display:block}
-.nav-links{position:absolute;right:0;top:80px;background:#000;flex-direction:column;width:200px;padding:20px;display:none}
+.nav-links{position:absolute;top:80px;right:0;flex-direction:column;padding:20px;width:220px;display:none}
 .nav-links.active{display:flex}
 }
 
 /* HERO */
-.hero{text-align:center;padding:100px 5%;background:radial-gradient(circle,#1a0510,#050505)}
-.terminal{font-family:Fira Code;font-size:2.3rem}
+.hero{text-align:center;padding:120px 5%;background:radial-gradient(circle at top,#1a0510,#050505)}
+.terminal{font-family:Fira Code;font-size:2.4rem}
 .cursor{display:inline-block;width:12px;height:30px;background:var(--primary);animation:blink .8s infinite}
 @keyframes blink{50%{opacity:0}}
 
-/* SECTIONS */
-.container{max-width:1200px;margin:auto;padding:40px 20px}
+/* LAYOUT */
+.container{max-width:1200px;margin:auto;padding:50px 20px}
 .section{border-left:6px solid var(--primary);padding-left:15px;margin-bottom:30px}
 
 /* CHANNELS */
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:25px;margin-bottom:60px}
-.card{background:var(--card);padding:30px;border-radius:15px;text-align:center;border:1px solid #222;transition:.3s;opacity:0;transform:translateY(30px)}
-.card.show{opacity:1;transform:none}
-.card i{font-size:3rem;color:var(--primary);margin-bottom:10px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:30px;margin-bottom:80px}
+.card{padding:35px;border-radius:20px;text-align:center;transition:.4s;transform-style:preserve-3d;cursor:pointer}
+.card.glass{box-shadow:0 20px 40px rgba(0,0,0,.4)}
+.card i{font-size:3rem;color:var(--primary);margin-bottom:12px}
+.card h3{font-family:Orbitron;font-size:1.05rem}
+.card:hover{transform:translateY(-12px) rotateX(8deg)}
 
 /* VIDEOS */
-.video-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:30px}
-.video{background:var(--card);border-radius:18px;overflow:hidden;border:1px solid #222;text-decoration:none;color:#fff;transition:.3s;opacity:0;transform:translateY(30px)}
-.video.show{opacity:1;transform:none}
-.video:hover{transform:translateY(-8px);border-color:var(--primary)}
-.thumb{aspect-ratio:16/9;overflow:hidden;position:relative}
-.thumb img{width:100%;height:100%;object-fit:cover}
-.play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:3rem;color:var(--primary);opacity:0}
+.video-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:35px}
+.video{border-radius:22px;overflow:hidden;transition:.45s;transform-style:preserve-3d}
+.video.glass{box-shadow:0 25px 50px rgba(0,0,0,.45)}
+.video:hover{transform:translateY(-14px) scale(1.02)}
+.thumb{aspect-ratio:16/9;position:relative;overflow:hidden}
+.thumb img{width:100%;height:100%;object-fit:cover;transition:.6s}
+.video:hover img{transform:scale(1.15);filter:brightness(.75)}
+.play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:3.5rem;color:var(--primary);opacity:0;transition:.3s}
 .video:hover .play{opacity:1}
-.info{padding:20px}
-.tag{color:var(--primary);font-size:.7rem}
+.info{padding:22px}
+.tag{color:var(--primary);font-size:.7rem;letter-spacing:1px}
 
-/* ADMIN */
-#admin{max-width:400px;margin:60px auto;background:#111;padding:20px;border-radius:12px}
-#admin input{width:100%;padding:10px;margin-bottom:10px;background:#000;color:#fff;border:1px solid #333}
-#admin button{width:100%;padding:10px;background:var(--primary);border:none;color:#fff;font-weight:bold}
-
-footer{text-align:center;padding:40px;color:#777;border-top:1px solid #222}
+/* FOOTER */
+footer{text-align:center;padding:50px;color:#777;border-top:1px solid var(--border)}
 </style></head>
 <body><div id="loader"><h1>GAMERS EDGE 09</h1></div><header>
 <div class="logo">GAMERS EDGE 09</div>
@@ -96,20 +101,7 @@ footer{text-align:center;padding:40px;color:#777;border-top:1px solid #222}
 <div class="card"><i class="fa-brands fa-youtube"></i><h3>Gameverse Explorer</h3></div>
 </div><div id="videos" class="section"><h2 data-i18n="videos">Latest Videos</h2></div>
 <div class="video-grid" id="videoGrid"></div>
-</div><section id="admin" style="display:none;">
-<h3>Admin Control Panel</h3>
-<input id="adminPass" type="password" placeholder="Enter Admin Password">
-<button onclick="unlockAdmin()">Unlock</button>
-<hr style="margin:15px 0;border-color:#333"><label>Primary Color</label> <input type="color" id="themeColor" onchange="changeTheme(this.value)">
-
-<label style="display:block;margin-top:10px">Website Title</label> <input id="siteTitle" placeholder="Website Title"> <button onclick="updateTitle()">Update Title</button>
-
-<hr style="margin:15px 0;border-color:#333">
-<h4>Add Video</h4>
-<input id="vtitle" placeholder="Video Title">
-<input id="vlink" placeholder="YouTube Link">
-<button onclick="addVideo()">Add Video</button>
-</section><footer>© 2026 AHNAF | GAMERS EDGE 09</footer><script>
+</div><footer>© 2026 AHNAF | GAMERS EDGE 09</footer><script>
 // LOADER
 window.onload=()=>{setTimeout(()=>loader.style.display='none',800);type()}
 
