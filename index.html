@@ -1,291 +1,130 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AHNAF | GAMERS EDGE 09 OFFICIAL</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Poppins:wght@300;500;700&family=Fira+Code:wght@500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <style>
-        :root {
-            --primary: #FF2D7D; 
-            --primary-glow: rgba(255, 45, 125, 0.5);
-            --bg-dark: #050505;
-            --card-bg: #111111;
-            --text-main: #ffffff;
-            --text-dim: #aaaaaa;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AHNAF | GAMERS EDGE 09 OFFICIAL</title>
+<meta name="description" content="Official gaming hub of AHNAF | GAMERS EDGE 09 with live YouTube feed, multilingual support and admin panel."><link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Poppins:wght@300;500;700&family=Fira+Code:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"><style>
+:root{--primary:#FF2D7D;--bg:#050505;--card:#111;--text:#fff;--dim:#aaa}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Poppins,sans-serif;background:var(--bg);color:var(--text)}
 
-        /* Reset & Base */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { 
-            background-color: var(--bg-dark); 
-            color: var(--text-main); 
-            font-family: 'Poppins', sans-serif; 
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
+/* LOADER */
+#loader{position:fixed;inset:0;background:#050505;display:flex;align-items:center;justify-content:center;z-index:9999}
+#loader h1{font-family:Orbitron;color:var(--primary);animation:pulse 1.2s infinite}
+@keyframes pulse{50%{opacity:.4;transform:scale(.95)}}
 
-        /* 100% Guaranteed Reliability Fix: Direct Image Loading */
-        img { max-width: 100%; display: block; }
+/* HEADER */
+header{height:80px;display:flex;align-items:center;justify-content:space-between;padding:0 5%;border-bottom:2px solid var(--primary);position:sticky;top:0;background:#000;z-index:1000}
+.logo{font-family:Orbitron;color:var(--primary);font-weight:900}
+.nav-links{list-style:none;display:flex;gap:25px}
+.nav-links a{color:#fff;text-decoration:none;font-size:.8rem;text-transform:uppercase}
+.menu{display:none;color:var(--primary);font-size:1.4rem}
 
-        /* Professional Animated Background */
-        body::before {
-            content: "";
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at 50% 50%, #1a0510 0%, #050505 100%);
-            z-index: -1;
-        }
+.lang-switch button{background:none;border:1px solid var(--primary);color:#fff;font-size:.7rem;margin-left:5px;padding:3px 6px;cursor:pointer}
 
-        /* Header Navigation */
-        header {
-            height: 80px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 5%;
-            background: rgba(0, 0, 0, 0.9);
-            border-bottom: 2px solid var(--primary);
-            position: sticky; top: 0; z-index: 9999;
-            backdrop-filter: blur(10px);
-        }
-        .logo { 
-            font-family: 'Orbitron', sans-serif; 
-            font-size: 1.6rem; 
-            font-weight: 900; 
-            letter-spacing: 2px;
-            color: var(--primary);
-            text-shadow: 0 0 10px var(--primary-glow);
-        }
-        .nav-links { display: flex; list-style: none; gap: 30px; }
-        .nav-links a { 
-            text-decoration: none; color: var(--text-main); 
-            font-weight: 600; font-size: 0.9rem; text-transform: uppercase;
-            transition: 0.3s;
-        }
-        .nav-links a:hover { color: var(--primary); }
+@media(max-width:768px){
+.menu{display:block}
+.nav-links{position:absolute;right:0;top:80px;background:#000;flex-direction:column;width:200px;padding:20px;display:none}
+.nav-links.active{display:flex}
+}
 
-        /* Hero Terminal Section */
-        .hero {
-            padding: 120px 5% 80px;
-            text-align: center;
-            position: relative;
-        }
-        .terminal-container {
-            display: inline-block;
-            background: #000;
-            padding: 20px 40px;
-            border-radius: 10px;
-            border: 1px solid #333;
-            box-shadow: 0 0 30px rgba(0,0,0,1);
-            margin-bottom: 20px;
-        }
-        .terminal-text {
-            font-family: 'Fira Code', monospace;
-            font-size: 2.2rem;
-            color: #fff;
-        }
-        .cursor {
-            display: inline-block; width: 15px; height: 35px;
-            background: var(--primary); margin-left: 8px;
-            animation: blink 0.8s infinite;
-            vertical-align: middle;
-        }
-        @keyframes blink { 50% { opacity: 0; } }
+/* HERO */
+.hero{text-align:center;padding:100px 5%;background:radial-gradient(circle,#1a0510,#050505)}
+.terminal{font-family:Fira Code;font-size:2.3rem}
+.cursor{display:inline-block;width:12px;height:30px;background:var(--primary);animation:blink .8s infinite}
+@keyframes blink{50%{opacity:0}}
 
-        /* Content Container */
-        .container { max-width: 1300px; margin: 0 auto; padding: 40px 20px; }
-        .section-header {
-            margin-bottom: 50px;
-            text-align: left;
-            border-left: 8px solid var(--primary);
-            padding-left: 20px;
-        }
-        .section-header h2 { font-family: 'Orbitron', sans-serif; font-size: 2rem; text-transform: uppercase; }
-        .section-header p { color: var(--text-dim); font-size: 1rem; }
+/* SECTIONS */
+.container{max-width:1200px;margin:auto;padding:40px 20px}
+.section{border-left:6px solid var(--primary);padding-left:15px;margin-bottom:30px}
 
-        /* THE PROFESSIONAL VIDEO GRID (Direct Teleport Method) */
-        .video-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
-            gap: 30px;
-        }
-        .video-card {
-            background: var(--card-bg);
-            border-radius: 20px;
-            overflow: hidden;
-            text-decoration: none;
-            color: white;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            border: 1px solid #222;
-            position: relative;
-        }
-        .video-card:hover {
-            transform: translateY(-15px);
-            border-color: var(--primary);
-            box-shadow: 0 20px 40px rgba(255, 45, 125, 0.2);
-        }
-        
-        .thumbnail-wrapper {
-            width: 100%;
-            aspect-ratio: 16/9;
-            overflow: hidden;
-            position: relative;
-            background: #000;
-        }
-        /* Automatically pulls high-res thumbnails from YT servers */
-        .thumbnail-wrapper img {
-            width: 100%; height: 100%; object-fit: cover;
-            transition: 0.5s;
-        }
-        .video-card:hover .thumbnail-wrapper img { transform: scale(1.1); filter: brightness(0.7); }
+/* CHANNELS */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:25px;margin-bottom:60px}
+.card{background:var(--card);padding:30px;border-radius:15px;text-align:center;border:1px solid #222;transition:.3s;opacity:0;transform:translateY(30px)}
+.card.show{opacity:1;transform:none}
+.card i{font-size:3rem;color:var(--primary);margin-bottom:10px}
 
-        .play-icon {
-            position: absolute; top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 4rem; color: var(--primary);
-            opacity: 0; transition: 0.3s; z-index: 2;
-        }
-        .video-card:hover .play-icon { opacity: 1; }
+/* VIDEOS */
+.video-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:30px}
+.video{background:var(--card);border-radius:18px;overflow:hidden;border:1px solid #222;text-decoration:none;color:#fff;transition:.3s;opacity:0;transform:translateY(30px)}
+.video.show{opacity:1;transform:none}
+.video:hover{transform:translateY(-8px);border-color:var(--primary)}
+.thumb{aspect-ratio:16/9;overflow:hidden;position:relative}
+.thumb img{width:100%;height:100%;object-fit:cover}
+.play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:3rem;color:var(--primary);opacity:0}
+.video:hover .play{opacity:1}
+.info{padding:20px}
+.tag{color:var(--primary);font-size:.7rem}
 
-        .video-info { padding: 25px; }
-        .channel-name {
-            display: flex; align-items: center; gap: 10px;
-            color: var(--primary); font-weight: 700; font-size: 0.8rem;
-            text-transform: uppercase; margin-bottom: 10px;
-        }
-        .video-title {
-            font-size: 1.1rem; font-weight: 600; line-height: 1.4;
-            height: 3em; overflow: hidden; margin-bottom: 15px;
-        }
-        .teleport-btn {
-            display: inline-block;
-            padding: 10px 20px;
-            background: transparent;
-            border: 2px solid var(--primary);
-            color: var(--primary);
-            border-radius: 5px;
-            font-weight: 700;
-            font-size: 0.8rem;
-            transition: 0.3s;
-        }
-        .video-card:hover .teleport-btn { background: var(--primary); color: white; }
+/* ADMIN */
+#admin{max-width:400px;margin:60px auto;background:#111;padding:20px;border-radius:12px}
+#admin input{width:100%;padding:10px;margin-bottom:10px;background:#000;color:#fff;border:1px solid #333}
+#admin button{width:100%;padding:10px;background:var(--primary);border:none;color:#fff;font-weight:bold}
 
-        /* Fixed Gear Settings */
-        .gear-container { position: relative; cursor: pointer; }
-        .fa-gear { 
-            font-size: 1.8rem; color: var(--primary); 
-            animation: rotateGear 5s linear infinite; 
-        }
-        @keyframes rotateGear { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+footer{text-align:center;padding:40px;color:#777;border-top:1px solid #222}
+</style></head>
+<body><div id="loader"><h1>GAMERS EDGE 09</h1></div><header>
+<div class="logo">GAMERS EDGE 09</div>
+<i class="fa fa-bars menu" onclick="toggleMenu()"></i>
+<ul class="nav-links">
+<li><a href="#channels" data-i18n="channels">Channels</a></li>
+<li><a href="#videos" data-i18n="videos">Videos</a></li>
+</ul>
+<div class="lang-switch">
+<button onclick="setLang('en')">EN</button>
+<button onclick="setLang('bn')">BN</button>
+<button onclick="setLang('hi')">HI</button>
+</div>
+</header><section class="hero">
+<div class="terminal">root@ahnaf:~$ <span id="typing"></span><span class="cursor"></span></div>
+</section><div class="container">
+<div id="channels" class="section"><h2 data-i18n="channels">My Channels</h2></div>
+<div class="grid">
+<div class="card"><i class="fa-brands fa-youtube"></i><h3>Run Till Craft</h3></div>
+<div class="card"><i class="fa-brands fa-youtube"></i><h3>Game Explorer Gamerz</h3></div>
+<div class="card"><i class="fa-brands fa-youtube"></i><h3>Gameverse Explorer</h3></div>
+</div><div id="videos" class="section"><h2 data-i18n="videos">Latest Videos</h2></div>
+<div class="video-grid" id="videoGrid"></div>
+</div><section id="admin">
+<h3>Admin Panel</h3>
+<input id="vtitle" placeholder="Video Title">
+<input id="vlink" placeholder="YouTube Link">
+<button onclick="addVideo()">Add Video</button>
+</section><footer>© 2026 AHNAF | GAMERS EDGE 09</footer><script>
+// LOADER
+window.onload=()=>{setTimeout(()=>loader.style.display='none',800);type()}
 
-        footer {
-            background: #000;
-            padding: 80px 5% 40px;
-            text-align: center;
-            margin-top: 100px;
-            border-top: 1px solid #222;
-        }
-        .footer-logo { font-family: 'Orbitron', sans-serif; font-size: 2rem; color: #333; margin-bottom: 20px; }
+// MENU
+function toggleMenu(){document.querySelector('.nav-links').classList.toggle('active')}
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .terminal-text { font-size: 1.5rem; }
-            .video-grid { grid-template-columns: 1fr; }
-        }
-    </style>
-</head>
-<body>
+// TYPING
+const text="Ahnaf_Gamer";let i=0;
+function type(){if(i<text.length){typing.textContent+=text[i++];setTimeout(type,120)}}
 
-    <header>
-        <div class="logo">GAMERS EDGE 09</div>
-        <nav>
-            <ul class="nav-links">
-                <li><a href="#feed">Latest Feed</a></li>
-                <li><a href="https://youtube.com/@gameexplorergamerz">Channels</a></li>
-                <li class="gear-container"><i class="fa-solid fa-gear"></i></li>
-            </ul>
-        </nav>
-    </header>
+// LANGUAGE
+const lang={
+en:{channels:'My Channels',videos:'Latest Videos'},
+bn:{channels:'আমার চ্যানেল',videos:'সর্বশেষ ভিডিও'},
+hi:{channels:'मेरे चैनल',videos:'नवीनतम वीडियो'}
+}
+function setLang(l){document.querySelectorAll('[data-i18n]').forEach(e=>e.innerText=lang[l][e.dataset.i18n]);localStorage.lang=l}
+setLang(localStorage.lang||'en')
 
-    <section class="hero">
-        <div class="terminal-container">
-            <span class="terminal-text">root@ahnaf:~$ <span id="typing"></span><span class="cursor"></span></span>
-        </div>
-        <p style="color: var(--text-dim); font-weight: 600; letter-spacing: 3px;">CENTRAL COMMAND HUB</p>
-    </section>
+// YOUTUBE AUTO FEED
+const API_KEY='YOUR_API_KEY';
+const CHANNEL_ID='YOUR_CHANNEL_ID';
+fetch(`https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&maxResults=6`)
+.then(r=>r.json()).then(d=>{
+videoGrid.innerHTML='';
+d.items.forEach(v=>{if(!v.id.videoId)return;
+videoGrid.innerHTML+=`<a class="video show" target="_blank" href="https://youtube.com/watch?v=${v.id.videoId}"><div class="thumb"><img src="${v.snippet.thumbnails.high.url}"><div class="play"><i class="fa fa-play-circle"></i></div></div><div class="info"><span class="tag">${v.snippet.channelTitle}</span><h4>${v.snippet.title}</h4></div></a>`});})
 
-    <div class="container" id="feed">
-        <div class="section-header">
-            <h2>Live Video Feed</h2>
-            <p>Direct teleport to YouTube Uplinks. Click to watch.</p>
-        </div>
+// ADMIN ADD
+function addVideo(){const id=vlink.value.split('v=')[1];videoGrid.innerHTML+=`<a class="video show" href="${vlink.value}" target="_blank"><div class="thumb"><img src="https://img.youtube.com/vi/${id}/maxresdefault.jpg"><div class="play"><i class="fa fa-play-circle"></i></div></div><div class="info"><span class="tag">Admin</span><h4>${vtitle.value}</h4></div></a>`}
 
-        <div class="video-grid">
-            
-            <a href="https://www.youtube.com/watch?v=S280jPId4M8" target="_blank" class="video-card">
-                <div class="thumbnail-wrapper">
-                    <i class="fa-solid fa-circle-play play-icon"></i>
-                    <img src="https://img.youtube.com/vi/S280jPId4M8/maxresdefault.jpg" alt="Video Thumbnail">
-                </div>
-                <div class="video-info">
-                    <div class="channel-name"><i class="fa-brands fa-youtube"></i> Explorer Gamerz</div>
-                    <h3 class="video-title">EXPLORING THE UNKNOWN - EXTREME GAMEPLAY</h3>
-                    <span class="teleport-btn">TELEPORT TO VIDEO</span>
-                </div>
-            </a>
-
-            <a href="https://www.youtube.com/watch?v=5rLzW8Xm8V0" target="_blank" class="video-card">
-                <div class="thumbnail-wrapper">
-                    <i class="fa-solid fa-circle-play play-icon"></i>
-                    <img src="https://img.youtube.com/vi/5rLzW8Xm8V0/maxresdefault.jpg" alt="Video Thumbnail">
-                </div>
-                <div class="video-info">
-                    <div class="channel-name"><i class="fa-brands fa-youtube"></i> Gameverse Explorer</div>
-                    <h3 class="video-title">NEW ADVENTURE: THE DARK DIMENSION</h3>
-                    <span class="teleport-btn">TELEPORT TO VIDEO</span>
-                </div>
-            </a>
-
-            <a href="https://www.youtube.com/watch?v=vV9l8N2vT8A" target="_blank" class="video-card">
-                <div class="thumbnail-wrapper">
-                    <i class="fa-solid fa-circle-play play-icon"></i>
-                    <img src="https://img.youtube.com/vi/vV9l8N2vT8A/maxresdefault.jpg" alt="Video Thumbnail">
-                </div>
-                <div class="video-info">
-                    <div class="channel-name"><i class="fa-brands fa-youtube"></i> Run Till Craft</div>
-                    <h3 class="video-title">SURVIVAL CHALLENGE: 100 DAYS OF CRAFTING</h3>
-                    <span class="teleport-btn">TELEPORT TO VIDEO</span>
-                </div>
-            </a>
-
-        </div>
-    </div>
-
-    <footer>
-        <div class="footer-logo">AHNAF</div>
-        <p style="color:var(--primary); font-weight: bold; margin-bottom: 10px;">GAMERS EDGE 09 HUB</p>
-        <p>&copy; 2026 OFFICIAL WEBSITE | BUILT FOR PERFORMANCE</p>
-    </footer>
-
-    <script>
-        // Typing Effect Script
-        const textToType = "Ahnaf_Gamer";
-        let charIndex = 0;
-        function startTyping() {
-            if (charIndex < textToType.length) {
-                document.getElementById("typing").textContent += textToType.charAt(charIndex);
-                charIndex++;
-                setTimeout(startTyping, 150);
-            }
-        }
-
-        // Professional Smooth Load
-        window.addEventListener('DOMContentLoaded', (event) => {
-            startTyping();
-        });
-    </script>
-</body>
+// SCROLL ANIMATION
+const obs=new IntersectionObserver(e=>e.forEach(x=>x.isIntersecting&&x.target.classList.add('show')));
+document.querySelectorAll('.card,.video').forEach(el=>obs.observe(el));
+</script></body>
 </html>
