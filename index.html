@@ -3,198 +3,172 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gamers Edge 09 | Ahnaf Hub</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <title>Ahnaf | Gamers Edge 09</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Poppins:wght@300;600&family=Fira+Code&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
         :root {
             --primary: #FF2D7D; 
-            --dark: #121212; 
-            --light: #FFF0F5; 
-            --white: #ffffff;
-            --card-bg: #ffffff;
+            --bg: #0a0a0a;
+            --card: #1a1a1a;
+            --text: #ffffff;
         }
 
-        body.dark-theme {
-            --light: #1a1a1a;
-            --dark: #ffffff;
-            --white: #2d2d2d;
-            --card-bg: #262626;
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            background-color: var(--bg); 
+            color: var(--text); 
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
         }
 
-        html { scroll-behavior: smooth; }
-        * { margin: 0; padding: 0; box-sizing: border-box; transition: background 0.3s, color 0.3s; }
-        body { font-family: 'Poppins', sans-serif; background: var(--light); color: var(--dark); overflow-x: hidden; }
-
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(40px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
+        /* Pro Gaming Header */
         header {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(15px);
-            padding: 1rem 5%;
+            padding: 20px 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            background: rgba(0,0,0,0.8);
+            border-bottom: 2px solid var(--primary);
             position: sticky; top: 0; z-index: 1000;
-            border-bottom: 1px solid rgba(255, 45, 125, 0.2);
         }
-        .logo { font-size: 1.4rem; font-weight: 700; color: var(--primary); letter-spacing: 1px; }
-
-        nav ul { display: flex; list-style: none; align-items: center; }
-        nav ul li { margin-left: 25px; }
-        nav ul li a { text-decoration: none; color: var(--dark); font-weight: 600; font-size: 0.8rem; }
-
-        .fa-gear {
-            font-size: 1.4rem; color: var(--primary);
-            animation: gearSpin 3s linear infinite;
-            cursor: pointer; margin-left: 20px;
-        }
-        @keyframes gearSpin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        .logo { font-family: 'Orbitron', sans-serif; font-size: 1.5rem; color: var(--primary); font-weight: bold; }
         
-        .settings-menu {
-            position: absolute; right: 5%; top: 70px; background: var(--white);
-            padding: 15px; border-radius: 12px; display: none;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2); width: 150px; z-index: 2000;
+        .gear-btn {
+            font-size: 1.5rem; color: var(--primary);
+            animation: spin 4s linear infinite; cursor: pointer;
         }
-        .settings-menu.active { display: block; }
+        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
+        /* Terminal Hero */
         .hero {
-            background: linear-gradient(135deg, #121212 0%, #300a18 100%);
-            color: white; padding: 120px 5%; text-align: center;
-            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+            padding: 100px 5%;
+            text-align: center;
+            background: linear-gradient(to bottom, #121212, #0a0a0a);
         }
-        .terminal-box { font-family: 'Fira Code', monospace; font-size: 2rem; }
-        .cursor { display: inline-block; width: 10px; height: 30px; background: var(--primary); animation: blink 0.8s infinite; vertical-align: middle; }
-        @keyframes blink { 50% { opacity: 0; } }
+        .terminal { font-family: 'Fira Code', monospace; font-size: 2.5rem; margin-bottom: 10px; }
+        .pink-text { color: var(--primary); }
 
-        .container { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
-        .section-title { margin: 40px 0 20px; border-left: 6px solid var(--primary); padding-left: 15px; color: var(--dark); }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
+        .section-title { font-family: 'Orbitron', sans-serif; margin-bottom: 30px; border-left: 5px solid var(--primary); padding-left: 15px; }
+
+        /* Channel & Video Cards */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
         
-        .card { 
-            background: var(--card-bg); padding: 20px; border-radius: 20px; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            animation: fadeInUp 1.5s ease forwards;
+        .video-card {
+            background: var(--card);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: 0.4s;
+            cursor: pointer;
+            border: 1px solid #333;
+            text-decoration: none;
+            color: white;
+            display: block;
         }
-        
-        .video-container { aspect-ratio: 16/9; background: #000; border-radius: 12px; overflow: hidden; margin-bottom: 15px; }
-        .video-container iframe { width: 100%; height: 100%; border: none; }
-
-        .btn { 
-            display: inline-block; background: var(--primary); color: white; 
-            padding: 10px 25px; border-radius: 50px; text-decoration: none; 
-            font-weight: 600; margin-top: 10px; font-size: 0.9rem;
+        .video-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: var(--primary);
+            box-shadow: 0 0 20px rgba(255, 45, 125, 0.4);
         }
 
-        footer { background: #121212; color: white; text-align: center; padding: 40px; }
-        
-        .status-msg { grid-column: 1/-1; text-align: center; padding: 20px; font-style: italic; opacity: 0.7; }
+        .thumb-box {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        .play-overlay {
+            position: absolute; inset: 0; background: rgba(0,0,0,0.3);
+            display: flex; align-items: center; justify-content: center; opacity: 0; transition: 0.3s;
+        }
+        .video-card:hover .play-overlay { opacity: 1; }
+        .play-overlay i { font-size: 3rem; color: var(--primary); }
+
+        .info { padding: 20px; }
+        .info h3 { font-size: 1.1rem; margin-bottom: 8px; line-height: 1.4; }
+        .channel-tag { font-size: 0.8rem; font-weight: bold; color: var(--primary); text-transform: uppercase; }
+
+        footer { text-align: center; padding: 60px; border-top: 1px solid #222; opacity: 0.6; font-size: 0.9rem; }
     </style>
 </head>
-<body id="body">
+<body>
 
     <header>
         <div class="logo">GAMERS EDGE 09</div>
-        <nav>
-            <ul>
-                <li><a href="#channels">CHANNELS</a></li>
-                <li><a href="#videos">AUTO-FEED</a></li>
-                <li><i class="fa-solid fa-gear" onclick="toggleSettings()"></i></li>
-            </ul>
-        </nav>
-        <div class="settings-menu" id="menu">
-            <p style="font-size: 0.8rem; margin-bottom: 10px; font-weight:bold;">Appearance</p>
-            <button onclick="setTheme('pink')" style="width:100%; margin-bottom:5px; padding:5px; cursor:pointer;">Pink Mode</button>
-            <button onclick="setTheme('dark')" style="width:100%; padding:5px; cursor:pointer;">Dark Mode</button>
-        </div>
+        <i class="fa-solid fa-gear gear-btn" onclick="alert('System Active: v2.0 Professional Feed')"></i>
     </header>
 
     <section class="hero">
-        <div class="terminal-box">
-            root@ahnaf:~$ <span id="typewriter"></span><span class="cursor"></span>
-        </div>
-        <p style="opacity: 0.6; margin-top:10px; font-size: 0.9rem;">SYNCING YOUTUBE DATABASE...</p>
+        <div class="terminal">root@ahnaf:~$ <span id="type"></span><span class="pink-text">_</span></div>
+        <p style="font-size: 0.9rem; letter-spacing: 2px;">TELEPORTING TO YOUTUBE DATABASE...</p>
     </section>
 
     <div class="container">
-        <h2 id="channels" class="section-title">My Channels</h2>
-        <div class="grid">
-            <div class="card"><h3>Game Explorer Gamerz</h3><a href="https://youtube.com/@gameexplorergamerz" target="_blank" class="btn">Subscribe</a></div>
-            <div class="card"><h3>Gameverse Explorer</h3><a href="https://youtube.com/@gameverseexplorergamer" target="_blank" class="btn">Subscribe</a></div>
-            <div class="card"><h3>Run Till Craft</h3><a href="https://youtube.com/@runtillcraft" target="_blank" class="btn">Subscribe</a></div>
-        </div>
-
-        <h2 id="videos" class="section-title">Latest Videos & Shorts</h2>
-        <div id="video-feed" class="grid">
-            <div class="status-msg">Fetching content from YouTube...</div>
+        <h2 class="section-title">Latest Videos (Auto-Teleport)</h2>
+        <div id="feed" class="grid">
+            <p style="grid-column: 1/-1; text-align: center;">Locating YouTube Uplinks...</p>
         </div>
     </div>
 
-    <footer><p>&copy; 2026 AHNAF | GAMERS EDGE 09</p></footer>
+    <footer>
+        <p>&copy; 2026 AHNAF | ALL RIGHTS RESERVED</p>
+    </footer>
 
     <script>
-        // Ahnaf Typewriter Effect
-        const text = "Ahnaf_";
-        let idx = 0;
-        function type() {
-            if (idx < text.length) {
-                document.getElementById("typewriter").innerHTML += text.charAt(idx);
-                idx++; setTimeout(type, 200);
+        // 1. Terminal Typing Effect
+        const text = "Ahnaf_Gamer";
+        let i = 0;
+        function typing() {
+            if (i < text.length) {
+                document.getElementById("type").innerHTML += text.charAt(i);
+                i++; setTimeout(typing, 150);
             }
         }
+        typing();
 
-        // Settings Menu
-        function toggleSettings() { document.getElementById('menu').classList.toggle('active'); }
-        function setTheme(mode) {
-            if(mode === 'dark') document.getElementById('body').classList.add('dark-theme');
-            else document.getElementById('body').classList.remove('dark-theme');
-            toggleSettings();
-        }
-
-        // AUTO FEED WITH VERIFIED IDs
+        // 2. The Direct Teleport Feed
         const channels = [
             { name: 'Game Explorer Gamerz', id: 'UC8-5Yc9_fX9f5H-YI9Xf_mw' }, 
             { name: 'Gameverse Explorer', id: 'UCj0lP0o6X_9Y0L_zM5v5GZw' },
             { name: 'Run Till Craft', id: 'UC7f_5G9X_9Y0L_zM5v5GZw' }
         ];
 
-        async function getVideos() {
-            const feed = document.getElementById('video-feed');
-            let foundAny = false;
+        async function loadFeed() {
+            const feedDiv = document.getElementById('feed');
+            let content = "";
 
             for (const ch of channels) {
-                // Using RSS2JSON with the verified UC IDs
-                const url = `https://api.rss2json.com/v1/api.json?rss_url=https://www.youtube.com/feeds/videos.xml?channel_id=${ch.id}`;
-                
                 try {
-                    const res = await fetch(url);
+                    // RSS2JSON allows us to get the link and thumbnail for teleporting
+                    const res = await fetch(`https://api.rss2json.com/v1/api.json?rss_url=https://www.youtube.com/feeds/videos.xml?channel_id=${ch.id}`);
                     const data = await res.json();
-                    
-                    if (data.status === 'ok' && data.items.length > 0) {
-                        if (!foundAny) { feed.innerHTML = ''; foundAny = true; }
-                        const v = data.items[0];
-                        const videoId = v.guid.split(':')[2];
-                        
-                        feed.innerHTML += `
-                            <div class="card">
-                                <div class="video-container">
-                                    <iframe src="https://www.youtube.com/embed/${videoId}" allowfullscreen loading="lazy"></iframe>
-                                </div>
-                                <h3>${v.title}</h3>
-                                <p style="color:var(--primary); font-size:0.75rem; font-weight:bold;">${ch.name}</p>
-                            </div>`;
+
+                    if (data.status === 'ok') {
+                        // Take the top 2 videos from each channel
+                        data.items.slice(0, 2).forEach(video => {
+                            content += `
+                                <a href="${video.link}" target="_blank" class="video-card">
+                                    <div class="thumb-box" style="background-image: url('${video.thumbnail}')">
+                                        <div class="play-overlay"><i class="fa-solid fa-play"></i></div>
+                                    </div>
+                                    <div class="info">
+                                        <p class="channel-tag">${ch.name}</p>
+                                        <h3>${video.title}</h3>
+                                        <p style="font-size: 0.8rem; opacity: 0.6;">Click to Watch on YouTube &rarr;</p>
+                                    </div>
+                                </a>
+                            `;
+                        });
                     }
-                } catch (e) { console.error("Error loading channel feed"); }
+                } catch (e) { console.error("Link failed"); }
             }
-            if (!foundAny) feed.innerHTML = '<div class="status-msg">Database sync pending. Check IDs in code.</div>';
+            feedDiv.innerHTML = content || "<p>Sync failed. Refresh page.</p>";
         }
 
-        window.onload = () => { type(); getVideos(); };
+        window.onload = loadFeed;
     </script>
 </body>
 </html>
