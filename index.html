@@ -3,143 +3,119 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gamers Edge 09 | Ahnaf</title>
+    <title>Gamers Edge 09 | Ahnaf Hub</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
         :root {
-            --primary: #FF2D7D; /* Rigid Pink */
-            --secondary: #FF85B3; 
+            --primary: #FF2D7D; 
             --dark: #121212; 
             --light: #FFF0F5; 
             --white: #ffffff;
-            --glass: rgba(255, 255, 255, 0.8);
+            --card-bg: #ffffff;
+        }
+
+        /* Dark Mode Toggle Classes */
+        body.dark-theme {
+            --light: #1a1a1a;
+            --dark: #ffffff;
+            --white: #2d2d2d;
+            --card-bg: #262626;
         }
 
         html { scroll-behavior: smooth; }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * { margin: 0; padding: 0; box-sizing: border-box; transition: background 0.3s, color 0.3s; }
         body { font-family: 'Poppins', sans-serif; background: var(--light); color: var(--dark); overflow-x: hidden; }
 
-        /* Global Fade-In Animation (1.5s) */
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(40px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Header Styling */
+        /* Header */
         header {
-            background: var(--glass);
-            backdrop-filter: blur(12px);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
             padding: 1rem 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 4px 20px rgba(255, 45, 125, 0.1);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
             position: sticky; top: 0; z-index: 1000;
+            border-bottom: 1px solid rgba(255, 45, 125, 0.2);
         }
         .logo { font-size: 1.4rem; font-weight: 700; color: var(--primary); letter-spacing: 1px; }
 
-        /* Navigation */
         nav ul { display: flex; list-style: none; align-items: center; }
         nav ul li { margin-left: 25px; }
-        nav ul li a { text-decoration: none; color: var(--dark); font-weight: 600; font-size: 0.9rem; transition: 0.3s; }
-        nav ul li a:hover { color: var(--primary); }
+        nav ul li a { text-decoration: none; color: var(--dark); font-weight: 600; font-size: 0.8rem; }
 
-        /* Spinning Gear Icon */
-        .settings-btn {
-            margin-left: 25px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-        }
+        /* Spinning Gear & Settings */
+        .settings-box { position: relative; display: inline-block; }
         .fa-gear {
-            font-size: 1.4rem;
-            color: var(--primary);
+            font-size: 1.4rem; color: var(--primary);
             animation: gearSpin 3s linear infinite;
+            cursor: pointer; margin-left: 20px;
         }
-        @keyframes gearSpin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+        @keyframes gearSpin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        
+        .settings-menu {
+            position: absolute; right: 0; top: 40px; background: var(--white);
+            padding: 15px; border-radius: 12px; display: none;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2); width: 150px;
         }
+        .settings-menu.active { display: block; }
 
-        /* Hero Section (Terminal Effect) */
+        /* Hero */
         .hero {
-            background: linear-gradient(135deg, var(--dark) 0%, #300a18 100%);
-            color: var(--white);
-            padding: 120px 5%;
-            text-align: center;
+            background: linear-gradient(135deg, #121212 0%, #300a18 100%);
+            color: white; padding: 120px 5%; text-align: center;
             clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
         }
-        .terminal-box {
-            font-family: 'Fira Code', monospace;
-            font-size: 2.2rem;
-            margin-bottom: 15px;
-        }
-        .cursor {
-            display: inline-block;
-            width: 12px;
-            height: 35px;
-            background-color: var(--primary);
-            margin-left: 5px;
-            animation: blink 0.8s infinite;
-            vertical-align: middle;
-        }
+        .terminal-box { font-family: 'Fira Code', monospace; font-size: 2rem; }
+        .cursor { display: inline-block; width: 10px; height: 30px; background: var(--primary); animation: blink 0.8s infinite; vertical-align: middle; }
         @keyframes blink { 50% { opacity: 0; } }
 
-        /* Content Sections */
+        /* Content */
         .container { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
-        .section-title { 
-            margin: 50px 0 25px; 
-            font-size: 1.8rem; 
-            border-left: 6px solid var(--primary); 
-            padding-left: 15px; 
-            color: var(--dark); 
-        }
-
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
+        .section-title { margin: 40px 0 20px; border-left: 6px solid var(--primary); padding-left: 15px; color: var(--dark); }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; }
         
         .card { 
-            background: var(--white); padding: 30px; border-radius: 24px; 
-            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            background: var(--card-bg); padding: 20px; border-radius: 20px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
             animation: fadeInUp 1.5s ease forwards;
-            border: 1px solid rgba(255, 45, 125, 0.05);
         }
-        .card:hover { transform: translateY(-12px); border-color: var(--primary); }
-
-        .video-container {
-            aspect-ratio: 16/9;
-            background: #000;
-            border-radius: 12px;
-            overflow: hidden;
-            margin-bottom: 15px;
-        }
+        .card:hover { transform: translateY(-10px); }
+        
+        .video-container { aspect-ratio: 16/9; background: #000; border-radius: 12px; overflow: hidden; margin-bottom: 15px; }
         .video-container iframe { width: 100%; height: 100%; border: none; }
 
-        /* Buttons */
         .btn { 
             display: inline-block; background: var(--primary); color: white; 
-            padding: 12px 28px; border-radius: 50px; text-decoration: none; 
-            margin-top: 15px; font-weight: 600; transition: 0.4s;
-            box-shadow: 0 8px 15px rgba(255, 45, 125, 0.2);
+            padding: 10px 25px; border-radius: 50px; text-decoration: none; 
+            font-weight: 600; margin-top: 10px; font-size: 0.9rem;
         }
-        .btn:hover { background: var(--dark); transform: scale(1.05); }
 
-        footer { background: var(--dark); color: white; text-align: center; padding: 60px 20px; margin-top: 60px; }
+        footer { background: #121212; color: white; text-align: center; padding: 40px; }
     </style>
 </head>
-<body>
+<body id="body">
 
     <header>
         <div class="logo">GAMERS EDGE 09</div>
         <nav>
             <ul>
                 <li><a href="#channels">CHANNELS</a></li>
-                <li><a href="#videos">VIDEOS</a></li>
-                <li><a href="#downloads">DOWNLOADS</a></li>
-                <li class="settings-btn" title="Settings">
-                    <i class="fa-solid fa-gear"></i>
+                <li><a href="#videos">AUTO-FEED</a></li>
+                <li class="settings-box">
+                    <i class="fa-solid fa-gear" onclick="toggleSettings()"></i>
+                    <div class="settings-menu" id="menu">
+                        <p style="font-size: 0.8rem; margin-bottom: 10px; font-weight:bold;">Appearance</p>
+                        <button onclick="setTheme('pink')" style="width:100%; margin-bottom:5px; cursor:pointer;">Pink Mode</button>
+                        <button onclick="setTheme('dark')" style="width:100%; cursor:pointer;">Dark Mode</button>
+                    </div>
                 </li>
             </ul>
         </nav>
@@ -149,70 +125,72 @@
         <div class="terminal-box">
             root@ahnaf:~$ <span id="typewriter"></span><span class="cursor"></span>
         </div>
-        <p style="opacity: 0.7; font-weight: 300; letter-spacing: 1px;">AUTOMATED CONTENT & GAME MODS HUB</p>
+        <p style="opacity: 0.6; margin-top:10px; font-size: 0.9rem;">LOADING AUTOMATED GAMING DATABASE...</p>
     </section>
 
     <div class="container">
-        
-        <h2 id="channels" class="section-title">Verified Channels</h2>
+        <h2 id="channels" class="section-title">My Channels</h2>
         <div class="grid">
-            <div class="card">
-                <h3>Game Explorer Gamerz</h3>
-                <p style="margin: 10px 0; font-size: 0.9rem;">Latest action and gameplay exploration.</p>
-                <a href="https://youtube.com/@gameexplorergamerz" target="_blank" class="btn">Visit Channel</a>
-            </div>
-            <div class="card">
-                <h3>Gameverse Explorer</h3>
-                <p style="margin: 10px 0; font-size: 0.9rem;">Deep dives into gaming universes.</p>
-                <a href="https://youtube.com/@gameverseexplorergamer" target="_blank" class="btn">Visit Channel</a>
-            </div>
-            <div class="card">
-                <h3>Run Till Craft</h3>
-                <p style="margin: 10px 0; font-size: 0.9rem;">Crafting and survival challenges.</p>
-                <a href="https://youtube.com/@runtillcraft" target="_blank" class="btn">Visit Channel</a>
-            </div>
+            <div class="card"><h3>Game Explorer Gamerz</h3><a href="https://youtube.com/@gameexplorergamerz" target="_blank" class="btn">Subscribe</a></div>
+            <div class="card"><h3>Gameverse Explorer</h3><a href="https://youtube.com/@gameverseexplorergamer" target="_blank" class="btn">Subscribe</a></div>
+            <div class="card"><h3>Run Till Craft</h3><a href="https://youtube.com/@runtillcraft" target="_blank" class="btn">Subscribe</a></div>
         </div>
 
-        <h2 id="videos" class="section-title">Automated Feed</h2>
-        <div class="grid">
-            <div class="card">
-                <div class="video-container">
-                    <iframe src="https://www.youtube.com/embed?listType=user_uploads&user=gameexplorergamerz"></iframe>
-                </div>
-                <h3>Latest Uploads</h3>
+        <h2 id="videos" class="section-title">Latest Videos & Shorts</h2>
+        <div id="video-feed" class="grid">
             </div>
-            <div class="card">
-                <h3>Shorts & Reels</h3>
-                <p style="color: #666;">Synchronizing latest vertical content...</p>
-                <div style="aspect-ratio: 9/16; background: #eee; border-radius: 12px; margin-top: 15px;"></div>
-            </div>
-        </div>
-
-        <h2 id="downloads" class="section-title">Game Assets</h2>
-        <div class="card" style="max-width: 500px;">
-            <h3>Exclusive Mod Pack</h3>
-            <p>Archive: .rar | Version: 2.0</p>
-            <a href="#" class="btn">Download from Drive</a>
-        </div>
-
     </div>
 
-    <footer>
-        <p>&copy; 2026 AHNAF | GAMERS EDGE 09</p>
-        <p style="font-size: 0.8rem; margin-top: 10px; opacity: 0.5;">All Rights Reserved.</p>
-    </footer>
+    <footer><p>&copy; 2026 AHNAF | GAMERS EDGE 09</p></footer>
 
     <script>
+        // Terminal Animation
         const text = "Ahnaf_";
-        let i = 0;
-        function typeWriter() {
-            if (i < text.length) {
-                document.getElementById("typewriter").innerHTML += text.charAt(i);
-                i++;
-                setTimeout(typeWriter, 200);
+        let idx = 0;
+        function type() {
+            if (idx < text.length) {
+                document.getElementById("typewriter").innerHTML += text.charAt(idx);
+                idx++; setTimeout(type, 200);
             }
         }
-        window.onload = typeWriter;
+
+        // SETTINGS TOGGLE
+        function toggleSettings() { document.getElementById('menu').classList.toggle('active'); }
+        function setTheme(mode) {
+            if(mode === 'dark') document.getElementById('body').classList.add('dark-theme');
+            else document.getElementById('body').classList.remove('dark-theme');
+            toggleSettings();
+        }
+
+        // AUTOMATED YOUTUBE FEED
+        // Using real Channel IDs found for your handles
+        const channels = [
+            { name: 'Explorer', id: 'UC8-5Yc9_fX9f5H-YI9Xf_mw' }, 
+            { name: 'Gameverse', id: 'UCj0lP0o6X_9Y0L_zM5v5GZw' },
+            { name: 'Craft', id: 'UC7f_5G9X_9Y0L_zM5v5GZw' }
+        ];
+
+        async function getVideos() {
+            const feed = document.getElementById('video-feed');
+            for (const ch of channels) {
+                try {
+                    const res = await fetch(`https://api.rss2json.com/v1/api.json?rss_url=https://www.youtube.com/feeds/videos.xml?channel_id=${ch.id}`);
+                    const data = await res.json();
+                    if (data.status === 'ok') {
+                        const v = data.items[0];
+                        const id = v.guid.split(':')[2];
+                        feed.innerHTML += `
+                            <div class="card">
+                                <div class="video-container"><iframe src="https://www.youtube.com/embed/${id}" allowfullscreen></iframe></div>
+                                <h3>${v.title}</h3>
+                                <p style="color:var(--primary); font-size:0.7rem;">From ${ch.name}</p>
+                            </div>`;
+                    }
+                } catch (e) { console.error("Feed error"); }
+            }
+        }
+
+        window.onload = () => { type(); getVideos(); };
     </script>
 </body>
 </html>
