@@ -4,225 +4,92 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AHNAF LABIB | GAMERS EDGE 09</title>
-    
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Poppins:wght@300;500;700&family=Fira+Code:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        :root {
-            --primary: #FF2D7D; 
-            --accent: #00D1FF;
-            --bg: #050505;
-            --glass: rgba(255, 255, 255, 0.03);
-            --border: rgba(255, 255, 255, 0.1);
-            --text: #ffffff;
-        }
-
+        :root { --primary: #FF2D7D; --bg: #050505; --glass: rgba(255, 255, 255, 0.03); --border: rgba(255, 255, 255, 0.1); --text: #ffffff; }
         * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
-        body { 
-            font-family: 'Poppins', sans-serif; 
-            background: var(--bg); 
-            color: var(--text); 
-            overflow-x: hidden; 
-        }
-
-        /* DYNAMIC SCROLL BAR */
-        #scroll-progress {
-            position: fixed; top: 0; left: 0; width: 0%; height: 4px;
-            background: linear-gradient(to right, var(--primary), var(--accent));
-            z-index: 10001;
-        }
-
-        /* MOVING BACKGROUND PARTICLES */
-        #bg-canvas {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1; opacity: 0.4;
-        }
-
-        /* HEADER & NAVIGATION */
-        header {
-            height: 80px; display: flex; align-items: center; justify-content: space-between;
-            padding: 0 5%; position: fixed; top: 0; width: 100%; z-index: 1000;
-            background: rgba(5, 5, 5, 0.8); backdrop-filter: blur(15px); border-bottom: 1px solid var(--border);
-        }
-        .logo { font-family: 'Orbitron'; font-weight: 900; color: var(--primary); font-size: 1.4rem; text-shadow: 0 0 15px var(--primary); }
-        .nav-links { display: flex; list-style: none; gap: 25px; }
-        .nav-links a { color: #fff; text-decoration: none; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; transition: 0.3s; }
-        .nav-links a:hover { color: var(--primary); transform: translateY(-2px); }
-
-        /* HERO SECTION */
-        .hero { height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
-        .terminal { font-family: 'Fira Code'; font-size: clamp(2rem, 8vw, 4rem); margin-bottom: 10px; }
-        .terminal span { color: var(--primary); }
-        .cursor { display: inline-block; width: 15px; height: 45px; background: var(--primary); animation: blink 0.8s infinite; vertical-align: middle; }
-        @keyframes blink { 50% { opacity: 0; } }
-
-        /* REVEAL ON SCROLL ANIMATION */
-        .reveal { opacity: 0; transform: translateY(30px); transition: 1s all ease; }
-        .reveal.active { opacity: 1; transform: translateY(0); }
-
-        /* CONTAINER */
-        .container { max-width: 1200px; margin: auto; padding: 100px 20px; }
-        .section-title { font-family: 'Orbitron'; font-size: 1.8rem; margin-bottom: 50px; border-left: 5px solid var(--primary); padding-left: 20px; }
-
-        /* PRO CARDS */
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        .card, .video-card { 
-            background: var(--glass); border: 1px solid var(--border); border-radius: 20px; 
-            text-decoration: none; color: white; transition: 0.5s cubic-bezier(0.2, 1, 0.3, 1); 
-            overflow: hidden; backdrop-filter: blur(5px);
-        }
-        .card:hover, .video-card:hover { 
-            transform: scale(1.03) translateY(-10px); 
-            border-color: var(--primary); 
-            box-shadow: 0 15px 30px rgba(255, 45, 125, 0.2);
-        }
+        body { font-family: 'Poppins', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; }
         
-        .card { padding: 50px 30px; text-align: center; }
-        .card i { font-size: 4rem; color: var(--primary); margin-bottom: 20px; transition: 0.3s; }
-        .card:hover i { transform: scale(1.2) rotate(5deg); }
+        header { height: 80px; display: flex; align-items: center; justify-content: space-between; padding: 0 5%; position: fixed; top: 0; width: 100%; z-index: 1000; background: rgba(5,5,5,0.95); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); }
+        .logo { font-family: 'Orbitron'; font-weight: 900; color: var(--primary); font-size: 1.2rem; }
+        .nav-links { display: flex; list-style: none; gap: 20px; }
+        .nav-links a { color: #fff; text-decoration: none; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; }
 
-        /* VIDEO THUMBNAILS */
-        .thumb { aspect-ratio: 16/9; position: relative; overflow: hidden; background: #111; }
-        .thumb img { width: 100%; height: 100%; object-fit: cover; transition: 0.8s; }
-        .video-card:hover .thumb img { transform: scale(1.15) rotate(1deg); filter: brightness(0.5); }
-        .play-overlay { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 4rem; color: var(--primary); opacity: 0; transition: 0.3s; }
-        .video-card:hover .play-overlay { opacity: 1; transform: scale(1.1); }
+        .container { max-width: 1200px; margin: auto; padding: 100px 20px 40px; }
+        .section-title { font-family: 'Orbitron'; font-size: 1.5rem; margin-bottom: 30px; border-left: 5px solid var(--primary); padding-left: 15px; color: var(--primary); }
+        
+        /* FEATURED VIDEO AREA */
+        .featured-video { width: 100%; margin-bottom: 50px; background: var(--glass); border: 1px solid var(--border); border-radius: 20px; overflow: hidden; }
+        .video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; }
+        .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+        .featured-info { padding: 30px; border-top: 1px solid var(--border); }
+        .featured-info h2 { font-family: 'Orbitron'; color: var(--primary); margin-bottom: 10px; }
 
-        .info { padding: 25px; }
-        .info h4 { font-weight: 600; font-size: 1.1rem; line-height: 1.4; margin-top: 10px; }
+        /* GRID SYSTEM */
+        .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+        .video-card { background: var(--glass); border: 1px solid var(--border); border-radius: 12px; text-decoration: none; color: white; transition: 0.3s; overflow: hidden; display: block; }
+        .video-card:hover { transform: translateY(-5px); border-color: var(--primary); box-shadow: 0 5px 20px rgba(255, 45, 125, 0.2); }
+        .thumb { width: 100%; aspect-ratio: 16/9; position: relative; background: #111; }
+        .thumb img { width: 100%; height: 100%; object-fit: cover; }
+        .info { padding: 12px; }
+        .info h4 { font-size: 0.85rem; height: 2.8em; overflow: hidden; }
+        .tag { font-size: 0.6rem; color: var(--primary); font-weight: 700; text-transform: uppercase; }
 
-        /* ABOUT ME BOX */
-        .about-box { 
-            background: linear-gradient(145deg, rgba(255,45,125,0.05), rgba(0,209,255,0.05)); 
-            border: 1px solid var(--border); border-radius: 30px; padding: 60px; 
-            text-align: center;
-        }
-        .insta-btn { 
-            margin-top: 30px; display: inline-flex; align-items: center; gap: 12px; 
-            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-            color: white; padding: 15px 35px; border-radius: 50px; font-weight: 700; text-decoration: none; transition: 0.3s;
-        }
-        .insta-btn:hover { transform: scale(1.05); box-shadow: 0 10px 20px rgba(220, 39, 67, 0.4); }
-
-        footer { padding: 60px; text-align: center; background: #000; font-size: 0.9rem; color: #444; }
-
-        @media (max-width: 768px) { .nav-links { display: none; } }
+        footer { padding: 40px; text-align: center; border-top: 1px solid var(--border); font-size: 0.8rem; opacity: 0.5; }
     </style>
 </head>
 <body>
 
-    <div id="scroll-progress"></div>
-    <canvas id="bg-canvas"></canvas>
-
     <header>
-        <div class="logo">GAMERS EDGE</div>
+        <div class="logo">GAMERS EDGE 09</div>
         <ul class="nav-links">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#channels">Channels</a></li>
-            <li><a href="#videos">Uplinks</a></li>
-            <li><a href="#about">About</a></li>
+            <li><a href="#home">Latest</a></li>
+            <li><a href="#archive">Old Videos</a></li>
+            <li><a href="https://www.instagram.com/gameverseexplorergamer?igsh=c3V3OHZqdnN6ZXZ3" target="_blank">Instagram</a></li>
         </ul>
     </header>
 
-    <section class="hero" id="home">
-        <div class="terminal">root@ahnaf:~$ <span id="typing"></span><span class="cursor"></span></div>
-        <p style="font-family: Orbitron; color: #555; letter-spacing: 5px; font-size: 0.8rem;">ESTABLISHING CONNECTION</p>
-    </section>
-
-    <div class="container reveal" id="channels">
-        <h2 class="section-title">CHANNELS</h2>
-        <div class="grid">
-            <a href="https://youtube.com/@runtillcraft" target="_blank" class="card"><i class="fa-brands fa-youtube"></i><h3>Run Till Craft</h3></a>
-            <a href="https://youtube.com/@gameexplorergamerz" target="_blank" class="card"><i class="fa-brands fa-youtube"></i><h3>Game Explorer</h3></a>
-            <a href="https://youtube.com/@gameverseexplorergamer" target="_blank" class="card"><i class="fa-brands fa-youtube"></i><h3>Gameverse</h3></a>
+    <div class="container" id="home">
+        <h2 class="section-title">LATEST UPLOAD</h2>
+        <div class="featured-video">
+            <div class="video-wrapper">
+                <iframe src="https://www.youtube.com/embed/ujwrGXKa_IU" allowfullscreen></iframe>
+            </div>
+            <div class="featured-info">
+                <span class="tag">Game Explorer Gamerz</span>
+                <h2>GTA Vice City FULL Walkthrough</h2>
+                <p>Experience the 2002 Original in 4K 60FPS. The ultimate nostalgia trip.</p>
+            </div>
         </div>
     </div>
 
-    <div class="container reveal" id="videos">
-        <h2 class="section-title">LATEST UPLINKS</h2>
-        <div class="grid">
-            <a href="https://youtube.com/watch?v=S280jPId4M8" target="_blank" class="video-card">
-                <div class="thumb">
-                    <img src="https://img.youtube.com/vi/S280jPId4M8/maxresdefault.jpg">
-                    <div class="play-overlay"><i class="fa-solid fa-play"></i></div>
-                </div>
-                <div class="info"><span style="color:var(--primary); font-size: 0.7rem; font-weight: bold;">[ CHANNEL: EXPLORER ]</span><h4>Gaming Evolution v2.0</h4></div>
+    <div class="container" id="archive">
+        <h2 class="section-title">OLD VIDEOS ARCHIVE</h2>
+        <div class="video-grid">
+            
+            <a href="https://www.youtube.com/watch?v=S280jPId4M8" target="_blank" class="video-card">
+                <div class="thumb"><img src="https://img.youtube.com/vi/S280jPId4M8/hqdefault.jpg"></div>
+                <div class="info"><span class="tag">Archive</span><h4>GTA Missions Part 1</h4></div>
             </a>
-            <a href="https://youtube.com/watch?v=5rLzW8Xm8V0" target="_blank" class="video-card">
-                <div class="thumb">
-                    <img src="https://img.youtube.com/vi/5rLzW8Xm8V0/maxresdefault.jpg">
-                    <div class="play-overlay"><i class="fa-solid fa-play"></i></div>
-                </div>
-                <div class="info"><span style="color:var(--primary); font-size: 0.7rem; font-weight: bold;">[ CHANNEL: GAMEVERSE ]</span><h4>Survival In The Unknown</h4></div>
-            </a>
-        </div>
-    </div>
 
-    <div class="container reveal" id="about">
-        <div class="about-box">
-            <h2 style="font-family: Orbitron; font-size: 2rem; margin-bottom: 20px;">I AM AHNAF LABIB</h2>
-            <p style="max-width: 800px; margin: auto; font-size: 1.1rem; line-height: 1.8; opacity: 0.8;">
-                My dream is to conquer the digital world as a <strong>Professional YouTube Gamer</strong>. 
-                I don't just play games; I experience them. Join my journey as I build my gaming legacy 
-                from the ground up in Bangladesh.
-            </p>
-            <a href="https://www.instagram.com/gameverseexplorergamer?igsh=c3V3OHZqdnN6ZXZ3" target="_blank" class="insta-btn">
-                <i class="fa-brands fa-instagram"></i> FOLLOW MY JOURNEY
+            <a href="https://www.youtube.com/watch?v=5rLzW8Xm8V0" target="_blank" class="video-card">
+                <div class="thumb"><img src="https://img.youtube.com/vi/5rLzW8Xm8V0/hqdefault.jpg"></div>
+                <div class="info"><span class="tag">Archive</span><h4>Adventure Highlights</h4></div>
             </a>
+
+            <a href="https://www.youtube.com/watch?v=vV9l8N2vT8A" target="_blank" class="video-card">
+                <div class="thumb"><img src="https://img.youtube.com/vi/vV9l8N2vT8A/hqdefault.jpg"></div>
+                <div class="info"><span class="tag">Archive</span><h4>Survival Crafting</h4></div>
+            </a>
+
         </div>
     </div>
 
     <footer>
-        <p>© 2026 AHNAF LABIB | GAMERS EDGE 09 | PERFORMANCE MODE ACTIVE</p>
+        <p>© 2026 AHNAF LABIB | PRO GAMING HUB</p>
     </footer>
 
-    <script>
-        // TYPEWRITER
-        const text = "Ahnaf_Labib"; let i = 0;
-        function type() { if (i < text.length) { document.getElementById("typing").textContent += text.charAt(i); i++; setTimeout(type, 150); } }
-        window.onload = type;
-
-        // SCROLL REVEAL
-        window.addEventListener('scroll', () => {
-            let reveals = document.querySelectorAll('.reveal');
-            reveals.forEach(r => {
-                let windowHeight = window.innerHeight;
-                let revealTop = r.getBoundingClientRect().top;
-                if(revealTop < windowHeight - 100) r.classList.add('active');
-            });
-            // Progress Bar
-            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            document.getElementById("scroll-progress").style.width = (winScroll / height) * 100 + "%";
-        });
-
-        // BACKGROUND PARTICLES
-        const canvas = document.getElementById('bg-canvas');
-        const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-        let particles = [];
-        class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 2;
-                this.speedX = Math.random() * 0.5 - 0.25;
-                this.speedY = Math.random() * 0.5 - 0.25;
-            }
-            update() {
-                this.x += this.speedX; this.y += this.speedY;
-                if (this.x > canvas.width) this.x = 0; if (this.y > canvas.height) this.y = 0;
-            }
-            draw() { ctx.fillStyle = 'rgba(255, 45, 125, 0.5)'; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); }
-        }
-        for (let i = 0; i < 100; i++) particles.push(new Particle());
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(p => { p.update(); p.draw(); });
-            requestAnimationFrame(animate);
-        }
-        animate();
-    </script>
 </body>
 </html>
