@@ -86,93 +86,109 @@
         <div class="login-trigger" onclick="login()">[ ARCHIVE_LOCK ]</div>
     </footer>
 
-    <script>
-        const SECURE_HASH = "815049533f81509a278f24458f3192095f9d1462002f2328f467262d55e8c15a";
+<script>
+    // RELIABLE HASH OF "ahnaf09"
+    const SECURE_HASH = "815049533f81509a278f24458f3192095f9d1462002f2328f467262d55e8c15a";
 
-        async function hashPassword(string) {
-            const utf8 = new TextEncoder().encode(string);
-            const hashBuffer = await crypto.subtle.digest('SHA-256', utf8);
-            const hashArray = Array.from(new Uint8Array(hashBuffer));
-            return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    // Improved SHA-256 Function
+    async function hashPassword(string) {
+        const msgUint8 = new TextEncoder().encode(string); 
+        const hashBuffer = await crypto.subtle.digest('SHA-256', msgUint8); 
+        const hashArray = Array.from(new Uint8Array(hashBuffer)); 
+        const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        return hashHex;
+    }
+
+    async function login() {
+        let pass = prompt("Verification Required:");
+        if(!pass) return;
+        
+        // Trim any accidental spaces from the password
+        const enteredHash = await hashPassword(pass.trim());
+        
+        console.log("Debug Hash:", enteredHash); // This helps you see if it's working in the Console
+
+        if(enteredHash === SECURE_HASH) {
+            document.getElementById('admin-panel').style.display = 'block';
+            alert("Identity Verified. Welcome Ahnaf.");
+        } else {
+            alert("Access Denied: Hash Mismatch. Please try again.");
         }
+    }
 
-        async function login() {
-            let pass = prompt("Verification Required:");
-            if(!pass) return;
-            const enteredHash = await hashPassword(pass);
-            
-            if(enteredHash === SECURE_HASH) {
-                document.getElementById('admin-panel').style.display = 'block';
-                alert("Identity Verified. Welcome Ahnaf.");
-            } else {
-                alert("Access Denied: Hash Mismatch.");
-            }
+    function logout() { 
+        document.getElementById('admin-panel').style.display = 'none'; 
+        document.getElementById('main-body').classList.remove('delete-mode-active');
+    }
+
+    function toggleDeleteMode() {
+        document.getElementById('main-body').classList.toggle('delete-mode-active');
+        let btn = document.getElementById('delete-btn');
+        let isActive = document.getElementById('main-body').classList.contains('delete-mode-active');
+        btn.style.background = isActive ? 'red' : '#333';
+        btn.innerHTML = isActive ? '<i class="fa-solid fa-xmark"></i> Exit Removal Mode' : '<i class="fa-solid fa-trash"></i> Toggle Removal Mode';
+    }
+
+    function extractID(url) {
+        let match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:.*v=|\/v\/|embed\/|shorts\/))([^?&"'>]+)/);
+        return (match && match[1].length == 11) ? match[1] : null;
+    }
+
+    function addVideo() {
+        let url = document.getElementById('vid-url').value;
+        let title = document.getElementById('vid-title').value;
+        let id = extractID(url);
+        let timestamp = Date.now();
+
+        if(id && title) {
+            let grid = document.getElementById('video-archive');
+            let div = document.createElement('div');
+            div.className = 'video-card';
+            div.id = 'vid-' + timestamp;
+            div.innerHTML = `
+                <div class="remove-overlay" onclick="removeVideo('vid-${timestamp}')"><i class="fa-solid fa-trash-can"></i></div>
+                <a href="${url}" target="_blank">
+                    <div class="thumb"><img src="https://img.youtube.com/vi/${id}/maxresdefault.jpg"></div>
+                    <div class="info"><h4>${title}</h4></div>
+                </a>`;
+            grid.prepend(div);
+            document.getElementById('vid-url').value = '';
+            document.getElementById('vid-title').value = '';
+        } else {
+            alert("Error: Please provide a valid YouTube link and title.");
         }
+    }
 
-        function logout() { document.getElementById('admin-panel').style.display = 'none'; }
-
-        function toggleDeleteMode() {
-            document.getElementById('main-body').classList.toggle('delete-mode-active');
-            let btn = document.getElementById('delete-btn');
-            btn.style.background = btn.style.background === 'red' ? '#333' : 'red';
+    function removeVideo(id) {
+        if(confirm("Confirm Deletion?")) {
+            document.getElementById(id).remove();
         }
+    }
 
-        function extractID(url) {
-            let match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:.*v=|\/v\/|embed\/))([^?&"'>]+)/);
-            return (match && match[1].length == 11) ? match[1] : null;
+    // BACKGROUND ANIMATION
+    const canvas = document.getElementById('bg-canvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    function init() {
+        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+        particles = [];
+        for (let i = 0; i < 80; i++) {
+            particles.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, sx: (Math.random()-0.5)*1, sy: (Math.random()-0.5)*1 });
         }
-
-        function addVideo() {
-            let url = document.getElementById('vid-url').value;
-            let title = document.getElementById('vid-title').value;
-            let id = extractID(url);
-            let timestamp = Date.now();
-
-            if(id && title) {
-                let grid = document.getElementById('video-archive');
-                let div = document.createElement('div');
-                div.className = 'video-card';
-                div.id = 'vid-' + timestamp;
-                div.innerHTML = `
-                    <div class="remove-overlay" onclick="removeVideo('vid-${timestamp}')"><i class="fa-solid fa-trash-can"></i></div>
-                    <a href="${url}" target="_blank">
-                        <div class="thumb"><img src="https://img.youtube.com/vi/${id}/maxresdefault.jpg"></div>
-                        <div class="info"><h4>${title}</h4></div>
-                    </a>`;
-                grid.prepend(div);
-                document.getElementById('vid-url').value = '';
-                document.getElementById('vid-title').value = '';
-            }
-        }
-
-        function removeVideo(id) {
-            if(confirm("Confirm Deletion?")) {
-                document.getElementById(id).remove();
-            }
-        }
-
-        // BACKGROUND ANIMATION
-        const canvas = document.getElementById('bg-canvas');
-        const ctx = canvas.getContext('2d');
-        let particles = [];
-        function init() {
-            canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-            for (let i = 0; i < 80; i++) {
-                particles.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, sx: (Math.random()-0.5)*1, sy: (Math.random()-0.5)*1 });
-            }
-        }
-        function animate() {
-            ctx.clearRect(0,0,canvas.width,canvas.height);
-            particles.forEach(p => {
-                p.x+=p.sx; p.y+=p.sy;
-                if(p.x<0||p.x>canvas.width) p.sx*=-1;
-                if(p.y<0||p.y>canvas.height) p.sy*=-1;
-                ctx.fillStyle = 'rgba(255,45,125,0.5)';
-                ctx.beginPath(); ctx.arc(p.x,p.y,2,0,Math.PI*2); ctx.fill();
-            });
-            requestAnimationFrame(animate);
-        }
-        init(); animate();
-    </script>
+    }
+    function animate() {
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        particles.forEach(p => {
+            p.x+=p.sx; p.y+=p.sy;
+            if(p.x<0||p.x>canvas.width) p.sx*=-1;
+            if(p.y<0||p.y>canvas.height) p.sy*=-1;
+            ctx.fillStyle = 'rgba(255,45,125,0.5)';
+            ctx.beginPath(); ctx.arc(p.x,p.y,2,0,Math.PI*2); ctx.fill();
+        });
+        requestAnimationFrame(animate);
+    }
+    window.addEventListener('resize', init);
+    init(); animate();
+</script>
 </body>
 </html>
