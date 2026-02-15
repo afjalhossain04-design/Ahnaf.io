@@ -8,41 +8,42 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        :root { --primary: #FF2D7D; --accent: #00D1FF; --bg: #050505; --glass: rgba(255, 255, 255, 0.05); --border: rgba(255, 255, 255, 0.1); }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Poppins', sans-serif; background: var(--bg); color: #fff; overflow-x: hidden; min-height: 100vh; }
+        :root { --primary: #FF2D7D; --accent: #00D1FF; --bg: #050505; --glass: rgba(255, 255, 255, 0.03); --border: rgba(255, 255, 255, 0.1); }
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+        body { font-family: 'Poppins', sans-serif; background: var(--bg); color: #fff; overflow-x: hidden; }
 
-        /* BACKGROUND */
-        #bg-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: #000; }
+        /* THE OLD NEURAL BACKGROUND */
+        #bg-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: radial-gradient(circle at center, #11050a 0%, #050505 100%); }
 
         /* HEADER */
-        header { height: 80px; display: flex; align-items: center; justify-content: space-between; padding: 0 5%; position: fixed; top: 0; width: 100%; z-index: 1000; background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); }
-        .logo { font-family: 'Orbitron'; font-weight: 900; color: var(--primary); font-size: 1.3rem; text-shadow: 0 0 10px var(--primary); transition: 0.3s; }
+        header { height: 80px; display: flex; align-items: center; justify-content: space-between; padding: 0 5%; position: fixed; top: 0; width: 100%; z-index: 1000; background: rgba(5,5,5,0.85); backdrop-filter: blur(15px); border-bottom: 1px solid var(--border); }
+        .logo { font-family: 'Orbitron'; font-weight: 900; color: var(--primary); font-size: 1.4rem; text-shadow: 0 0 15px var(--primary); transition: 0.3s; }
 
-        /* ADMIN PANEL */
-        #admin-panel { display: none; position: fixed; top: 90px; right: 20px; width: 300px; background: rgba(10,10,10,0.95); border: 1px solid var(--primary); border-radius: 15px; padding: 20px; z-index: 2000; backdrop-filter: blur(20px); box-shadow: 0 10px 40px rgba(0,0,0,0.8); }
-        .admin-input { width: 100%; padding: 10px; margin-bottom: 10px; background: #000; border: 1px solid var(--border); color: white; border-radius: 5px; }
-        .admin-btn { width: 100%; padding: 10px; background: var(--primary); color: white; border: none; font-weight: bold; border-radius: 5px; cursor: pointer; margin-bottom: 10px; }
-        
-        /* CONTENT */
-        .container { max-width: 1100px; margin: auto; padding: 120px 20px 60px; }
-        .section-title { font-family: 'Orbitron'; font-size: 1.5rem; margin-bottom: 30px; color: #fff; border-left: 5px solid var(--primary); padding-left: 15px; text-transform: uppercase; }
+        /* ADMIN PANEL - FLOATING GLASS */
+        #admin-panel { display: none; position: fixed; top: 100px; right: 20px; width: 320px; background: rgba(10,10,10,0.98); border: 1px solid var(--primary); border-radius: 20px; padding: 25px; z-index: 10000; backdrop-filter: blur(25px); box-shadow: 0 20px 50px rgba(0,0,0,1); }
+        .admin-input { width: 100%; padding: 12px; margin-bottom: 12px; background: #111; border: 1px solid var(--border); color: white; border-radius: 8px; font-size: 0.8rem; }
+        .admin-btn { width: 100%; padding: 12px; background: var(--primary); color: white; border: none; font-weight: bold; border-radius: 8px; cursor: pointer; transition: 0.3s; margin-bottom: 10px; }
+        .admin-btn:hover { filter: brightness(1.2); transform: translateY(-2px); }
+
+        /* SECTIONS */
+        .container { max-width: 1200px; margin: auto; padding: 120px 20px 40px; }
+        .section-title { font-family: 'Orbitron'; font-size: 1.8rem; margin-bottom: 30px; border-left: 6px solid var(--primary); padding-left: 15px; color: #fff; text-transform: uppercase; letter-spacing: 2px; }
 
         /* VIDEO CARDS */
-        .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px; }
-        .video-card { position: relative; background: var(--glass); border: 1px solid var(--border); border-radius: 15px; overflow: hidden; transition: 0.3s; }
-        .thumb { aspect-ratio: 16/9; width: 100%; }
-        .thumb img { width: 100%; height: 100%; object-fit: cover; }
-        .info { padding: 15px; }
-        .info h4 { font-size: 0.9rem; color: #fff; text-decoration: none; }
+        .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 30px; }
+        .video-card { position: relative; background: var(--glass); border: 1px solid var(--border); border-radius: 15px; text-decoration: none; color: white; transition: 0.4s; overflow: hidden; backdrop-filter: blur(5px); }
+        .video-card:hover { border-color: var(--accent); transform: translateY(-5px); }
+        .thumb { aspect-ratio: 16/9; position: relative; overflow: hidden; }
+        .thumb img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+        .video-card:hover .thumb img { transform: scale(1.1); filter: brightness(0.8); }
 
-        /* DELETE OVERLAY */
-        .delete-overlay { display: none; position: absolute; inset: 0; background: rgba(255, 0, 0, 0.8); z-index: 5; align-items: center; justify-content: center; cursor: pointer; }
-        .delete-mode-active .delete-overlay { display: flex; }
+        /* REMOVE OVERLAY */
+        .remove-overlay { display: none; position: absolute; inset: 0; background: rgba(255, 0, 0, 0.7); align-items: center; justify-content: center; z-index: 10; cursor: pointer; color: white; font-weight: bold; flex-direction: column; gap: 10px; }
+        .delete-mode-active .remove-overlay { display: flex; }
 
         /* FOOTER */
-        footer { padding: 40px; text-align: center; border-top: 1px solid var(--border); margin-top: 50px; }
-        .lock-btn { opacity: 0.1; cursor: pointer; font-size: 10px; }
+        footer { padding: 80px 20px; text-align: center; border-top: 1px solid var(--border); }
+        .login-trigger { opacity: 0.05; cursor: pointer; font-size: 0.7rem; margin-top: 20px; }
     </style>
 </head>
 <body id="main-body">
@@ -54,140 +55,162 @@
     </header>
 
     <div id="admin-panel">
-        <h4 style="color:var(--primary); font-family:Orbitron; margin-bottom:15px;">Admin Tools</h4>
-        <input type="text" id="v-url" class="admin-input" placeholder="YouTube URL">
+        <div style="display:flex; justify-content:space-between; margin-bottom:20px;">
+            <span style="font-family:Orbitron; color:var(--primary);">Control Panel</span>
+            <i class="fa-solid fa-xmark" onclick="closeAdmin()" style="cursor:pointer;"></i>
+        </div>
+        <input type="text" id="v-url" class="admin-input" placeholder="YouTube Video URL">
         <input type="text" id="v-title" class="admin-input" placeholder="Video Title">
-        <button class="admin-btn" onclick="addNewVideo()">Add Video</button>
-        <button class="admin-btn" id="del-toggle" onclick="toggleDel()" style="background:#444;">Enable Delete Mode</button>
-        <button onclick="closeAdmin()" style="background:none; border:none; color:#777; width:100%; cursor:pointer;">Close</button>
+        <button class="admin-btn" onclick="addVideo()">Add to Archive</button>
+        <button class="admin-btn" id="del-btn" onclick="toggleDeleteMode()" style="background:#333;">Toggle Removal Mode</button>
     </div>
 
     <div class="container">
-        <h2 class="section-title">Channel Hub</h2>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 50px;">
-            <a href="https://youtube.com/@gameexplorergamerz" target="_blank" style="background:var(--glass); padding:20px; border-radius:10px; text-align:center; color:white; text-decoration:none; border:1px solid var(--border);">Explorer</a>
-            <a href="https://youtube.com/@gameverseexplorergamer" target="_blank" style="background:var(--glass); padding:20px; border-radius:10px; text-align:center; color:white; text-decoration:none; border:1px solid var(--border);">Verse</a>
-            <a href="https://youtube.com/@runtillcraft" target="_blank" style="background:var(--glass); padding:20px; border-radius:10px; text-align:center; color:white; text-decoration:none; border:1px solid var(--border);">Craft</a>
-        </div>
-
-        <h2 class="section-title">Latest Upload</h2>
-        <div style="background:var(--glass); border-radius:20px; overflow:hidden; border:1px solid var(--border); margin-bottom:60px;">
+        <h2 class="section-title">Latest Uplink</h2>
+        <div style="background:var(--glass); border:1px solid var(--border); border-radius:25px; overflow:hidden; margin-bottom:60px; backdrop-filter:blur(10px);">
             <div style="position:relative; padding-bottom:56.25%; height:0;">
                 <iframe src="https://www.youtube.com/embed/ujwrGXKa_IU" style="position:absolute; top:0; left:0; width:100%; height:100%; border:none;" allowfullscreen></iframe>
+            </div>
+            <div style="padding:40px;">
+                <h2 style="font-family:Orbitron; color:var(--primary); margin-bottom:10px;">GTA VICE CITY: 4K STORY</h2>
+                <p style="opacity:0.7;">Experience the neon lights of the 2002 legend.</p>
             </div>
         </div>
 
         <h2 class="section-title">Video Archive</h2>
         <div class="video-grid" id="v-grid">
-            <div class="video-card" id="card-1">
-                <div class="delete-overlay" onclick="removeMe('card-1')"><i class="fa-solid fa-trash fa-2x"></i></div>
-                <a href="https://www.youtube.com/watch?v=ujwrGXKa_IU" target="_blank" style="text-decoration:none;">
+            <div class="video-card" id="vid-initial">
+                <div class="remove-overlay" onclick="removeVideo('vid-initial')">
+                    <i class="fa-solid fa-trash-can fa-2x"></i>
+                    <span>REMOVE</span>
+                </div>
+                <a href="https://www.youtube.com/watch?v=ujwrGXKa_IU" target="_blank" style="text-decoration:none; color:white;">
                     <div class="thumb"><img src="https://img.youtube.com/vi/ujwrGXKa_IU/maxresdefault.jpg"></div>
-                    <div class="info"><h4>GTA Vice City: Full Story</h4></div>
+                    <div style="padding:20px;"><h4>GTA Mission Walkthrough</h4></div>
                 </a>
             </div>
         </div>
     </div>
 
     <footer>
-        <p>© 2026 AHNAF LABIB</p>
-        <div class="lock-btn" onclick="openLogin()">[ ARCHIVE_LOCK ]</div>
+        <div class="login-trigger" onclick="login()">[ ARCHIVE_LOCK ]</div>
     </footer>
 
     <script>
-        // AUTHENTICATION (Password: ahnaf09)
-        const KEY = "YWhuYWYwOQ==";
+        // AUTH (Password: ahnaf09)
+        const AUTH = "YWhuYWYwOQ==";
 
-        function openLogin() {
-            let p = prompt("Enter Admin Password:");
-            if(!p) return;
-            if(btoa(p) === KEY) {
+        function login() {
+            let p = prompt("Enter Access Key:");
+            if(p && btoa(p.trim()) === AUTH) {
                 document.getElementById('admin-panel').style.display = 'block';
                 document.getElementById('site-logo').style.color = '#00D1FF';
-                alert("Access Granted.");
-            } else {
-                alert("Wrong Password.");
+                alert("Admin Access Granted.");
+            } else if(p) {
+                alert("Access Denied.");
             }
         }
 
         function closeAdmin() { document.getElementById('admin-panel').style.display = 'none'; }
 
-        function toggleDel() {
+        function toggleDeleteMode() {
             document.getElementById('main-body').classList.toggle('delete-mode-active');
-            let b = document.getElementById('del-toggle');
-            b.innerHTML = b.innerHTML.includes("Enable") ? "Disable Delete Mode" : "Enable Delete Mode";
-            b.style.background = b.innerHTML.includes("Disable") ? "red" : "#444";
+            let btn = document.getElementById('del-btn');
+            let active = document.getElementById('main-body').classList.contains('delete-mode-active');
+            btn.style.background = active ? "red" : "#333";
+            btn.innerText = active ? "Exit Removal Mode" : "Toggle Removal Mode";
         }
 
         function extractID(url) {
-            let reg = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/;
-            let res = url.match(reg);
-            return (res) ? res[1] : null;
+            let match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:.*v=|\/v\/|embed\/|shorts\/))([^?&"'>]+)/);
+            return (match && match[1].length == 11) ? match[1] : null;
         }
 
-        function addNewVideo() {
+        function addVideo() {
             let url = document.getElementById('v-url').value;
             let title = document.getElementById('v-title').value;
             let id = extractID(url);
-            if(!id || !title) return alert("Fill all fields correctly!");
-
-            let time = Date.now();
-            let card = document.createElement('div');
-            card.className = 'video-card';
-            card.id = 'card-' + time;
-            card.innerHTML = `
-                <div class="delete-overlay" onclick="removeMe('card-${time}')"><i class="fa-solid fa-trash fa-2x"></i></div>
-                <a href="${url}" target="_blank" style="text-decoration:none;">
-                    <div class="thumb"><img src="https://img.youtube.com/vi/${id}/maxresdefault.jpg"></div>
-                    <div class="info"><h4>${title}</h4></div>
-                </a>`;
-            document.getElementById('v-grid').prepend(card);
-            document.getElementById('v-url').value = "";
-            document.getElementById('v-title').value = "";
+            if(id && title) {
+                let time = Date.now();
+                let div = document.createElement('div');
+                div.className = 'video-card';
+                div.id = 'v-' + time;
+                div.innerHTML = `
+                    <div class="remove-overlay" onclick="removeVideo('v-${time}')"><i class="fa-solid fa-trash-can fa-2x"></i><span>REMOVE</span></div>
+                    <a href="${url}" target="_blank" style="text-decoration:none; color:white;">
+                        <div class="thumb"><img src="https://img.youtube.com/vi/${id}/maxresdefault.jpg"></div>
+                        <div style="padding:20px;"><h4>${title}</h4></div>
+                    </a>`;
+                document.getElementById('v-grid').prepend(div);
+                document.getElementById('v-url').value = '';
+                document.getElementById('v-title').value = '';
+            }
         }
 
-        function removeMe(id) {
+        function removeVideo(id) {
             if(confirm("Delete this video?")) document.getElementById(id).remove();
         }
 
-        // PARTICLES (150 COUNT)
+        // --- THE OLD ADVANCED PARTICLE ENGINE ---
         const canvas = document.getElementById('bg-canvas');
         const ctx = canvas.getContext('2d');
-        let pts = [];
+        let particles = [];
+        const mouse = { x: null, y: null, radius: 150 };
 
-        function resize() {
+        window.addEventListener('mousemove', (e) => { mouse.x = e.x; mouse.y = e.y; });
+
+        function initParticles() {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
-        }
-
-        function create() {
-            pts = [];
-            for(let i=0; i<150; i++) {
-                pts.push({
-                    x: Math.random()*canvas.width,
-                    y: Math.random()*canvas.height,
-                    vx: (Math.random()-0.5)*1.5,
-                    vy: (Math.random()-0.5)*1.5
+            particles = [];
+            for (let i = 0; i < 150; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    size: Math.random() * 2 + 1,
+                    vx: (Math.random() - 0.5) * 1,
+                    vy: (Math.random() - 0.5) * 1
                 });
             }
         }
 
-        function draw() {
-            ctx.clearRect(0,0,canvas.width,canvas.height);
-            ctx.fillStyle = "rgba(255, 45, 125, 0.5)";
-            pts.forEach(p => {
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particles.length; i++) {
+                let p = particles[i];
                 p.x += p.vx; p.y += p.vy;
-                if(p.x<0 || p.x>canvas.width) p.vx*=-1;
-                if(p.y<0 || p.y>canvas.height) p.vy*=-1;
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, 2, 0, Math.PI*2);
-                ctx.fill();
-            });
-            requestAnimationFrame(draw);
+
+                if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+                if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+
+                // Mouse interaction
+                let dx = mouse.x - p.x;
+                let dy = mouse.y - p.y;
+                let dist = Math.sqrt(dx*dx + dy*dy);
+                if (dist < mouse.radius) {
+                    p.x -= dx/30; p.y -= dy/30;
+                }
+
+                ctx.fillStyle = 'rgba(255, 45, 125, 0.8)';
+                ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2); ctx.fill();
+
+                for (let j = i; j < particles.length; j++) {
+                    let p2 = particles[j];
+                    let d2x = p.x - p2.x;
+                    let d2y = p.y - p2.y;
+                    let dist2 = Math.sqrt(d2x*d2x + d2y*d2y);
+                    if (dist2 < 100) {
+                        ctx.strokeStyle = `rgba(255, 45, 125, ${1 - dist2/100})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(p2.x, p2.y); ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animate);
         }
 
-        window.addEventListener('resize', resize);
-        resize(); create(); draw();
+        window.addEventListener('resize', initParticles);
+        initParticles(); animate();
     </script>
 </body>
 </html>
