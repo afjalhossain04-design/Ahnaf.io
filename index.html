@@ -1,132 +1,42 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AHNAF LABIB | GAMERS EDGE 09</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <style>
-        :root { --primary: #FF2D7D; --accent: #00D1FF; --bg: #050505; --glass: rgba(255, 255, 255, 0.05); --border: rgba(255, 255, 255, 0.1); }
-        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
-        body { font-family: 'Poppins', sans-serif; background: var(--bg); color: #fff; overflow-x: hidden; }
-
-        #bg-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: #000; }
-        header { height: 80px; display: flex; align-items: center; justify-content: space-between; padding: 0 5%; position: fixed; top: 0; width: 100%; z-index: 1000; background: rgba(0,0,0,0.85); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); }
-        .logo { font-family: 'Orbitron'; font-weight: 900; color: var(--primary); font-size: 1.3rem; text-shadow: 0 0 10px var(--primary); }
-        
-        .container { max-width: 1200px; margin: auto; padding: 120px 20px 40px; }
-        .section-title { font-family: 'Orbitron'; font-size: 1.8rem; margin-bottom: 30px; color: #fff; border-left: 6px solid var(--primary); padding-left: 15px; text-transform: uppercase; }
-
-        /* ADVANCED ADMIN PANEL */
-        #admin-panel { display: none; position: fixed; top: 100px; right: 20px; width: 320px; background: rgba(10,10,10,0.98); border: 1px solid var(--primary); border-radius: 20px; padding: 25px; z-index: 10000; backdrop-filter: blur(25px); box-shadow: 0 20px 50px rgba(0,0,0,1); }
-        .admin-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
-        .admin-input { width: 100%; padding: 12px; margin-bottom: 12px; background: #111; border: 1px solid var(--border); color: white; border-radius: 8px; font-size: 0.8rem; }
-        .admin-btn { width: 100%; padding: 12px; background: var(--primary); color: white; border: none; font-weight: bold; border-radius: 8px; cursor: pointer; transition: 0.3s; margin-bottom: 10px; }
-        .admin-btn:hover { filter: brightness(1.2); }
-        .delete-toggle { background: #333; font-size: 0.7rem; }
-        .delete-mode-active .remove-overlay { display: flex !important; }
-
-        /* VIDEO CARDS */
-        .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px; }
-        .video-card { position: relative; background: var(--glass); border: 1px solid var(--border); border-radius: 15px; overflow: hidden; text-decoration: none; color: white; transition: 0.3s; }
-        .thumb { aspect-ratio: 16/9; position: relative; }
-        .thumb img { width: 100%; height: 100%; object-fit: cover; }
-        .info { padding: 15px; }
-
-        /* REMOVE OVERLAY */
-        .remove-overlay { display: none; position: absolute; inset: 0; background: rgba(255, 0, 0, 0.7); align-items: center; justify-content: center; z-index: 10; cursor: pointer; }
-        .remove-overlay i { font-size: 2rem; color: white; }
-
-        footer { padding: 60px; text-align: center; border-top: 1px solid var(--border); }
-        .login-trigger { opacity: 0.1; cursor: pointer; font-size: 0.7rem; }
-    </style>
-</head>
-<body id="main-body">
-
-    <canvas id="bg-canvas"></canvas>
-
-    <div id="admin-panel">
-        <div class="admin-header">
-            <span style="font-family: Orbitron; color: var(--primary); font-size: 0.9rem;">Command Center</span>
-            <i class="fa-solid fa-circle-xmark" onclick="logout()" style="cursor:pointer; opacity:0.5;"></i>
-        </div>
-        <input type="text" id="vid-url" class="admin-input" placeholder="YouTube Link">
-        <input type="text" id="vid-title" class="admin-input" placeholder="Video Title">
-        <button class="admin-btn" onclick="addVideo()"><i class="fa-solid fa-plus"></i> Add Video</button>
-        <button class="admin-btn delete-toggle" id="delete-btn" onclick="toggleDeleteMode()"><i class="fa-solid fa-trash"></i> Toggle Removal Mode</button>
-    </div>
-
-    <header>
-        <div class="logo">GAMERS EDGE 09</div>
-    </header>
-
-    <div class="container">
-        <h2 class="section-title">CHANNELS</h2>
-        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 50px;">
-            <a href="https://youtube.com/@gameexplorergamerz" target="_blank" style="text-align:center; padding:20px; background:var(--glass); border-radius:10px; text-decoration:none; color:#fff;">Explorer</a>
-            <a href="https://youtube.com/@gameverseexplorergamer" target="_blank" style="text-align:center; padding:20px; background:var(--glass); border-radius:10px; text-decoration:none; color:#fff;">Verse</a>
-            <a href="https://youtube.com/@runtillcraft" target="_blank" style="text-align:center; padding:20px; background:var(--glass); border-radius:10px; text-decoration:none; color:#fff;">Craft</a>
-        </div>
-
-        <h2 class="section-title">ARCHIVE FEED</h2>
-        <div class="video-grid" id="video-archive">
-            <div class="video-card" id="vid-init">
-                <div class="remove-overlay" onclick="removeVideo('vid-init')"><i class="fa-solid fa-trash-can"></i></div>
-                <a href="https://www.youtube.com/watch?v=ujwrGXKa_IU" target="_blank">
-                    <div class="thumb"><img src="https://img.youtube.com/vi/ujwrGXKa_IU/maxresdefault.jpg"></div>
-                    <div class="info"><h4>GTA Vice City Walkthrough</h4></div>
-                </a>
-            </div>
-        </div>
-    </div>
-
-    <footer>
-        <div class="login-trigger" onclick="login()">[ ARCHIVE_LOCK ]</div>
-    </footer>
-
 <script>
-    // RELIABLE HASH OF "ahnaf09"
-    const SECURE_HASH = "815049533f81509a278f24458f3192095f9d1462002f2328f467262d55e8c15a";
+    // This is "ahnaf09" encoded so it's not plain text
+    const AUTH_KEY = "YWhuYWYwOQ=="; 
 
-    // Improved SHA-256 Function
-    async function hashPassword(string) {
-        const msgUint8 = new TextEncoder().encode(string); 
-        const hashBuffer = await crypto.subtle.digest('SHA-256', msgUint8); 
-        const hashArray = Array.from(new Uint8Array(hashBuffer)); 
-        const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-        return hashHex;
-    }
-
-    async function login() {
+    function login() {
         let pass = prompt("Verification Required:");
         if(!pass) return;
         
-        // Trim any accidental spaces from the password
-        const enteredHash = await hashPassword(pass.trim());
-        
-        console.log("Debug Hash:", enteredHash); // This helps you see if it's working in the Console
+        // Simple, reliable encoding that works on all browsers
+        const check = btoa(pass.trim());
 
-        if(enteredHash === SECURE_HASH) {
+        if(check === AUTH_KEY) {
             document.getElementById('admin-panel').style.display = 'block';
+            // Visual feedback: Logo turns Blue when Admin is active
+            document.querySelector('.logo').style.color = '#00D1FF'; 
+            document.querySelector('.logo').style.textShadow = '0 0 15px #00D1FF';
             alert("Identity Verified. Welcome Ahnaf.");
         } else {
-            alert("Access Denied: Hash Mismatch. Please try again.");
+            alert("Access Denied: Incorrect Password.");
         }
     }
 
     function logout() { 
         document.getElementById('admin-panel').style.display = 'none'; 
+        document.querySelector('.logo').style.color = '#FF2D7D'; 
+        document.querySelector('.logo').style.textShadow = '0 0 10px #FF2D7D';
         document.getElementById('main-body').classList.remove('delete-mode-active');
     }
 
     function toggleDeleteMode() {
-        document.getElementById('main-body').classList.toggle('delete-mode-active');
+        const body = document.getElementById('main-body');
+        body.classList.toggle('delete-mode-active');
         let btn = document.getElementById('delete-btn');
-        let isActive = document.getElementById('main-body').classList.contains('delete-mode-active');
-        btn.style.background = isActive ? 'red' : '#333';
-        btn.innerHTML = isActive ? '<i class="fa-solid fa-xmark"></i> Exit Removal Mode' : '<i class="fa-solid fa-trash"></i> Toggle Removal Mode';
+        let isActive = body.classList.contains('delete-mode-active');
+        
+        btn.style.background = isActive ? '#ff0000' : '#333';
+        btn.innerHTML = isActive ? 
+            '<i class="fa-solid fa-circle-check"></i> Exit Removal Mode' : 
+            '<i class="fa-solid fa-trash"></i> Toggle Removal Mode';
     }
 
     function extractID(url) {
@@ -146,7 +56,10 @@
             div.className = 'video-card';
             div.id = 'vid-' + timestamp;
             div.innerHTML = `
-                <div class="remove-overlay" onclick="removeVideo('vid-${timestamp}')"><i class="fa-solid fa-trash-can"></i></div>
+                <div class="remove-overlay" onclick="removeVideo('vid-${timestamp}')">
+                    <i class="fa-solid fa-trash-can"></i>
+                    <p style="font-size:10px; font-weight:bold; margin-top:5px;">REMOVE</p>
+                </div>
                 <a href="${url}" target="_blank">
                     <div class="thumb"><img src="https://img.youtube.com/vi/${id}/maxresdefault.jpg"></div>
                     <div class="info"><h4>${title}</h4></div>
@@ -155,34 +68,36 @@
             document.getElementById('vid-url').value = '';
             document.getElementById('vid-title').value = '';
         } else {
-            alert("Error: Please provide a valid YouTube link and title.");
+            alert("Invalid YouTube Link.");
         }
     }
 
     function removeVideo(id) {
-        if(confirm("Confirm Deletion?")) {
-            document.getElementById(id).remove();
+        if(confirm("Permanently remove this video from the current view?")) {
+            const el = document.getElementById(id);
+            el.style.opacity = '0';
+            el.style.transform = 'scale(0.5)';
+            setTimeout(() => el.remove(), 300);
         }
     }
 
-    // BACKGROUND ANIMATION
+    // PARTICLE ENGINE
     const canvas = document.getElementById('bg-canvas');
     const ctx = canvas.getContext('2d');
     let particles = [];
     function init() {
         canvas.width = window.innerWidth; canvas.height = window.innerHeight;
         particles = [];
-        for (let i = 0; i < 80; i++) {
-            particles.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, sx: (Math.random()-0.5)*1, sy: (Math.random()-0.5)*1 });
+        for (let i = 0; i < 100; i++) {
+            particles.push({ x: Math.random()*canvas.width, y: Math.random()*canvas.height, sx: (Math.random()-0.5)*1, sy: (Math.random()-0.5)*1 });
         }
     }
     function animate() {
         ctx.clearRect(0,0,canvas.width,canvas.height);
         particles.forEach(p => {
             p.x+=p.sx; p.y+=p.sy;
-            if(p.x<0||p.x>canvas.width) p.sx*=-1;
-            if(p.y<0||p.y>canvas.height) p.sy*=-1;
-            ctx.fillStyle = 'rgba(255,45,125,0.5)';
+            if(p.x<0||p.x>canvas.width) p.sx*=-1; if(p.y<0||p.y>canvas.height) p.sy*=-1;
+            ctx.fillStyle = 'rgba(255,45,125,0.4)';
             ctx.beginPath(); ctx.arc(p.x,p.y,2,0,Math.PI*2); ctx.fill();
         });
         requestAnimationFrame(animate);
@@ -190,5 +105,3 @@
     window.addEventListener('resize', init);
     init(); animate();
 </script>
-</body>
-</html>
