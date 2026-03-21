@@ -1,105 +1,185 @@
-<section class="eid-hero">
-    <h1 class="eid-message"><span id="typewriter"></span><span class="cursor"></span></h1>
-    <p id="sub-tag" style="opacity:0; letter-spacing: 3px; font-weight:300; margin-top:10px;">MAY YOUR JOY BE AS BRIGHT AS GOLD</p>
-</section>
-
-<script>
-    // ADMIN AUTH (ahnaf09)
-    const AUTH = "YWhuYWYwOQ==";
-
-    // TERMINAL CMD TYPE ANIMATION (Updated to 2s Delay & Removed 'ahnaf')
-    const text = "Eid Mubarak!"; 
-    let i = 0;
-
-    function typeWriter() {
-        if (i < text.length) {
-            document.getElementById("typewriter").innerHTML += text.charAt(i);
-            i++;
-            setTimeout(typeWriter, 120); // Slightly slower typing for better effect
-        } else {
-            // Fade in sub-tag smoothly after typing
-            document.getElementById("sub-tag").style.transition = "2s ease-in-out";
-            document.getElementById("sub-tag").style.opacity = "1";
-        }
-    }
-
-    // Start the animation after exactly 2 seconds (2000ms)
-    window.onload = () => { 
-        setTimeout(typeWriter, 2000); 
-    };
-
-    // --- ADMIN LOGIC ---
-    function login() {
-        let p = prompt("Enter Key:");
-        if(p && btoa(p.trim()) === AUTH) {
-            document.getElementById('admin-panel').style.display = 'block';
-            document.getElementById('site-logo').style.color = '#FFFFFF';
-            alert("Identity Verified.");
-        }
-    }
-    function closeAdmin() { document.getElementById('admin-panel').style.display = 'none'; }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AHNAF | EID SPECIAL | GAMERS EDGE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Cinzel+Decorative:wght@700;900&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    function toggleDeleteMode() {
-        document.getElementById('main-body').classList.toggle('delete-mode-active');
-        let active = document.getElementById('main-body').classList.contains('delete-mode-active');
-        document.getElementById('del-btn').style.background = active ? "#ff0000" : "#333";
-        document.getElementById('del-btn').innerText = active ? "Exit Removal Mode" : "Toggle Removal Mode";
-    }
+    <style>
+        :root { --gold: #D4AF37; --deep-gold: #AA8201; --emerald: #02231A; --deep-emerald: #01150F; --text: #fdfdfd; }
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+        body { font-family: 'Poppins', sans-serif; background: var(--deep-emerald); color: var(--text); overflow-x: hidden; }
 
-    // --- VIDEO LOGIC ---
-    function extractID(url) {
-        let match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:.*v=|\/v\/|embed\/|shorts\/))([^?&"'>]+)/);
-        return (match && match[1].length == 11) ? match[1] : null;
-    }
+        /* EID BACKGROUND & PARTICLES */
+        #bg-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: linear-gradient(135deg, var(--deep-emerald) 0%, var(--emerald) 100%); }
 
-    function addVideo() {
-        let url = document.getElementById('v-url').value;
-        let title = document.getElementById('v-title').value;
-        let id = extractID(url);
-        if(id && title) {
-            let div = document.createElement('div');
-            div.className = 'video-card';
-            div.id = 'v' + Date.now();
-            div.innerHTML = `<div class="remove-overlay" onclick="removeVideo('${div.id}')">REMOVE</div>
-                <a href="${url}" target="_blank" style="text-decoration:none; color:white;">
-                <div class="thumb"><img src="https://img.youtube.com/vi/${id}/maxresdefault.jpg"></div>
-                <div style="padding:20px;"><h4>${title}</h4></div></a>`;
-            document.getElementById('v-grid').prepend(div);
-            document.getElementById('v-url').value = '';
-            document.getElementById('v-title').value = '';
+        header { height: 90px; display: flex; align-items: center; justify-content: space-between; padding: 0 5%; position: fixed; top: 0; width: 100%; z-index: 1000; background: rgba(1, 21, 15, 0.9); backdrop-filter: blur(20px); border-bottom: 2px solid var(--deep-gold); }
+        .logo { font-family: 'Cinzel Decorative'; font-weight: 900; color: var(--gold); font-size: 1.5rem; text-shadow: 0 0 20px var(--gold); }
+
+        /* HERO AREA */
+        .eid-hero { height: 70vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; margin-top: 50px; }
+        .eid-message { font-family: 'Cinzel Decorative'; font-size: clamp(2.5rem, 8vw, 5rem); color: var(--gold); min-height: 1.2em; }
+        .cursor { display: inline-block; width: 8px; background-color: var(--gold); margin-left: 5px; animation: blink 0.7s infinite; }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+        /* AHNAF NAME ANIMATION BOX */
+        .name-box { margin-top: 20px; padding: 10px 40px; border: 1px solid var(--gold); border-radius: 50px; opacity: 0; transform: translateY(20px); transition: all 1.5s ease-out; box-shadow: 0 0 20px rgba(212, 175, 55, 0.2); }
+        .name-text { font-family: 'Cinzel'; font-weight: 900; letter-spacing: 10px; color: #fff; text-shadow: 0 0 10px var(--gold); font-size: 1.2rem; }
+        .show-name { opacity: 1; transform: translateY(0); }
+
+        /* ADMIN PANEL */
+        #admin-panel { display: none; position: fixed; top: 110px; right: 20px; width: 330px; background: rgba(2, 35, 26, 0.98); border: 2px solid var(--deep-gold); border-radius: 20px; padding: 30px; z-index: 10000; backdrop-filter: blur(25px); }
+        .admin-input { width: 100%; padding: 12px; margin-bottom: 15px; background: rgba(0,0,0,0.5); border: 1px solid #333; color: white; border-radius: 8px; }
+        .admin-btn { width: 100%; padding: 12px; background: var(--gold); color: #000; font-weight: bold; border-radius: 8px; cursor: pointer; border: none; margin-bottom: 10px; }
+
+        /* SECTIONS */
+        .container { max-width: 1200px; margin: auto; padding: 40px 20px; }
+        .section-title { font-family: 'Cinzel'; font-size: 1.8rem; margin-bottom: 40px; border-left: 8px solid var(--gold); padding-left: 15px; color: #fff; text-transform: uppercase; }
+        
+        /* RESTORED CHANNELS */
+        .channel-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-bottom: 60px; }
+        .channel-link { font-family:'Cinzel Decorative'; text-align:center; padding:30px; background:rgba(2, 35, 26, 0.6); border-radius:15px; text-decoration:none; color:var(--gold); border: 2px solid rgba(212, 175, 55, 0.1); transition: 0.3s; }
+        .channel-link:hover { border-color: var(--gold); transform: translateY(-5px); text-shadow: 0 0 15px var(--gold); }
+
+        /* VIDEO CARDS */
+        .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px; }
+        .video-card { position: relative; background: rgba(2, 35, 26, 0.4); border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 15px; overflow: hidden; backdrop-filter: blur(10px); transition: 0.4s; }
+        .thumb img { width: 100%; height: 100%; object-fit: cover; }
+        .remove-overlay { display: none; position: absolute; inset: 0; background: rgba(212, 175, 55, 0.9); align-items: center; justify-content: center; z-index: 10; color: #000; font-weight: bold; }
+        .delete-mode-active .remove-overlay { display: flex; }
+
+        footer { padding: 60px; text-align: center; border-top: 1px solid var(--deep-gold); }
+        .lock-btn { opacity: 0.05; cursor: pointer; font-size: 10px; margin-top: 20px; }
+    </style>
+</head>
+<body id="main-body">
+
+    <canvas id="bg-canvas"></canvas>
+
+    <header>
+        <div class="logo">AHNAF'S EDGE</div>
+    </header>
+
+    <section class="eid-hero">
+        <h1 class="eid-message"><span id="typewriter"></span><span class="cursor"></span></h1>
+        <div class="name-box" id="nameBox">
+            <span class="name-text">AHNAF</span>
+        </div>
+    </section>
+
+    <div id="admin-panel">
+        <h3 style="color:var(--gold); margin-bottom:15px; font-family:Cinzel;">Admin Tools</h3>
+        <input type="text" id="v-url" class="admin-input" placeholder="YouTube URL">
+        <input type="text" id="v-title" class="admin-input" placeholder="Video Title">
+        <button class="admin-btn" onclick="addVideo()">Add Video</button>
+        <button class="admin-btn" id="del-btn" onclick="toggleDeleteMode()" style="background:#333; color:white;">Toggle Delete</button>
+        <button onclick="document.getElementById('admin-panel').style.display='none'" style="background:none; border:none; color:#777; width:100%; cursor:pointer;">Close</button>
+    </div>
+
+    <div class="container">
+        <h2 class="section-title">Channel Hub</h2>
+        <div class="channel-grid">
+            <a href="https://youtube.com/@gameexplorergamerz" target="_blank" class="channel-link">Explorer</a>
+            <a href="https://youtube.com/@gameverseexplorergamer" target="_blank" class="channel-link">Verse</a>
+            <a href="https://youtube.com/@runtillcraft" target="_blank" class="channel-link">Craft</a>
+        </div>
+
+        <h2 class="section-title">Video Archive</h2>
+        <div class="video-grid" id="v-grid">
+            <div class="video-card" id="v1">
+                <div class="remove-overlay" onclick="removeVideo('v1')">REMOVE</div>
+                <a href="https://www.youtube.com/watch?v=ujwrGXKa_IU" target="_blank" style="text-decoration:none; color:white;">
+                    <div class="thumb"><img src="https://img.youtube.com/vi/ujwrGXKa_IU/maxresdefault.jpg"></div>
+                    <div style="padding:20px;"><h4>GTA Vice City 4K Story</h4></div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <h4 style="font-family:'Cinzel'; color:var(--gold);">AHNAF | GAMERS EDGE</h4>
+        <div class="lock-btn" onclick="login()">[ ARCHIVE_LOCK ]</div>
+    </footer>
+
+    <script>
+        // ADMIN AUTH
+        const AUTH = "YWhuYWYwOQ==";
+
+        // ANIMATION: CMD TYPE (2s delay) + NAME REVEAL
+        const text = "Eid Mubarak!";
+        let i = 0;
+        function typeWriter() {
+            if (i < text.length) {
+                document.getElementById("typewriter").innerHTML += text.charAt(i);
+                i++;
+                setTimeout(typeWriter, 120);
+            } else {
+                // Show AHNAF box after typing finished
+                setTimeout(() => {
+                    document.getElementById("nameBox").classList.add("show-name");
+                }, 500);
+            }
         }
-    }
+        window.onload = () => { setTimeout(typeWriter, 2000); };
 
-    function removeVideo(id) { if(confirm("Permanently delete?")) document.getElementById(id).remove(); }
+        // ADMIN FUNCTIONS
+        function login() {
+            let p = prompt("Enter Key:");
+            if(p && btoa(p.trim()) === AUTH) {
+                document.getElementById('admin-panel').style.display = 'block';
+            }
+        }
+        function toggleDeleteMode() {
+            document.getElementById('main-body').classList.toggle('delete-mode-active');
+            let active = document.getElementById('main-body').classList.contains('delete-mode-active');
+            document.getElementById('del-btn').style.background = active ? "red" : "#333";
+        }
+        function extractID(url) {
+            let match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:.*v=|\/v\/|embed\/|shorts\/))([^?&"'>]+)/);
+            return (match && match[1].length == 11) ? match[1] : null;
+        }
+        function addVideo() {
+            let url = document.getElementById('v-url').value;
+            let title = document.getElementById('v-title').value;
+            let id = extractID(url);
+            if(id && title) {
+                let div = document.createElement('div');
+                div.className = 'video-card'; div.id = 'v' + Date.now();
+                div.innerHTML = `<div class="remove-overlay" onclick="removeVideo('${div.id}')">REMOVE</div>
+                    <a href="${url}" target="_blank" style="text-decoration:none; color:white;">
+                    <div class="thumb"><img src="https://img.youtube.com/vi/${id}/maxresdefault.jpg"></div>
+                    <div style="padding:20px;"><h4>${title}</h4></div></a>`;
+                document.getElementById('v-grid').prepend(div);
+            }
+        }
+        function removeVideo(id) { if(confirm("Delete?")) document.getElementById(id).remove(); }
 
-    // --- GOLD DUST PARTICLES ---
-    const canvas = document.getElementById('bg-canvas');
-    const ctx = canvas.getContext('2d');
-    let particles = [];
-    function init() {
-        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-        particles = [];
-        for (let i = 0; i < 150; i++) {
-            particles.push({
-                x: Math.random() * canvas.width, 
-                y: Math.random() * canvas.height,
-                vx: (Math.random() - 0.5) * 0.6, 
-                vy: (Math.random() - 0.5) * 0.6,
-                size: Math.random() * 2 + 0.5
+        // GOLD DUST PARTICLES
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        function init() {
+            canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+            particles = [];
+            for (let i = 0; i < 120; i++) {
+                particles.push({ x: Math.random()*canvas.width, y: Math.random()*canvas.height, vx: (Math.random()-0.5)*0.5, vy: (Math.random()-0.5)*0.5, size: Math.random()*2 });
+            }
+        }
+        function animate() {
+            ctx.clearRect(0,0,canvas.width,canvas.height);
+            particles.forEach(p => {
+                p.x += p.vx; p.y += p.vy;
+                if(p.x<0||p.x>canvas.width) p.vx*=-1;
+                if(p.y<0||p.y>canvas.height) p.vy*=-1;
+                ctx.fillStyle = "rgba(212, 175, 55, 0.4)";
+                ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, Math.PI*2); ctx.fill();
             });
+            requestAnimationFrame(animate);
         }
-    }
-    function animate() {
-        ctx.clearRect(0,0,canvas.width,canvas.height);
-        particles.forEach(p => {
-            p.x += p.vx; p.y += p.vy;
-            if(p.x<0||p.x>canvas.width) p.vx*=-1;
-            if(p.y<0||p.y>canvas.height) p.vy*=-1;
-            ctx.fillStyle = "rgba(212, 175, 55, 0.6)";
-            ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, Math.PI*2); ctx.fill();
-        });
-        requestAnimationFrame(animate);
-    }
-    window.addEventListener('resize', init);
-    init(); animate();
-</script>
+        window.addEventListener('resize', init);
+        init(); animate();
+    </script>
+</body>
+</html>
