@@ -38,12 +38,12 @@
         .container { max-width: 1200px; margin: auto; padding: 40px 20px; }
         .section-title { font-family: 'Cinzel'; font-size: 1.8rem; margin-bottom: 40px; border-left: 8px solid var(--gold); padding-left: 15px; color: #fff; text-transform: uppercase; }
         
-        /* RESTORED CHANNELS */
+        /* CHANNEL HUB */
         .channel-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-bottom: 60px; }
         .channel-link { font-family:'Cinzel Decorative'; text-align:center; padding:30px; background:rgba(2, 35, 26, 0.6); border-radius:15px; text-decoration:none; color:var(--gold); border: 2px solid rgba(212, 175, 55, 0.1); transition: 0.3s; }
         .channel-link:hover { border-color: var(--gold); transform: translateY(-5px); text-shadow: 0 0 15px var(--gold); }
 
-        /* VIDEO CARDS */
+        /* VIDEO CARDS (FOR FUTURE ADDITIONS) */
         .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px; }
         .video-card { position: relative; background: rgba(2, 35, 26, 0.4); border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 15px; overflow: hidden; backdrop-filter: blur(10px); transition: 0.4s; }
         .thumb img { width: 100%; height: 100%; object-fit: cover; }
@@ -86,15 +86,9 @@
             <a href="https://youtube.com/@runtillcraft" target="_blank" class="channel-link">Craft</a>
         </div>
 
-        <h2 class="section-title">Video Archive</h2>
-        <div class="video-grid" id="v-grid">
-            <div class="video-card" id="v1">
-                <div class="remove-overlay" onclick="removeVideo('v1')">REMOVE</div>
-                <a href="https://www.youtube.com/watch?v=ujwrGXKa_IU" target="_blank" style="text-decoration:none; color:white;">
-                    <div class="thumb"><img src="https://img.youtube.com/vi/ujwrGXKa_IU/maxresdefault.jpg"></div>
-                    <div style="padding:20px;"><h4>GTA Vice City 4K Story</h4></div>
-                </a>
-            </div>
+        <div id="archive-section" style="display:none;">
+            <h2 class="section-title">Video Archive</h2>
+            <div class="video-grid" id="v-grid"></div>
         </div>
     </div>
 
@@ -104,10 +98,8 @@
     </footer>
 
     <script>
-        // ADMIN AUTH
         const AUTH = "YWhuYWYwOQ==";
 
-        // ANIMATION: CMD TYPE (2s delay) + NAME REVEAL
         const text = "Eid Mubarak!";
         let i = 0;
         function typeWriter() {
@@ -116,7 +108,6 @@
                 i++;
                 setTimeout(typeWriter, 120);
             } else {
-                // Show AHNAF box after typing finished
                 setTimeout(() => {
                     document.getElementById("nameBox").classList.add("show-name");
                 }, 500);
@@ -124,7 +115,6 @@
         }
         window.onload = () => { setTimeout(typeWriter, 2000); };
 
-        // ADMIN FUNCTIONS
         function login() {
             let p = prompt("Enter Key:");
             if(p && btoa(p.trim()) === AUTH) {
@@ -133,8 +123,6 @@
         }
         function toggleDeleteMode() {
             document.getElementById('main-body').classList.toggle('delete-mode-active');
-            let active = document.getElementById('main-body').classList.contains('delete-mode-active');
-            document.getElementById('del-btn').style.background = active ? "red" : "#333";
         }
         function extractID(url) {
             let match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:.*v=|\/v\/|embed\/|shorts\/))([^?&"'>]+)/);
@@ -145,6 +133,7 @@
             let title = document.getElementById('v-title').value;
             let id = extractID(url);
             if(id && title) {
+                document.getElementById('archive-section').style.display = 'block';
                 let div = document.createElement('div');
                 div.className = 'video-card'; div.id = 'v' + Date.now();
                 div.innerHTML = `<div class="remove-overlay" onclick="removeVideo('${div.id}')">REMOVE</div>
@@ -152,11 +141,12 @@
                     <div class="thumb"><img src="https://img.youtube.com/vi/${id}/maxresdefault.jpg"></div>
                     <div style="padding:20px;"><h4>${title}</h4></div></a>`;
                 document.getElementById('v-grid').prepend(div);
+                document.getElementById('v-url').value = '';
+                document.getElementById('v-title').value = '';
             }
         }
         function removeVideo(id) { if(confirm("Delete?")) document.getElementById(id).remove(); }
 
-        // GOLD DUST PARTICLES
         const canvas = document.getElementById('bg-canvas');
         const ctx = canvas.getContext('2d');
         let particles = [];
