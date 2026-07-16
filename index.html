@@ -26,6 +26,44 @@
             color: var(--text);
             overflow-x: hidden;
             min-height: 100vh;
+            position: relative;
+        }
+
+        /* ── INTERACTIVE BACKGROUND CHARACTER ───────── */
+        .bg-character-wrap {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 50vw;
+            height: 100vh;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+            display: flex;
+            align-items: flex-end;
+            justify-content: flex-end;
+            opacity: 0.65; /* Balanced blend for reading text clear */
+            mix-blend-mode: screen; 
+            transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        
+        .bg-character-wrap img {
+            height: 90vh;
+            width: auto;
+            object-fit: contain;
+            mask-image: linear-gradient(to top, transparent 0%, black 15%), 
+                        linear-gradient(to right, transparent 0%, black 40%);
+            -webkit-mask-image: linear-gradient(to top, transparent 0%, black 15%), 
+                                linear-gradient(to right, transparent 0%, black 40%);
+        }
+
+        /* Background shadow matrix layer to keep contrast high */
+        .bg-gradient-overlay {
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(circle at 80% 50%, rgba(255, 45, 125, 0.08) 0%, transparent 60%);
+            z-index: 0;
+            pointer-events: none;
         }
 
         /* ── CURSOR ─────────────────────────────────── */
@@ -64,8 +102,8 @@
         /* ── HERO ─────────────────────────────────────── */
         .hero {
             height:100vh;
-            display:flex; flex-direction:column; align-items:center; justify-content:center;
-            text-align:center; position:relative; padding:0 20px;
+            display:flex; flex-direction:column; align-items:flex-start; justify-content:center;
+            text-align:left; position:relative; padding:0 8%;
         }
         .hero-eyebrow {
             font-family:'Share Tech Mono'; font-size:0.7rem; letter-spacing:6px;
@@ -74,7 +112,7 @@
         }
         .hero-title {
             font-family:'Orbitron'; font-weight:900;
-            font-size:clamp(2.8rem, 9vw, 6.5rem);
+            font-size:clamp(2.8rem, 8vw, 6rem);
             line-height:1;
             letter-spacing:4px;
             color:#fff;
@@ -89,7 +127,7 @@
             opacity:0; animation:fadeUp .9s 1.2s forwards;
         }
         .hero-cta {
-            margin-top:48px; display:flex; gap:16px; flex-wrap:wrap; justify-content:center;
+            margin-top:48px; display:flex; gap:16px; flex-wrap:wrap;
             opacity:0; animation:fadeUp .9s 1.5s forwards;
         }
         .btn-primary {
@@ -163,6 +201,7 @@
             border-radius:6px; overflow:hidden;
             transition:.35s cubic-bezier(.25,.46,.45,.94);
             text-decoration:none; color:inherit; display:block;
+            backdrop-filter: blur(5px);
         }
         .video-card:hover { transform:translateY(-4px); border-color:rgba(255,45,125,.3); background:rgba(255,45,125,.03); box-shadow:0 20px 60px rgba(0,0,0,.6); }
         .thumb-wrap { position:relative; aspect-ratio:16/9; overflow:hidden; background:#0a0a0a; }
@@ -192,8 +231,6 @@
         .video-date { font-family:'Share Tech Mono'; font-size:0.6rem; letter-spacing:1px; color:var(--muted); }
         .video-badge { font-family:'Share Tech Mono'; font-size:0.55rem; letter-spacing:1px; padding:2px 7px; border:1px solid rgba(255,45,125,.3); border-radius:2px; color:var(--red); }
 
-        /* Loading state */
-        .feed-loading { text-align:center; padding:60px; font-family:'Share Tech Mono'; font-size:0.75rem; letter-spacing:3px; color:var(--muted); }
         .feed-error { text-align:center; padding:60px; }
         .feed-error p { font-family:'Share Tech Mono'; font-size:0.75rem; letter-spacing:2px; color:var(--muted); margin-bottom:16px; }
 
@@ -211,6 +248,7 @@
             border-radius:6px; text-decoration:none; color:inherit;
             transition:.3s; display:flex; flex-direction:column; gap:10px;
             position:relative; overflow:hidden;
+            backdrop-filter: blur(5px);
         }
         .channel-card::before {
             content:''; position:absolute; top:0; left:0; right:0; height:2px;
@@ -258,7 +296,6 @@
         .ap-close:hover { color:rgba(255,255,255,.5); }
         .ap-status { font-family:'Share Tech Mono'; font-size:0.65rem; text-align:center; color:var(--cyan); margin-top:6px; opacity:0; transition:opacity .4s; }
 
-        /* delete mode */
         .del-overlay { display:none; position:absolute; inset:0; background:rgba(255,0,50,.85); z-index:20; align-items:center; justify-content:center; cursor:pointer; }
         .del-overlay span { font-family:'Orbitron'; font-size:0.75rem; letter-spacing:2px; color:#fff; }
         .delete-mode-active .del-overlay { display:flex; }
@@ -273,7 +310,10 @@
         .lock-trigger { opacity:.06; cursor:pointer; font-size:9px; margin-top:28px; display:inline-block; user-select:none; color:#fff; }
         .lock-trigger:hover { opacity:.2; }
 
-        /* ── RESPONSIVE ──────────────────────────────── */
+        @media(max-width:900px) {
+            .bg-character-wrap { width: 100vw; opacity: 0.25; }
+            .hero { align-items: center; text-align: center; padding: 0 20px; }
+        }
         @media(max-width:600px) {
             .stats-bar { gap:30px; }
             .stat-divider { display:none; }
@@ -286,6 +326,11 @@
 <div id="cur"></div>
 <div id="curR"></div>
 
+<div class="bg-gradient-overlay"></div>
+<div class="bg-character-wrap" id="bg-art">
+    <img src="1000018709.png" alt="Featured Bard Character">
+</div>
+
 <canvas id="three-canvas"></canvas>
 
 <header>
@@ -297,9 +342,8 @@
     </nav>
 </header>
 
-<!-- HERO -->
-<section class="hero">
-    <div style="position:relative;z-index:10;">
+<section class="hero" style="position: relative; z-index: 10;">
+    <div>
         <p class="hero-eyebrow">// AHNAF LABIB · CONTENT CREATOR</p>
         <h1 class="hero-title">GAMERS<br><span class="accent">EDGE</span></h1>
         <p class="hero-sub">Gaming · Exploration · Content</p>
@@ -314,7 +358,6 @@
     </div>
 </section>
 
-<!-- STATS BAR -->
 <div class="stats-bar">
     <div class="stat">
         <div class="stat-num">3<span class="unit">+</span></div>
@@ -332,7 +375,6 @@
     </div>
 </div>
 
-<!-- ADMIN PANEL -->
 <div id="admin-panel">
     <div class="ap-title">⬡ Admin Control</div>
     <input type="text" id="v-url"   class="ap-input" placeholder="YouTube video URL">
@@ -346,7 +388,6 @@
     <button class="ap-close" onclick="closeAdmin()">✕ Close</button>
 </div>
 
-<!-- VIDEO FEED -->
 <div style="position:relative;z-index:10;">
 <div class="section" id="feed">
     <div class="section-head">
@@ -357,7 +398,6 @@
         <a href="https://youtube.com/@gameexplorergamerz" target="_blank" class="section-link">View Channel ↗</a>
     </div>
     <div class="video-grid" id="v-grid">
-        <!-- Skeleton placeholders -->
         <div class="video-card" style="pointer-events:none;">
             <div class="sk-thumb skeleton"></div>
             <div class="video-info"><div class="sk-line skeleton"></div><div class="sk-line short skeleton"></div></div>
@@ -373,7 +413,6 @@
     </div>
 </div>
 
-<!-- CHANNEL HUB -->
 <div class="section" id="channels">
     <div class="section-head">
         <div>
@@ -404,7 +443,6 @@
 </div>
 </div>
 
-<!-- FOOTER -->
 <footer>
     <div class="footer-logo">GAMERS EDGE 09</div>
     <div class="footer-meta">AHNAF LABIB · ALL RIGHTS RESERVED</div>
@@ -425,7 +463,7 @@
     const camera = new THREE.PerspectiveCamera(70, innerWidth / innerHeight, 0.1, 1000);
     camera.position.z = 90;
 
-    const N = 2800;
+    const N = 1800; // Adjusted lightly for design visibility
     const pos = new Float32Array(N * 3);
     const vel = new Float32Array(N * 3);
     const col = new Float32Array(N * 3);
@@ -437,7 +475,6 @@
         vel[i*3]   = (Math.random()-.5)*.06;
         vel[i*3+1] = (Math.random()-.5)*.06;
         vel[i*3+2] = (Math.random()-.5)*.04;
-        // Color: red/cyan/white mix
         const r = Math.random();
         if (r < 0.5)      { col[i*3]=1;   col[i*3+1]=0.17; col[i*3+2]=0.49; }
         else if (r < 0.75){ col[i*3]=0;   col[i*3+1]=0.82; col[i*3+2]=1;    }
@@ -449,7 +486,7 @@
     geo.setAttribute('color',    new THREE.BufferAttribute(col, 3));
 
     const mat = new THREE.PointsMaterial({
-        size: 0.55, vertexColors: true, transparent: true, opacity: 0.7,
+        size: 0.55, vertexColors: true, transparent: true, opacity: 0.5,
         blending: THREE.AdditiveBlending, depthWrite: false, sizeAttenuation: true
     });
 
@@ -459,12 +496,16 @@
     document.addEventListener('mousemove', e => {
         mx = (e.clientX / innerWidth  - .5) * 2;
         my = (e.clientY / innerHeight - .5) * 2;
+        
+        // Dynamic Character Parallax Track
+        const bgArt = document.getElementById('bg-art');
+        if(bgArt) {
+            bgArt.style.transform = `translate3d(${-mx * 15}px, ${-my * 10}px, 0)`;
+        }
     });
 
-    let t = 0;
     function tick() {
         requestAnimationFrame(tick);
-        t += 0.003;
         for (let i = 0; i < N; i++) {
             pos[i*3]   += vel[i*3];
             pos[i*3+1] += vel[i*3+1];
@@ -508,8 +549,7 @@ document.querySelectorAll('a,button').forEach(el => {
 // ═══════════════════════════════════════
 // YOUTUBE RSS AUTO-FEED
 // ═══════════════════════════════════════
-// Channel ID for @gameexplorergamerz
-const CHANNEL_ID = 'UCYzPXprvl5237A2OcGOmVDQ'; // gameexplorergamerz
+const CHANNEL_ID = 'UCYzPXprvl5237A2OcGOmVDQ'; 
 const RSS_PROXY  = `https://api.rss2json.com/v1/api.json?rss_url=https://www.youtube.com/feeds/videos.xml?channel_id=${CHANNEL_ID}&api_key=public&count=12`;
 
 async function loadFeed() {
@@ -519,7 +559,6 @@ async function loadFeed() {
         if (!data.items || data.items.length === 0) throw new Error('Empty feed');
         renderFeed(data.items);
     } catch(e) {
-        // Fallback: show manual cards + error hint
         renderFeedFallback();
     }
 }
@@ -568,7 +607,6 @@ function renderFeed(items) {
         grid.appendChild(card);
     });
     document.getElementById('vid-count').textContent = items.length;
-    // Load saved manual cards too
     loadSavedCards();
 }
 
@@ -615,7 +653,6 @@ function adminAddVideo() {
 
 function buildManualCard(ytId, url, title, ts) {
     const grid = document.getElementById('v-grid');
-    // Remove fallback message if present
     const fb = grid.querySelector('.feed-error');
     if (fb) fb.remove();
 
@@ -657,7 +694,6 @@ function updateCount() {
     document.getElementById('vid-count').textContent = n || '—';
 }
 
-// ── LocalStorage ──────────────────────
 function saveData() {
     const cards = document.querySelectorAll('.manual-card');
     const arr   = [];
@@ -683,4 +719,4 @@ function loadSavedCards() {
 }
 </script>
 </body>
-    </html>
+</html>
