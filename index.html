@@ -198,4 +198,1078 @@ section.block{padding:110px 0 30px;position:relative;z-index:2}
 .ch:hover::after{opacity:1}
 .ch .top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
 .ch .num{font-family:var(--display);font-weight:800;font-size:3.4rem;line-height:1;color:rgba(255,255,255,.09)}
-.ch 
+.ch .cls{font-size:.7rem;color:var(--cyan);padding:5px 10px;border:1px solid color-mix(in srgb,var(--cyan) 35%,transparent)}
+.ch h3{font-family:var(--display);font-weight:700;font-size:2rem;line-height:1;text-transform:uppercase}
+.ch .handle{color:var(--accent-2);font-weight:500;font-size:.9rem}
+.ch p{color:var(--muted);font-size:.95rem}
+.bars{display:grid;gap:10px;margin:6px 0 8px}
+.bar{display:grid;grid-template-columns:96px 1fr;align-items:center;gap:12px;font-size:.68rem;color:var(--muted)}
+.bar i{display:block;height:6px;background:rgba(255,255,255,.08);position:relative;overflow:hidden}
+.bar i::after{content:"";position:absolute;inset:0;width:calc(var(--v)*1%);transform:scaleX(0);transform-origin:left;background:linear-gradient(90deg,var(--accent),var(--cyan))}
+.ch.in .bar i::after{transform:scaleX(1);transition:transform 1.2s cubic-bezier(.2,.8,.2,1) .35s}
+.ch .go{margin-top:auto;font-family:var(--display);font-weight:700;letter-spacing:.1em;text-transform:uppercase;display:flex;align-items:center;gap:8px;transition:gap .2s}
+.ch:hover .go{gap:16px;color:var(--accent-2)}
+
+/* games */
+.games{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:16px}
+.game{position:relative;padding:22px 20px;background:var(--card);border:1px solid var(--line);display:flex;flex-direction:column;gap:6px;transition:.3s;clip-path:var(--cut)}
+.game:hover{border-color:color-mix(in srgb,var(--accent) 55%,transparent);transform:translateY(-4px)}
+.game .gname{font-family:var(--display);font-weight:700;font-size:1.5rem;line-height:1.05;text-transform:uppercase}
+.game .gtag{font-size:.7rem;color:var(--cyan)}
+
+/* about */
+.about{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.about-card{padding:38px;background:var(--card);border:1px solid var(--line)}
+.about-card h3{font-family:var(--display);font-size:1.9rem;text-transform:uppercase;line-height:1;margin-bottom:14px}
+.about-card p{color:var(--muted);white-space:pre-line}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:14px;margin-top:6px}
+.stat{padding:22px 12px;background:rgba(255,255,255,.03);border:1px solid var(--line);text-align:center}
+.stat strong{display:block;font-family:var(--display);font-size:2.4rem;line-height:1;color:var(--cyan)}
+.stat span{font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+
+/* cta + footer */
+.cta{margin:120px 0 0;position:relative;z-index:2}
+.cta-box{position:relative;overflow:hidden;padding:76px 50px;text-align:center;color:var(--on-accent);background:linear-gradient(135deg,var(--accent),color-mix(in srgb,var(--accent) 55%,#000));clip-path:polygon(0 0,calc(100% - 40px) 0,100% 40px,100% 100%,40px 100%,0 calc(100% - 40px))}
+.cta-box::before{content:"EDGE";position:absolute;inset:auto 0 -.28em;font-family:var(--display);font-weight:800;font-size:clamp(9rem,26vw,22rem);line-height:1;color:rgba(0,0,0,.15);letter-spacing:.02em;pointer-events:none}
+.cta-box>*{position:relative}
+.cta-box .mono{font-size:.8rem;opacity:.85;margin-bottom:14px;display:block}
+.cta-box h2{font-family:var(--display);font-weight:800;font-size:clamp(2.6rem,6vw,4.8rem);line-height:.95;text-transform:uppercase}
+.cta-box p{margin:16px auto 30px;max-width:480px;opacity:.92;font-size:1.1rem}
+.cta-box .btn{background:#fff;color:#0b0b0d}
+.cta-box .btn:hover{transform:translateY(-2px) scale(1.03)}
+footer{margin-top:90px;border-top:1px solid var(--line);padding:36px 0 44px;position:relative;z-index:2}
+.foot{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;color:var(--muted);font-size:.88rem}
+.foot .links{display:flex;gap:22px;align-items:center;flex-wrap:wrap}
+.foot .links a:hover{color:#fff}
+.lock{opacity:.3;cursor:pointer;background:none;border:0;padding:6px 10px;transition:.2s}
+.lock:hover{opacity:1}
+#totop{position:fixed;right:20px;bottom:20px;z-index:150;width:48px;height:48px;border:0;background:var(--accent);clip-path:polygon(25% 0,75% 0,100% 50%,75% 100%,25% 100%,0 50%);cursor:pointer;display:grid;place-items:center;opacity:0;pointer-events:none;transform:translateY(10px);transition:.3s}
+#totop.show{opacity:1;pointer-events:auto;transform:none}
+#totop svg{width:18px;height:18px;fill:none;stroke:var(--on-accent);stroke-width:2.5}
+
+/* toast + modal */
+#toasts{position:fixed;left:20px;bottom:20px;z-index:350;display:grid;gap:10px;pointer-events:none}
+.toast{display:flex;gap:14px;align-items:center;min-width:250px;padding:14px 18px;background:color-mix(in srgb,var(--bg) 94%,transparent);border:1px solid color-mix(in srgb,var(--cyan) 45%,transparent);clip-path:var(--cut);animation:toast 5s forwards}
+.toast b{display:block;font-family:var(--display);font-size:1.15rem;letter-spacing:.06em;text-transform:uppercase}
+.toast small{color:var(--muted)}
+.toast .ico{font-size:1.5rem}
+.toast .mono{font-size:.66rem;color:var(--cyan)}
+@keyframes toast{0%{opacity:0;transform:translateX(-30px)}8%,88%{opacity:1;transform:none}100%{opacity:0;transform:translateX(-30px)}}
+#modal{position:fixed;inset:0;z-index:400;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(4,4,6,.9);backdrop-filter:blur(8px)}
+#modal.open{display:flex;animation:fade .25s}
+@keyframes fade{from{opacity:0}}
+.modal-box{position:relative;width:min(960px,100%);max-height:100%}
+.modal-box.vertical{width:min(380px,100%)}
+.mframe{position:relative;aspect-ratio:16/9;background:#000;box-shadow:0 0 0 1px color-mix(in srgb,var(--accent) 50%,transparent),0 40px 100px rgba(0,0,0,.8),0 0 60px -10px color-mix(in srgb,var(--accent) 45%,transparent)}
+.modal-box.vertical .mframe{aspect-ratio:9/16;max-height:82vh;margin-inline:auto}
+.mframe iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.modal-title{margin-top:14px;font-weight:600;display:flex;justify-content:space-between;gap:14px;align-items:flex-start}
+.modal-title a{color:var(--accent-2);white-space:nowrap;font-size:.9rem}
+#modal-close{position:absolute;right:0;top:-48px;width:40px;height:40px;border:1px solid var(--line);background:rgba(255,255,255,.08);cursor:pointer;font-size:1.3rem;line-height:1}
+#modal-close:hover{background:var(--accent);border-color:var(--accent)}
+
+/* admin: floating button + drawer editor */
+#fab{position:fixed;left:20px;bottom:20px;z-index:480;display:none;align-items:center;gap:8px;padding:11px 16px;background:#0c0c11;border:1px solid var(--line);color:#fff;font:600 .85rem var(--body);cursor:pointer;clip-path:var(--cut)}
+#fab.show{display:flex}
+#fab i{width:9px;height:9px;border-radius:50%;background:#33d17a}
+#fab.busy i{background:#ffb400;animation:pulse 1s infinite}
+#fab.err i{background:#ff4d4d}
+#drawer{position:fixed;top:0;right:0;bottom:0;width:min(450px,100%);z-index:500;background:#0c0c11;border-left:1px solid var(--line);display:none;flex-direction:column;box-shadow:-30px 0 80px rgba(0,0,0,.6);font-size:.9rem;color:var(--text)}
+#drawer.open{display:flex}
+.dr-head{display:flex;justify-content:space-between;align-items:center;padding:16px 18px;border-bottom:1px solid var(--line)}
+.dr-head b{font-family:var(--display);font-size:1.35rem;letter-spacing:.06em;text-transform:uppercase}
+.dr-head small{display:block;color:var(--muted);font-size:.74rem}
+.dr-tabs{display:flex;gap:4px;overflow-x:auto;padding:10px 12px;border-bottom:1px solid var(--line);scrollbar-width:thin}
+.dr-tab{flex:none;padding:8px 14px;border:0;background:transparent;color:var(--muted);font:600 .82rem var(--body);cursor:pointer;border-bottom:2px solid transparent}
+.dr-tab:hover{color:#fff}
+.dr-tab.on{color:#fff;border-color:var(--accent)}
+.dr-body{flex:1;overflow:auto;padding:18px}
+.dr-foot{padding:12px 18px;border-top:1px solid var(--line);display:flex;gap:10px;align-items:center;justify-content:space-between}
+#dr-status{font-size:.68rem;color:var(--muted);line-height:1.4}
+#dr-status.ok{color:#33d17a}#dr-status.err{color:#ff6b6b}#dr-status.busy{color:#ffb400}
+.f{margin-bottom:14px}
+.f>label{display:block;font-size:.74rem;color:var(--muted);margin-bottom:6px;letter-spacing:.04em}
+.f small{display:block;color:var(--muted);font-size:.72rem;margin-top:5px}
+.f input[type=text],.f input[type=url],.f input[type=password],.f input[type=number],.f textarea,.f select{width:100%;padding:10px 12px;background:#16161d;border:1px solid var(--line);color:#fff;font:inherit;outline:none}
+.f input:focus,.f textarea:focus,.f select:focus{border-color:var(--cyan)}
+.f textarea{resize:vertical;min-height:70px}
+.f input[type=color]{width:100%;height:40px;padding:3px;background:#16161d;border:1px solid var(--line);cursor:pointer}
+.f input[type=range]{width:100%;accent-color:var(--accent)}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.sw{display:flex;align-items:center;gap:12px;padding:9px 0;cursor:pointer;color:var(--text)}
+.sw input{position:absolute;opacity:0;pointer-events:none}
+.sw i{flex:none;width:38px;height:22px;background:#2a2a35;border-radius:99px;position:relative;transition:.2s}
+.sw i::after{content:"";position:absolute;left:3px;top:3px;width:16px;height:16px;border-radius:50%;background:#fff;transition:.2s}
+.sw input:checked+i{background:var(--accent)}
+.sw input:checked+i::after{left:19px}
+.sw input:focus-visible+i{outline:2px solid var(--cyan)}
+.grp{margin-bottom:22px}
+.grp>h5{font-family:var(--display);font-size:1.05rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-2);margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--line)}
+.li{border:1px solid var(--line);padding:12px;margin-bottom:10px;background:#101016}
+.li-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;color:var(--muted);font-size:.78rem}
+.mini{padding:5px 10px;border:1px solid var(--line);background:#18181f;color:#fff;font:600 .78rem var(--body);cursor:pointer;margin-left:4px}
+.mini:hover{border-color:var(--accent)}
+.mini.danger:hover{background:#ff4d4d;border-color:#ff4d4d}
+.mini.add{margin:0;width:100%;padding:10px;border-style:dashed}
+.presets{display:flex;gap:8px;flex-wrap:wrap}
+.presets button{width:38px;height:38px;border:2px solid var(--line);cursor:pointer;clip-path:var(--cut)}
+.presets button:hover{border-color:#fff}
+.note{padding:12px 14px;background:rgba(25,227,255,.06);border:1px solid rgba(25,227,255,.25);color:var(--muted);font-size:.8rem;margin-bottom:16px;line-height:1.5}
+.note b{color:#fff}
+.note.warn{background:rgba(255,180,0,.07);border-color:rgba(255,180,0,.3)}
+.pv{display:flex;gap:10px;align-items:center;margin-bottom:10px}
+.pv img{width:84px;aspect-ratio:16/9;object-fit:cover;background:#000;flex:none}
+.btnrow{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.btnrow .mini{margin:0;padding:9px 14px}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .8s ease,transform .8s ease}
+.reveal.in{opacity:1;transform:none}
+
+@media(max-width:900px){
+  .hero-grid{grid-template-columns:1fr}
+  .hero-art{height:48vh;order:-1;margin-top:10px}
+  .hero{align-items:flex-start;padding-top:90px}
+  .featured,.about{grid-template-columns:1fr}
+  .scroll-cue,#lvl{display:none}
+  .burger{display:grid}
+  .nav-links{position:fixed;inset:70px 0 auto 0;flex-direction:column;align-items:stretch;gap:0;padding:10px 24px 24px;background:color-mix(in srgb,var(--bg) 98%,transparent);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);transform:translateY(-130%);transition:transform .35s;z-index:-1}
+  .nav-links.open{transform:none}
+  .nav-links a:not(.btn){padding:16px 0;border-bottom:1px solid var(--line);font-size:1.05rem}
+  .nav-links a:not(.btn)::after{display:none}
+  .nav-links .btn{margin-top:18px;justify-content:center}
+}
+@media(max-width:600px){
+  .wrap{width:calc(100% - 32px)}
+  .sec-head{flex-direction:column;align-items:flex-start}
+  .cta-box{padding:54px 24px}
+  .feat-info,.about-card{padding:26px}
+  .hud div{padding:12px 16px}
+  .toolbar{flex-direction:column;align-items:stretch}
+  .search{max-width:none}
+  .chip-float{font-size:.62rem;padding:6px 9px}
+  #toasts{left:12px;right:12px;bottom:76px}
+  .row,.row3{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}.reveal{opacity:1;transform:none}.bar i::after{transform:scaleX(1)}}
+
+/* =====================================================
+   LIQUID GLASS LAYER (overrides the base look above)
+   ===================================================== */
+:root{
+  --cut:none;
+  --blur:22px;
+  --glass-a:.10;
+  --glass-line:rgba(255,255,255,.22);
+  --glass-bg:rgba(255,255,255,var(--glass-a));
+  --spec:inset 0 1px 0 rgba(255,255,255,.5),inset 0 -1px 0 rgba(255,255,255,.07),inset 1px 0 0 rgba(255,255,255,.14),inset -1px 0 0 rgba(255,255,255,.14);
+  --glass-shadow:0 20px 50px -20px rgba(0,0,0,.7),var(--spec);
+  --r-lg:calc(var(--radius) + 14px);
+  --muted:#b3b4c1;
+}
+#orbs{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+#orbs i{position:absolute;border-radius:50%;filter:blur(80px);animation:drift 24s ease-in-out infinite alternate}
+#orbs i:nth-child(1){width:46vmax;height:46vmax;left:-12vmax;top:-10vmax;background:var(--accent);opacity:.5}
+#orbs i:nth-child(2){width:40vmax;height:40vmax;right:-14vmax;top:30vh;background:var(--cyan);opacity:.32;animation-delay:-8s}
+#orbs i:nth-child(3){width:34vmax;height:34vmax;left:25vw;bottom:-18vmax;background:color-mix(in srgb,var(--accent) 55%,var(--cyan));opacity:.28;animation-delay:-14s}
+@keyframes drift{to{transform:translate3d(6vmax,4vmax,0) scale(1.15)}}
+body.no-orbs #orbs{display:none}
+.hero{background:none;padding-top:90px}
+
+/* glass surfaces */
+:is(.vcard,.ch,.game,.about-card,.featured,.hud,.stat,.toast,.sk-card,.empty),.ch:hover{
+  background:
+    radial-gradient(260px circle at var(--px,50%) var(--py,0%),rgba(255,255,255,calc(.17*var(--sh,0))),transparent 65%),
+    linear-gradient(135deg,rgba(255,255,255,calc(var(--glass-a) + .05)),rgba(255,255,255,calc(var(--glass-a) - .03)));
+  -webkit-backdrop-filter:blur(var(--blur)) saturate(170%);backdrop-filter:blur(var(--blur)) saturate(170%);
+  border:1px solid var(--glass-line);box-shadow:var(--glass-shadow);clip-path:none;
+}
+:is(.vcard,.ch,.game,.about-card,.featured,.stat,.btn-outline):hover{--sh:1}
+.vcard,.game,.ch,.about-card,.featured{border-radius:var(--r-lg)}
+.stat,.hud,.empty,.sk-card{border-radius:20px}
+.hud{overflow:hidden;border-radius:24px}
+.vcard::before{display:none}
+.vcard:hover{box-shadow:var(--glass-shadow),0 0 44px -10px color-mix(in srgb,var(--accent) 45%,transparent);border-color:rgba(255,255,255,.4)}
+.featured{overflow:hidden}
+.toast{border-radius:22px}
+
+/* floating pill nav */
+header{inset:10px 0 auto 0;border:0}
+header.scrolled{background:none;-webkit-backdrop-filter:none;backdrop-filter:none;border-color:transparent}
+.nav{position:relative;height:60px;padding:0 10px 0 18px;border-radius:999px;border:1px solid var(--glass-line);
+  background:linear-gradient(135deg,rgba(255,255,255,.14),rgba(255,255,255,.05));
+  -webkit-backdrop-filter:blur(var(--blur)) saturate(180%);backdrop-filter:blur(var(--blur)) saturate(180%);box-shadow:var(--glass-shadow)}
+header.scrolled .nav{background:linear-gradient(135deg,rgba(255,255,255,.2),rgba(255,255,255,.08))}
+.logo{border-radius:50%;clip-path:none;background:linear-gradient(145deg,color-mix(in srgb,var(--accent) 65%,#fff),var(--accent));box-shadow:var(--spec),0 0 22px color-mix(in srgb,var(--accent) 70%,transparent)}
+#lvl{border-radius:999px;background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.22)}
+
+/* buttons, chips, inputs */
+.btn{border-radius:999px;clip-path:none}
+.btn-primary{background:linear-gradient(180deg,color-mix(in srgb,var(--accent) 80%,#fff),var(--accent) 60%);box-shadow:var(--spec),0 12px 30px -10px color-mix(in srgb,var(--accent) 80%,transparent)}
+.btn-primary:hover{filter:none;box-shadow:var(--spec),0 16px 40px -8px var(--accent)}
+.btn-outline{background:var(--glass-bg);-webkit-backdrop-filter:blur(var(--blur));backdrop-filter:blur(var(--blur));box-shadow:var(--spec);border:1px solid var(--glass-line)}
+.chip{border-radius:999px;clip-path:none;background:var(--glass-bg);border:1px solid var(--glass-line);box-shadow:var(--spec);-webkit-backdrop-filter:blur(var(--blur));backdrop-filter:blur(var(--blur))}
+.chip[aria-pressed="true"]{background:linear-gradient(180deg,color-mix(in srgb,var(--accent) 80%,#fff),var(--accent));border-color:transparent}
+.search input{border-radius:999px;clip-path:none;background:var(--glass-bg);border:1px solid var(--glass-line);box-shadow:var(--spec);-webkit-backdrop-filter:blur(var(--blur));backdrop-filter:blur(var(--blur))}
+.tag,.status .pill,.chip-float{border-radius:999px;clip-path:none}
+.status .pill,.chip-float{background:var(--glass-bg);border-color:var(--glass-line);box-shadow:var(--spec);-webkit-backdrop-filter:blur(var(--blur));backdrop-filter:blur(var(--blur))}
+.badge{border-radius:999px;background:rgba(0,0,0,.42);border:1px solid rgba(255,255,255,.2);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.badge.short,.badge.pinned{background:color-mix(in srgb,var(--accent) 75%,transparent)}
+.badge.new{background:color-mix(in srgb,var(--cyan) 85%,transparent)}
+
+/* hero art */
+.hero-art::before{clip-path:none;border-radius:44px;opacity:.9}
+.hero-art .frame{z-index:1;inset:8% 6% 0;border-radius:44px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.28);box-shadow:var(--spec);-webkit-backdrop-filter:blur(var(--blur));backdrop-filter:blur(var(--blur))}
+
+/* play buttons */
+.play{border-radius:50%;clip-path:none;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.45);-webkit-backdrop-filter:blur(14px) saturate(180%);backdrop-filter:blur(14px) saturate(180%);box-shadow:var(--spec),0 12px 40px rgba(0,0,0,.45)}
+.player:hover .play{filter:none;background:color-mix(in srgb,var(--accent) 55%,rgba(255,255,255,.2))}
+.vthumb i{border-radius:50%;clip-path:none;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.45);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+
+/* ticker */
+.ticker{width:min(1200px,100% - 48px);margin:22px auto 0;border-radius:999px;border:1px solid var(--glass-line);background:var(--glass-bg);-webkit-backdrop-filter:blur(var(--blur));backdrop-filter:blur(var(--blur));box-shadow:var(--glass-shadow)}
+.ticker span{padding:12px 28px;font-size:1.2rem}
+
+/* cta + totop + footer */
+.cta-box{clip-path:none;border-radius:calc(var(--r-lg) + 16px);box-shadow:var(--spec),0 30px 80px -30px color-mix(in srgb,var(--accent) 75%,transparent)}
+.cta-box::after{content:"";position:absolute;inset:0;background:linear-gradient(160deg,rgba(255,255,255,.3),transparent 42%);pointer-events:none}
+#totop{clip-path:none;border-radius:50%;background:linear-gradient(180deg,color-mix(in srgb,var(--accent) 75%,#fff),var(--accent));box-shadow:var(--spec),0 10px 30px -8px var(--accent)}
+footer{border-top:0}
+.foot-r{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+.admin-pill{display:inline-flex;align-items:center;gap:8px;padding:9px 16px;border-radius:999px;border:1px solid var(--glass-line);background:var(--glass-bg);-webkit-backdrop-filter:blur(var(--blur));backdrop-filter:blur(var(--blur));color:#fff;font:600 .82rem var(--body);cursor:pointer;box-shadow:var(--spec);transition:.2s}
+.admin-pill:hover{background:color-mix(in srgb,var(--accent) 35%,transparent);border-color:var(--accent)}
+.admin-pill svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2}
+
+/* modal */
+.mframe{border-radius:26px;overflow:hidden}
+#modal-close{border-radius:50%;background:var(--glass-bg);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+
+/* login dialog */
+#login{position:fixed;inset:0;z-index:600;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(4,4,8,.5);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);animation:fade .25s}
+.login-card{width:min(400px,100%);padding:30px;border-radius:32px;display:grid;gap:14px;background:linear-gradient(160deg,rgba(40,40,58,.6),rgba(16,16,26,.7));-webkit-backdrop-filter:blur(34px) saturate(190%);backdrop-filter:blur(34px) saturate(190%);border:1px solid rgba(255,255,255,.22);box-shadow:var(--glass-shadow),0 40px 90px rgba(0,0,0,.6)}
+.login-card h3{font-family:var(--display);font-size:1.8rem;text-transform:uppercase;letter-spacing:.04em;line-height:1}
+.login-card p{color:var(--muted);font-size:.9rem}
+.login-card input{width:100%;padding:14px 16px;border-radius:16px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);color:#fff;font:inherit;outline:none}
+.login-card input:focus{border-color:var(--cyan)}
+.login-err{min-height:1.2em;color:#ff7b8f;font-size:.82rem}
+.login-row{display:flex;gap:10px;justify-content:flex-end}
+
+/* editor drawer */
+#drawer{top:12px;right:12px;bottom:12px;width:min(460px,100% - 24px);border-radius:30px;border:1px solid rgba(255,255,255,.2);overflow:hidden;
+  background:linear-gradient(160deg,rgba(34,34,50,.62),rgba(14,14,22,.74));-webkit-backdrop-filter:blur(34px) saturate(190%);backdrop-filter:blur(34px) saturate(190%);box-shadow:var(--glass-shadow),0 40px 90px rgba(0,0,0,.6)}
+.dr-head,.dr-tabs,.dr-foot{border-color:rgba(255,255,255,.1)}
+.dr-tab{border-radius:999px;border:0}
+.dr-tab.on{background:rgba(255,255,255,.14);box-shadow:var(--spec);border:0}
+.f input[type=text],.f input[type=url],.f input[type=password],.f input[type=number],.f textarea,.f select{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);border-radius:12px}
+.f input[type=color]{background:rgba(255,255,255,.07);border-radius:12px;border-color:rgba(255,255,255,.14)}
+.li{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.1);border-radius:18px}
+.mini{border-radius:999px;background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.16)}
+.mini.add{border-radius:16px}
+.note{border-radius:16px}
+.presets button{clip-path:none;border-radius:50%}
+#fab{clip-path:none;border-radius:999px;background:var(--glass-bg);border-color:var(--glass-line);box-shadow:var(--glass-shadow);-webkit-backdrop-filter:blur(var(--blur));backdrop-filter:blur(var(--blur))}
+.chk{list-style:none;display:grid;gap:8px;margin-bottom:14px}
+.chk li{display:flex;gap:10px;align-items:center;padding:9px 12px;border-radius:14px;background:rgba(255,255,255,.05);font-size:.82rem;color:var(--muted)}
+.chk li b{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;font-size:.72rem;background:rgba(255,255,255,.1);color:#fff}
+.chk li.ok{color:#fff}
+.chk li.ok b{background:#33d17a;color:#04210f}
+.tokrow{display:flex;gap:8px}
+.tokrow input{flex:1;min-width:0}
+.tokrow .mini{margin:0}
+ol.steps{margin:0 0 14px 18px;color:var(--muted);font-size:.82rem;display:grid;gap:6px}
+ol.steps b{color:#fff}
+
+.burger{border-radius:50%;background:rgba(255,255,255,.08);border-color:var(--glass-line);box-shadow:var(--spec)}
+/* fallbacks */
+body.no-glass :is(.vcard,.ch,.game,.about-card,.featured,.hud,.stat,.toast,.sk-card,.empty,.ticker,.nav,.chip,.search input,.btn-outline){background:var(--card);-webkit-backdrop-filter:none;backdrop-filter:none}
+@media(prefers-reduced-transparency:reduce){:is(.vcard,.ch,.game,.about-card,.featured,.hud,.stat,.toast,.ticker,.nav,.chip,.search input,.btn-outline,#drawer,.login-card){background:var(--card)!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important}}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){:is(.vcard,.ch,.game,.about-card,.featured,.hud,.stat,.toast,.ticker,.nav,#drawer,.login-card){background:rgba(22,22,32,.94)}}
+
+@media(max-width:900px){
+  .hero{padding-top:98px}
+  .nav-links{position:absolute;inset:calc(100% + 10px) 0 auto 0;padding:12px 20px 20px;border-radius:28px;border:1px solid var(--glass-line);background:rgba(18,18,28,.9);box-shadow:var(--glass-shadow);transform:translateY(-12px) scale(.98);opacity:0;visibility:hidden;pointer-events:none;transition:.3s;z-index:5;backdrop-filter:none}
+  .nav-links.open{transform:none;opacity:1;visibility:visible;pointer-events:auto}
+}
+@media(max-width:600px){
+  .ticker{width:calc(100% - 32px)}
+  .nav{padding:0 8px 0 14px}
+  #drawer{top:8px;right:8px;bottom:8px;width:calc(100% - 16px);border-radius:26px}
+}
+</style>
+</head>
+<body id="main-body">
+<a class="skip" href="#videos">Skip to videos</a>
+<div id="xp" aria-hidden="true"><i></i></div>
+<div id="orbs" aria-hidden="true"><i></i><i></i><i></i></div>
+<div id="spot" aria-hidden="true"></div>
+
+<header id="top">
+  <div class="wrap nav">
+    <a href="#" class="brand" aria-label="Home"><span class="logo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span><span><span data-t="site.brand1"></span><b data-t="site.brand2"></b> <span data-t="site.brandNum"></span></span></a>
+    <nav class="nav-links" id="nav-links" aria-label="Main">
+      <a href="#videos" data-sec="videos" data-t="site.navVideos">Videos</a>
+      <a href="#channels" data-sec="channels" data-t="site.navChannels">Channels</a>
+      <a href="#games" data-sec="games" data-t="site.navGames">Games</a>
+      <a href="#about" data-sec="about" data-t="site.navAbout">About</a>
+      <span id="lvl" class="mono" aria-hidden="true">LVL 01</span>
+      <a href="#" target="_blank" rel="noopener" class="btn btn-primary btn-sm" data-sub data-href="site.primaryUrl" data-suffix="?sub_confirmation=1" data-t="site.joinLabel"></a>
+    </nav>
+    <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links"><span></span></button>
+  </div>
+</header>
+
+<main>
+<section class="hero" aria-label="Intro">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="status mono reveal">
+        <span><span class="dot"></span><span data-t="site.statusText"></span></span>
+        <span class="pill" data-t="site.owner"></span>
+        <span class="pill hot" id="live-pill" hidden><span id="live-text">New drop</span></span>
+      </div>
+      <h1 class="reveal"><span data-t="site.tagline1"></span><em data-t="site.tagline2"></em></h1>
+      <p class="lead reveal" data-t="site.lead"></p>
+      <div class="hero-cta reveal">
+        <a href="#" target="_blank" rel="noopener" class="btn btn-primary" data-sub data-href="site.primaryUrl" data-suffix="?sub_confirmation=1">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23 7.2a3 3 0 0 0-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 0 0 1 7.2C.5 9.1.5 12 .5 12s0 2.9.5 4.8a3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1c.5-1.9.5-4.8.5-4.8s0-2.9-.5-4.8zM9.8 15.1V8.9l5.4 3.1-5.4 3.1z"/></svg>
+          <span data-t="site.subscribeLabel"></span>
+        </a>
+        <a href="#videos" class="btn btn-outline">▶ <span data-t="site.watchLabel"></span></a>
+      </div>
+      <div class="hud reveal">
+        <div><strong id="ch-count">3</strong><span>Channels</span></div>
+        <div><strong id="vid-count">—</strong><span>Recent drops</span></div>
+        <div id="subs-stat" hidden><strong data-t="site.subscribers"></strong><span>Subscribers</span></div>
+      </div>
+    </div>
+    <div class="hero-art reveal" id="art">
+      <div class="frame"></div>
+      <div id="hero-chips"></div>
+      <img id="hero-img" src="1000018709.png" alt="Featured character">
+    </div>
+  </div>
+  <div class="scroll-cue" aria-hidden="true"></div>
+</section>
+
+<div class="ticker" id="ticker-wrap" aria-hidden="true"><div class="ticker-track" id="ticker"></div></div>
+
+<section class="block" id="videos" data-secbox="videos">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div><div class="eyebrow" data-t="site.videosEyebrow"></div><h2><span data-t="site.videosTitle"></span> <em data-t="site.videosAccent"></em></h2></div>
+      <a class="sec-link" href="#" target="_blank" rel="noopener" data-href="site.primaryUrl">Full channel →</a>
+    </div>
+    <div class="toolbar reveal">
+      <label class="search"><span style="position:absolute;left:-999px">Search videos</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="q" type="search" placeholder="Search videos…" autocomplete="off">
+      </label>
+      <div class="chips" role="group" aria-label="Filter">
+        <button class="chip" data-f="all" aria-pressed="true">All</button>
+        <button class="chip" data-f="video" aria-pressed="false">Videos</button>
+        <button class="chip" data-f="short" aria-pressed="false">Shorts</button>
+      </div>
+    </div>
+    <div id="featured"></div>
+    <div class="video-grid" id="v-grid" aria-live="polite">
+      <div class="sk-card"><div class="a skeleton"></div><div class="b skeleton"></div><div class="c skeleton"></div></div>
+      <div class="sk-card"><div class="a skeleton"></div><div class="b skeleton"></div><div class="c skeleton"></div></div>
+      <div class="sk-card"><div class="a skeleton"></div><div class="b skeleton"></div><div class="c skeleton"></div></div>
+    </div>
+    <div class="more"><button class="btn btn-outline" id="more-btn" hidden>Load more</button></div>
+  </div>
+</section>
+
+<section class="block" id="channels" data-secbox="channels">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div><div class="eyebrow" data-t="site.channelsEyebrow"></div><h2><span data-t="site.channelsTitle"></span> <em data-t="site.channelsAccent"></em></h2></div>
+    </div>
+    <div class="channels" id="channels-list"></div>
+  </div>
+</section>
+
+<section class="block" id="games" data-secbox="games">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div><div class="eyebrow" data-t="site.gamesEyebrow"></div><h2><span data-t="site.gamesTitle"></span> <em data-t="site.gamesAccent"></em></h2></div>
+    </div>
+    <div class="games" id="games-list"></div>
+  </div>
+</section>
+
+<section class="block" id="about" data-secbox="about">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div><div class="eyebrow" data-t="site.aboutEyebrow"></div><h2><span data-t="site.aboutTitle"></span> <em data-t="site.aboutAccent"></em></h2></div>
+    </div>
+    <div class="about">
+      <div class="about-card reveal"><h3 data-t="site.aboutHead"></h3><p data-t="site.aboutText"></p></div>
+      <div class="about-card reveal"><h3 data-t="site.aboutHead2"></h3><div class="stats" id="about-stats"></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta" data-secbox="cta">
+  <div class="wrap">
+    <div class="cta-box reveal">
+      <span class="mono" data-t="site.ctaEyebrow"></span>
+      <h2 data-t="site.ctaTitle" data-ml></h2>
+      <p data-t="site.ctaText"></p>
+      <a href="#" target="_blank" rel="noopener" class="btn" data-sub data-href="site.primaryUrl" data-suffix="?sub_confirmation=1" data-t="site.ctaButton"></a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <div data-t="site.footerText"></div>
+    <div class="foot-r"><div class="links" id="foot-links"></div><button class="admin-pill" id="lock-btn" type="button" aria-label="Admin login"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>Admin</button></div>
+  </div>
+</footer>
+
+<button id="totop" aria-label="Back to top"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 15 6-6 6 6"/></svg></button>
+<button id="fab" aria-label="Open site editor"><i></i><span>Editor</span></button>
+<div id="toasts" aria-live="polite"></div>
+
+<div id="modal" role="dialog" aria-modal="true" aria-label="Video player">
+  <div class="modal-box" id="modal-box">
+    <button id="modal-close" aria-label="Close video">×</button>
+    <div class="mframe" id="frame"></div>
+    <div class="modal-title"><span id="modal-title"></span><a id="modal-link" href="#" target="_blank" rel="noopener">YouTube ↗</a></div>
+  </div>
+</div>
+
+<div id="login" role="dialog" aria-modal="true" aria-labelledby="login-h" hidden>
+  <form class="login-card" id="login-form" autocomplete="off">
+    <h3 id="login-h">Admin access</h3>
+    <p>Enter your access key to open the site editor.</p>
+    <input type="password" id="login-key" placeholder="Access key" autocomplete="current-password" aria-label="Access key">
+    <div class="login-err" id="login-err" role="alert"></div>
+    <div class="login-row"><button type="button" class="btn btn-outline btn-sm" id="login-cancel">Cancel</button><button type="submit" class="btn btn-primary btn-sm">Unlock</button></div>
+  </form>
+</div>
+
+<aside id="drawer" aria-label="Site editor">
+  <div class="dr-head"><div><b>Site editor</b><small>Changes apply live · auto-commit to GitHub</small></div><div><button class="mini" id="dr-close" aria-label="Close editor">✕</button></div></div>
+  <div class="dr-tabs" id="dr-tabs" role="tablist"></div>
+  <div class="dr-body" id="dr-body"></div>
+  <div class="dr-foot"><span id="dr-status" class="mono">Ready</span><button class="btn btn-primary btn-sm" id="dr-save">Save now</button></div>
+</aside>
+
+
+<noscript><div class="wrap" style="padding:40px 0;text-align:center;position:relative;z-index:2"><a class="btn btn-primary" href="https://youtube.com/@gameexplorergamerz">Watch on YouTube</a></div></noscript>
+
+<!-- SITE CONFIG: edited by the admin panel and committed back to GitHub automatically. Do not rename this block. -->
+<script id="site-config" type="application/json">
+{
+  "adminHash": "2c61502cc8b2f87e43ad8a6239636907c2a4dcace24e4e3d6bec48a54c10f537",
+  "site": {
+    "brand1": "Gamers", "brand2": "Edge", "brandNum": "09",
+    "owner": "Ahnaf Labib",
+    "statusText": "Player 01 · Online",
+    "tagline1": "Gamers", "tagline2": "Edge 09",
+    "lead": "Gameplay, exploration and shorts across three channels. Fresh drops, zero filler. Hit subscribe and join the squad.",
+    "seoTitle": "Gamers Edge 09 — Ahnaf Labib | Gaming Videos & Shorts",
+    "seoDesc": "Gameplay, exploration and shorts by Ahnaf Labib across three YouTube channels. Watch the latest drops and join the squad.",
+    "heroImage": "1000018709.png",
+    "primaryUrl": "https://youtube.com/@gameexplorergamerz",
+    "subscribeLabel": "Subscribe", "joinLabel": "Join the squad", "watchLabel": "Watch latest", "enterLabel": "Enter channel",
+    "subscribers": "",
+    "navVideos": "Videos", "navChannels": "Channels", "navGames": "Games", "navAbout": "About",
+    "videosEyebrow": "Fresh loot", "videosTitle": "Latest", "videosAccent": "drops",
+    "channelsEyebrow": "Character select", "channelsTitle": "Pick your", "channelsAccent": "channel",
+    "gamesEyebrow": "Loadout", "gamesTitle": "Games I", "gamesAccent": "play",
+    "aboutEyebrow": "Player profile", "aboutTitle": "About", "aboutAccent": "Gamers Edge",
+    "aboutHead": "Play. Explore. Repeat.",
+    "aboutText": "Gamers Edge 09 is run by Ahnaf Labib — gameplay, open-world exploration and quick-hit shorts made to be watched in one sitting. Every channel has its own flavour, one home for all of it.",
+    "aboutHead2": "What to expect",
+    "ctaEyebrow": "Squad slots open",
+    "ctaTitle": "Don't miss\nthe next drop",
+    "ctaText": "Subscribe and turn on notifications so you're first in every new video.",
+    "ctaButton": "Join the squad →",
+    "footerText": "© {year} Ahnaf Labib · Gamers Edge 09"
+  },
+  "theme": {
+    "accent": "#ff2d55", "accent2": "#ff5c7a", "cyan": "#19e3ff", "bg": "#07070a", "card": "#12121a",
+    "radius": 10, "displayFont": "Barlow Condensed", "bodyFont": "Barlow",
+    "glass": true, "orbs": true, "blur": 22, "glassOpacity": 10,
+    "scanlines": false, "grain": true, "glitch": true, "spotlight": true, "xpbar": true,
+    "level": true, "achievements": true, "heroChips": true, "ticker": true
+  },
+  "sections": { "videos": true, "channels": true, "games": false, "about": true, "cta": true },
+  "ticker": ["Gaming", "Exploration", "Shorts", "New drops", "Gamers Edge 09", "Join the squad"],
+  "heroChips": ["● Gameplay", "★ Shorts", "◆ Exploration"],
+  "channels": [
+    { "name": "Explorer", "handle": "@gameexplorergamerz", "cls": "Class: Scout", "url": "https://youtube.com/@gameexplorergamerz", "desc": "The main channel. Gameplay, highlights and the best moments.",
+      "bars": [ { "l": "Gameplay", "v": 92 }, { "l": "Exploration", "v": 78 }, { "l": "Highlights", "v": 70 } ] },
+    { "name": "Verse", "handle": "@gameverseexplorergamer", "cls": "Class: Voyager", "url": "https://youtube.com/@gameverseexplorergamer", "desc": "Dive into more worlds, games and exploration content.",
+      "bars": [ { "l": "Gameplay", "v": 70 }, { "l": "Exploration", "v": 95 }, { "l": "New worlds", "v": 80 } ] },
+    { "name": "Craft", "handle": "@runtillcraft", "cls": "Class: Builder", "url": "https://youtube.com/@runtillcraft", "desc": "Build, survive and craft. Long sessions and creative runs.",
+      "bars": [ { "l": "Survival", "v": 75 }, { "l": "Building", "v": 90 }, { "l": "Long runs", "v": 88 } ] }
+  ],
+  "games": [],
+  "aboutStats": [ { "v": "3", "l": "Channels" }, { "v": "HD", "l": "Gameplay" }, { "v": "Often", "l": "New drops" } ],
+  "social": [],
+  "videos": { "channelId": "UCYzPXprvl5237A2OcGOmVDQ", "pageSize": 9, "showFeatured": true, "pinned": [] }
+}
+</script>
+
+<script>
+/* ============================================================
+   Gamers Edge — data-driven page + live admin editor
+   Config lives in the #site-config JSON block above.
+   The admin panel edits it live and commits it to GitHub.
+   ============================================================ */
+const $  = (s, r=document) => r.querySelector(s);
+const $$ = (s, r=document) => [...r.querySelectorAll(s)];
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const clone = o => JSON.parse(JSON.stringify(o));
+const safeGet = k => { try { return localStorage.getItem(k); } catch(e){ return null; } };
+const safeSet = (k,v) => { try { localStorage.setItem(k,v); } catch(e){} };
+const PLAY = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>';
+const thumb = id => `https://img.youtube.com/vi/${id}/hqdefault.jpg`;
+
+/* ---------- config ---------- */
+let CONFIG = JSON.parse($('#site-config').textContent);
+CONFIG.theme = Object.assign({glass:true, orbs:true, blur:22, glassOpacity:10}, CONFIG.theme);
+let SAVED  = JSON.stringify(CONFIG);              // last committed / loaded state
+const get = (p, o=CONFIG) => p.split('.').reduce((a,k) => a == null ? a : a[k], o);
+const set = (p, v) => { const ks = p.split('.'), last = ks.pop(); ks.reduce((a,k) => a[k], CONFIG)[last] = v; };
+
+const TEMPLATES = {
+  channels:   { name:'New channel', handle:'@handle', cls:'Class: Hero', url:'https://youtube.com/', desc:'Describe this channel.', bars:[{l:'Gameplay',v:80},{l:'Skill',v:70}] },
+  bars:       { l:'Stat', v:75 },
+  games:      { name:'Game name', tag:'Genre', url:'' },
+  ticker:     'New word',
+  heroChips:  '● New tag',
+  social:     { label:'TikTok', url:'https://' },
+  aboutStats: { v:'0', l:'Label' }
+};
+const PRESETS = [
+  { n:'Crimson', accent:'#ff2d55', accent2:'#ff5c7a', cyan:'#19e3ff' },
+  { n:'Violet',  accent:'#8b5cf6', accent2:'#a78bfa', cyan:'#22d3ee' },
+  { n:'Toxic',   accent:'#39ff14', accent2:'#86ff6b', cyan:'#00e5ff' },
+  { n:'Amber',   accent:'#ffb400', accent2:'#ffd04d', cyan:'#ff2d55' },
+  { n:'Ocean',   accent:'#3b82f6', accent2:'#60a5fa', cyan:'#19e3ff' },
+  { n:'Mono',    accent:'#f2f2f6', accent2:'#ffffff', cyan:'#9fa0ae' }
+];
+const FONTS_D = ['Barlow Condensed','Oswald','Rajdhani','Orbitron','Teko','Bebas Neue'];
+const FONTS_B = ['Barlow','Inter','Rajdhani','Roboto'];
+
+/* ---------- ids + time ---------- */
+const ID_RE = /(?:[?&]v=|youtu\.be\/|\/shorts\/|\/embed\/|\/live\/)([A-Za-z0-9_-]{11})/;
+const getId   = u => { const m = String(u).match(ID_RE); return m ? m[1] : null; };
+const isShort = u => /\/shorts\//.test(u);
+const toTime  = d => new Date(String(d).includes('T') ? d : String(d).replace(' ','T') + 'Z').getTime();
+const daysSince = d => Math.floor((Date.now() - toTime(d)) / 864e5);
+function timeAgo(d){
+  if (!d) return '';
+  const n = daysSince(d); if (isNaN(n)) return '';
+  if (n <= 0) return 'Today'; if (n === 1) return 'Yesterday';
+  if (n < 7) return n + ' days ago'; if (n < 30) return Math.floor(n/7) + 'w ago';
+  if (n < 365) return Math.floor(n/30) + 'mo ago'; return Math.floor(n/365) + 'y ago';
+}
+
+/* ---------- theme ---------- */
+const loadedFonts = new Set(['Barlow Condensed','Barlow']);
+function ensureFont(name){
+  if (!name || loadedFonts.has(name)) return; loadedFonts.add(name);
+  const l = document.createElement('link'); l.rel = 'stylesheet';
+  l.href = `https://fonts.googleapis.com/css2?family=${encodeURIComponent(name).replace(/%20/g,'+')}:wght@400;500;600;700;800&display=swap`;
+  document.head.appendChild(l);
+}
+function onColor(hex){
+  const m = /^#?([0-9a-f]{6})$/i.exec(hex || ''); if (!m) return '#fff';
+  const n = parseInt(m[1], 16), r = n >> 16 & 255, g = n >> 8 & 255, b = n & 255;
+  return (0.299*r + 0.587*g + 0.114*b) > 160 ? '#07070a' : '#ffffff';
+}
+function applyTheme(){
+  const t = CONFIG.theme, s = document.documentElement.style;
+  s.setProperty('--accent', t.accent); s.setProperty('--accent-2', t.accent2); s.setProperty('--cyan', t.cyan);
+  s.setProperty('--on-accent', onColor(t.accent));
+  s.setProperty('--bg', t.bg); s.setProperty('--card', t.card); s.setProperty('--radius', (t.radius ?? 10) + 'px');
+  s.setProperty('--display', `'${t.displayFont}',Impact,sans-serif`);
+  s.setProperty('--body', `'${t.bodyFont}',system-ui,sans-serif`);
+  ensureFont(t.displayFont); ensureFont(t.bodyFont);
+  const c = document.body.classList;
+  c.toggle('no-scan', !t.scanlines); c.toggle('no-grain', !t.grain); c.toggle('no-glitch', !t.glitch);
+  c.toggle('no-spot', !t.spotlight); c.toggle('no-xp', !t.xpbar); c.toggle('no-lvl', !t.level);
+  c.toggle('no-ach', !t.achievements); c.toggle('no-chips', !t.heroChips);
+  s.setProperty('--blur', (t.blur ?? 22) + 'px'); s.setProperty('--glass-a', String((t.glassOpacity ?? 10) / 100));
+  c.toggle('no-glass', t.glass === false); c.toggle('no-orbs', t.orbs === false);
+  $('meta[name=theme-color]').content = t.bg;
+  $('#ticker-wrap').hidden = !t.ticker;
+}
+
+/* ---------- text + content ---------- */
+let booted = false, heroPreview = '';
+function applyText(){
+  const yr = new Date().getFullYear();
+  $$('[data-t]').forEach(el => {
+    let v = get(el.dataset.t); v = v == null ? '' : String(v).replace('{year}', yr);
+    if (el.hasAttribute('data-ml')) el.innerHTML = esc(v).replace(/\n/g, '<br>'); else el.textContent = v;
+  });
+  $$('[data-href]').forEach(el => { el.href = (get(el.dataset.href) || '#') + (el.dataset.suffix || ''); });
+  $('.hero h1 em').dataset.text = CONFIG.site.tagline2;
+  $('#subs-stat').hidden = !CONFIG.site.subscribers;
+  $('#ch-count').textContent = (CONFIG.channels || []).length;
+  document.title = CONFIG.site.seoTitle;
+  $('meta[name=description]').content = CONFIG.site.seoDesc;
+  $('meta[property="og:title"]').content = CONFIG.site.seoTitle;
+  $('meta[property="og:description"]').content = CONFIG.site.seoDesc;
+  $('meta[property="og:image"]').content = CONFIG.site.heroImage;
+  const img = $('#hero-img'); img.style.display = ''; img.onerror = () => { img.style.display = 'none'; }; if (img.complete && !img.naturalWidth) img.style.display = 'none';
+  const src = heroPreview || CONFIG.site.heroImage; if (img.getAttribute('src') !== src) img.src = src;
+}
+function renderSections(){
+  const sec = CONFIG.sections, hasGames = (CONFIG.games || []).length > 0;
+  $$('[data-secbox]').forEach(el => { const k = el.dataset.secbox; el.hidden = !sec[k] || (k === 'games' && !hasGames); });
+  $$('.nav-links a[data-sec]').forEach(a => { const k = a.dataset.sec; a.hidden = !sec[k] || (k === 'games' && !hasGames); });
+}
+const rc = () => booted ? 'reveal in' : 'reveal';
+function renderTicker(){
+  const row = (CONFIG.ticker || []).map((w,i) => `<span class="${i % 2 ? '' : 'hot'}">${esc(w)}</span>`).join('');
+  $('#ticker').innerHTML = row + row + row + row;
+  $('#hero-chips').innerHTML = (CONFIG.heroChips || []).slice(0,3).map((t,i) => `<span class="chip-float mono i${i}">${esc(t)}</span>`).join('');
+}
+function renderChannels(){
+  $('#channels-list').innerHTML = (CONFIG.channels || []).map((c,i) => `
+    <a class="ch ${rc()}" href="${esc(c.url)}" target="_blank" rel="noopener">
+      <div class="top"><div class="num">${String(i+1).padStart(2,'0')}</div><span class="cls mono">${esc(c.cls)}</span></div>
+      <h3>${esc(c.name)}</h3><div class="handle">${esc(c.handle)}</div><p>${esc(c.desc)}</p>
+      <div class="bars mono">${(c.bars || []).map(b => `<div class="bar" style="--v:${Math.max(0, Math.min(100, Number(b.v) || 0))}"><span>${esc(b.l)}</span><i></i></div>`).join('')}</div>
+      <div class="go">${esc(CONFIG.site.enterLabel || 'Enter channel')} <span>→</span></div>
+    </a>`).join('');
+}
+function renderGames(){
+  $('#games-list').innerHTML = (CONFIG.games || []).map(g => {
+    const inner = `<span class="gname">${esc(g.name)}</span><span class="gtag mono">${esc(g.tag)}</span>`;
+    return g.url ? `<a class="game ${rc()}" href="${esc(g.url)}" target="_blank" rel="noopener">${inner}</a>` : `<div class="game ${rc()}">${inner}</div>`;
+  }).join('');
+}
+function renderAbout(){
+  $('#about-stats').innerHTML = (CONFIG.aboutStats || []).map(s => `<div class="stat"><strong>${esc(s.v)}</strong><span>${esc(s.l)}</span></div>`).join('');
+}
+function renderFooter(){
+  const links = [...(CONFIG.channels || []).map(c => ({label:c.name, url:c.url})), ...(CONFIG.social || [])];
+  $('#foot-links').innerHTML = links.map(l => `<a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)}</a>`).join('');
+}
+function applyAll(){
+  applyTheme(); applyText(); renderSections(); renderTicker(); renderChannels(); renderGames(); renderAbout(); renderFooter();
+  observeReveals();
+}
+
+/* ---------- achievements ---------- */
+let unlocked = []; try { unlocked = JSON.parse(safeGet('ge09_ach') || '[]'); } catch(e){}
+function achieve(key, icon, title, desc){
+  if (!CONFIG.theme.achievements || unlocked.includes(key)) return;
+  unlocked.push(key); safeSet('ge09_ach', JSON.stringify(unlocked));
+  const t = document.createElement('div'); t.className = 'toast';
+  t.innerHTML = `<span class="ico">${icon}</span><div><span class="mono">Achievement unlocked</span><b>${esc(title)}</b><small>${esc(desc)}</small></div>`;
+  $('#toasts').appendChild(t); setTimeout(() => t.remove(), 5200);
+}
+document.addEventListener('click', e => { if (e.target.closest('[data-sub]')) achieve('squad','🛡️','Squad Member','You joined the squad.'); });
+
+/* ---------- scroll, nav, reveal ---------- */
+const header = $('header'), xp = $('#xp i'), totop = $('#totop'), lvl = $('#lvl');
+function onScroll(){
+  const y = scrollY, max = document.documentElement.scrollHeight - innerHeight, p = max > 0 ? Math.min(1, y/max) : 0;
+  header.classList.toggle('scrolled', y > 20);
+  xp.style.transform = `scaleX(${p})`;
+  lvl.textContent = 'LVL ' + String(1 + Math.floor(p * 9)).padStart(2,'0');
+  totop.classList.toggle('show', y > 700);
+  if (p > .97) achieve('explorer','🧭','Explorer','You scrolled the whole page.');
+}
+addEventListener('scroll', onScroll, {passive:true});
+totop.addEventListener('click', () => scrollTo({top:0, behavior:'smooth'}));
+const secObs = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting) $$('.nav-links a[href^="#"]').forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id));
+}), {rootMargin:'-45% 0px -50% 0px'});
+['videos','channels','games','about'].forEach(id => secObs.observe(document.getElementById(id)));
+const burger = $('#burger'), nav = $('#nav-links');
+function setMenu(open){ nav.classList.toggle('open', open); burger.setAttribute('aria-expanded', open); burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu'); }
+burger.addEventListener('click', () => setMenu(!nav.classList.contains('open')));
+nav.addEventListener('click', e => { if (e.target.closest('a')) setMenu(false); });
+const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }), {threshold:.12});
+function observeReveals(){ $$('.reveal:not(.in)').forEach(el => io.observe(el)); }
+document.addEventListener('mousemove', e => {
+  const spot = $('#spot'), art = $('#hero-img');
+  spot.style.setProperty('--mx', e.clientX + 'px'); spot.style.setProperty('--my', e.clientY + 'px');
+  if (innerWidth < 900 || !art) return;
+  const x = e.clientX/innerWidth - .5, y = e.clientY/innerHeight - .5;
+  art.style.transform = `translate3d(${x*-16}px,${y*-9}px,0) rotate(${x*1.5}deg)`;
+}, {passive:true});
+
+/* ---------- video player modal ---------- */
+const modal = $('#modal'), box = $('#modal-box'), frame = $('#frame');
+let lastFocus = null;
+function openVideo(id, title, link, vertical){
+  lastFocus = document.activeElement;
+  box.classList.toggle('vertical', !!vertical);
+  frame.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&playsinline=1" title="${esc(title)}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`;
+  $('#modal-title').textContent = title; $('#modal-link').href = link;
+  modal.classList.add('open'); document.body.style.overflow = 'hidden'; $('#modal-close').focus();
+  achieve('firstwatch','🎮','Player One','You pressed play on your first video.');
+}
+function closeVideo(){
+  modal.classList.remove('open'); frame.innerHTML = ''; document.body.style.overflow = '';
+  if (lastFocus) lastFocus.focus();
+}
+$('#modal-close').addEventListener('click', closeVideo);
+modal.addEventListener('click', e => { if (e.target === modal) closeVideo(); });
+addEventListener('keydown', e => {
+  if (e.key === 'Escape'){ if (!$('#login').hidden) closeLogin(); else if (modal.classList.contains('open')) closeVideo(); else if (drawer.classList.contains('open')) closeDrawer(); }
+  if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'a'){ e.preventDefault(); adminLogin(); }
+});
+
+/* ---------- videos: feed + pinned ---------- */
+let FEED = [], filter = 'all', query = '', shown = 9;
+function cardEl(v){
+  const isNew = v.pub && daysSince(v.pub) <= 7;
+  const b = document.createElement('button');
+  b.type = 'button'; b.className = 'vcard ' + rc(); b.setAttribute('aria-label', 'Play ' + v.title);
+  b.innerHTML = `<div class="vthumb"><img src="${thumb(v.id)}" alt="" loading="lazy" decoding="async">
+    <div class="badges">${v.pinned ? '<span class="badge pinned">Pinned</span>' : ''}<span class="badge ${v.short ? 'short' : ''}">${v.short ? 'Short' : 'Video'}</span>${isNew ? '<span class="badge new">New</span>' : ''}</div><i>${PLAY}</i></div>
+    <div class="vinfo"><div class="vtitle">${esc(v.title)}</div><div class="vmeta">${v.pinned ? 'Pinned by creator' : timeAgo(v.pub)}</div></div>`;
+  b.addEventListener('click', () => openVideo(v.id, v.title, v.link, v.short));
+  return b;
+}
+function renderVideos(){
+  const V = CONFIG.videos, grid = $('#v-grid'), feat = $('#featured'), moreBtn = $('#more-btn');
+  const q = query.trim().toLowerCase(), match = v => (filter === 'all' || (filter === 'short') === v.short) && (!q || v.title.toLowerCase().includes(q));
+  const pinned = (V.pinned || []).map(p => ({id:p.id, title:p.title, link:p.url, short:isShort(p.url), pinned:true})).filter(match);
+  const list = FEED.filter(match);
+  grid.innerHTML = ''; feat.innerHTML = '';
+  const showFeat = V.showFeatured && list.length && filter === 'all' && !q;
+  const rest = showFeat ? list.slice(1) : list;
+  if (showFeat){
+    const f = list[0];
+    feat.innerHTML = `<div class="featured reveal in">
+      <button class="player" type="button" aria-label="Play ${esc(f.title)}"><img src="${thumb(f.id)}" alt=""><div class="play">${PLAY}</div></button>
+      <div class="feat-info"><span class="tag">Latest upload</span><h3>${esc(f.title)}</h3><small>${timeAgo(f.pub)}</small>
+        <div class="feat-actions"><button class="btn btn-primary btn-sm" data-play>▶ Watch here</button>
+        <a class="btn btn-outline btn-sm" href="${esc(f.link)}" target="_blank" rel="noopener">Open on YouTube ↗</a></div></div></div>`;
+    const go = () => openVideo(f.id, f.title, f.link, f.short);
+    $('.player', feat).addEventListener('click', go); $('[data-play]', feat).addEventListener('click', go);
+  }
+  pinned.forEach(v => grid.appendChild(cardEl(v)));
+  rest.slice(0, shown).forEach(v => grid.appendChild(cardEl(v)));
+  if (!grid.children.length){
+    grid.innerHTML = (FEED.length || (V.pinned || []).length)
+      ? '<div class="empty"><p>No videos match that. Try another search.</p></div>'
+      : `<div class="empty"><p>Live feed is taking a break. Catch every upload on YouTube.</p><a class="btn btn-primary btn-sm" href="${esc(CONFIG.site.primaryUrl)}" target="_blank" rel="noopener">Watch on YouTube ↗</a></div>`;
+  }
+  moreBtn.hidden = rest.length <= shown;
+  $('#vid-count').textContent = (FEED.length + pinned.length) || '—';
+  observeReveals();
+}
+$('#more-btn').addEventListener('click', () => { shown += CONFIG.videos.pageSize || 9; renderVideos(); });
+$$('.chip').forEach(c => c.addEventListener('click', () => {
+  filter = c.dataset.f; shown = CONFIG.videos.pageSize || 9;
+  $$('.chip').forEach(x => x.setAttribute('aria-pressed', x === c)); renderVideos();
+}));
+let qt; $('#q').addEventListener('input', e => { clearTimeout(qt); qt = setTimeout(() => { query = e.target.value; shown = CONFIG.videos.pageSize || 9; renderVideos(); }, 150); });
+
+const normalize = items => items.map(it => { const id = getId(it.link); return id ? {id, title:it.title, link:it.link, pub:it.pubDate, short:isShort(it.link)} : null; }).filter(Boolean);
+function setLive(){
+  const f = FEED[0]; if (!f || !f.pub) return; const d = daysSince(f.pub);
+  if (d >= 0 && d <= 7){ $('#live-text').textContent = d === 0 ? 'New drop today' : 'New this week'; $('#live-pill').hidden = false; } else $('#live-pill').hidden = true;
+}
+async function loadFeed(){
+  const cid = CONFIG.videos.channelId, ck = 'ge09_feed_' + cid;
+  const cached = safeGet(ck); if (cached){ try { FEED = JSON.parse(cached); renderVideos(); setLive(); } catch(e){} }
+  if (!cid){ FEED = []; renderVideos(); return; }
+  try {
+    const rss = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent('https://www.youtube.com/feeds/videos.xml?channel_id=' + cid)}&count=20`;
+    const ctrl = new AbortController(), to = setTimeout(() => ctrl.abort(), 9000);
+    const res = await fetch(rss, {signal:ctrl.signal}); clearTimeout(to);
+    const data = await res.json(); if (!data.items || !data.items.length) throw 0;
+    FEED = normalize(data.items); safeSet(ck, JSON.stringify(FEED)); renderVideos(); setLive();
+  } catch(e){ if (!FEED.length) renderVideos(); }
+}
+
+/* ============================================================
+   ADMIN: unlock, live editor drawer, GitHub auto-commit
+   ============================================================ */
+async function sha256(s){
+  if (!(window.crypto && crypto.subtle)) return null;
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(s));
+  return [...new Uint8Array(buf)].map(b => b.toString(16).padStart(2,'0')).join('');
+}
+const drawer = $('#drawer'), fab = $('#fab'), body = $('#dr-body'), statusEl = $('#dr-status');
+let tab = 'general', saveTimer = null, saving = false, queued = false;
+
+/* GitHub settings live in this browser only — never committed */
+let GH = Object.assign({owner:'', repo:'', branch:'main', path:'index.html', autosave:true, remember:true, verified:false}, (() => { try { return JSON.parse(safeGet('ge_gh') || '{}'); } catch(e){ return {}; } })());
+if (!GH.owner && /\.github\.io$/.test(location.hostname)){
+  GH.owner = location.hostname.split('.')[0];
+  const seg = location.pathname.split('/')[1] || ''; GH.repo = (seg && !seg.includes('.')) ? seg : GH.owner + '.github.io';
+}
+const getTok = () => safeGet('ge_tok') || sessionStorage.getItem('ge_tok') || '';
+function setTok(v){ try { localStorage.removeItem('ge_tok'); sessionStorage.removeItem('ge_tok'); } catch(e){} if (!v) return; if (GH.remember) safeSet('ge_tok', v); else sessionStorage.setItem('ge_tok', v); }
+const saveGH = () => safeSet('ge_gh', JSON.stringify(GH));
+
+function setStatus(msg, kind=''){
+  statusEl.textContent = msg; statusEl.className = 'mono ' + kind;
+  fab.classList.toggle('busy', kind === 'busy'); fab.classList.toggle('err', kind === 'err');
+}
+let loginFails = 0, lockUntil = 0;
+const checksHTML = () => [
+  ['Repository set', !!(GH.owner && GH.repo)],
+  ['Token pasted', !!getTok()],
+  ['Connection tested', !!GH.verified]
+].map(([l,ok]) => `<li class="${ok ? 'ok' : ''}"><b>${ok ? '✓' : '·'}</b>${l}</li>`).join('');
+function openLogin(){ $('#login').hidden = false; $('#login-err').textContent = ''; $('#login-key').value = ''; setTimeout(() => $('#login-key').focus(), 30); }
+function closeLogin(){ $('#login').hidden = true; }
+function adminLogin(){ if (sessionStorage.getItem('ge_unlocked') === '1') return openDrawer(); openLogin(); }
+$('#login-form').addEventListener('submit', async e => {
+  e.preventDefault();
+  const err = $('#login-err');
+  if (Date.now() < lockUntil){ err.textContent = 'Too many tries. Wait ' + Math.ceil((lockUntil - Date.now()) / 1000) + 's.'; return; }
+  const h = await sha256($('#login-key').value.trim());
+  if (h === null){ err.textContent = 'Open the page over HTTPS (your GitHub Pages link) or localhost so the key can be checked.'; return; }
+  if (h !== CONFIG.adminHash){
+    if (++loginFails >= 5){ lockUntil = Date.now() + 30000; loginFails = 0; }
+    err.textContent = 'Wrong key. Try again.'; $('#login-key').select(); return;
+  }
+  loginFails = 0; closeLogin(); sessionStorage.setItem('ge_unlocked', '1');
+  const d = safeGet('ge_draft');
+  if (d && d !== JSON.stringify(CONFIG) && d !== SAVED && confirm('Found unsaved local edits from earlier. Load them?')){ CONFIG = JSON.parse(d); applyAll(); renderVideos(); }
+  if (!getTok()) tab = 'github';
+  openDrawer();
+});
+$('#login-cancel').addEventListener('click', closeLogin);
+$('#login').addEventListener('click', e => { if (e.target.id === 'login') closeLogin(); });
+function openDrawer(){ drawer.classList.add('open'); fab.classList.remove('show'); renderTabs(); renderTab(); }
+function closeDrawer(){ drawer.classList.remove('open'); if (sessionStorage.getItem('ge_unlocked') === '1') fab.classList.add('show'); }
+$('#lock-btn').addEventListener('click', adminLogin);
+$('#dr-close').addEventListener('click', closeDrawer);
+fab.addEventListener('click', openDrawer);
+if (sessionStorage.getItem('ge_unlocked') === '1') fab.classList.add('show');
+
+/* ---- form helpers ---- */
+const fText = (p,l,h='',t='text') => `<div class="f"><label>${l}</label><input type="${t}" data-p="${p}" value="${esc(get(p) ?? '')}">${h ? `<small>${h}</small>` : ''}</div>`;
+const fArea = (p,l,rows=3,h='') => `<div class="f"><label>${l}</label><textarea rows="${rows}" data-p="${p}">${esc(get(p) ?? '')}</textarea>${h ? `<small>${h}</small>` : ''}</div>`;
+const fColor = (p,l) => `<div class="f"><label>${l}</label><input type="color" data-p="${p}" value="${esc(get(p) || '#000000')}"></div>`;
+const fNum = (p,l,min,max,step=1) => `<div class="f"><label>${l}</label><input type="number" data-p="${p}" min="${min}" max="${max}" step="${step}" value="${esc(get(p) ?? '')}"></div>`;
+const fRange = (p,l,min,max) => `<div class="f"><label>${l}: <b>${get(p)}</b></label><input type="range" data-p="${p}" min="${min}" max="${max}" value="${esc(get(p) ?? 0)}"></div>`;
+const fSel = (p,l,opts) => `<div class="f"><label>${l}</label><select data-p="${p}">${opts.map(o => `<option ${get(p) === o ? 'selected' : ''}>${esc(o)}</option>`).join('')}</select></div>`;
+const fTog = (p,l) => `<label class="sw"><input type="checkbox" data-p="${p}" ${get(p) ? 'checked' : ''}><i></i><span>${l}</span></label>`;
+const gText = (k,l,h='',t='text') => `<div class="f"><label>${l}</label><input type="${t}" data-g="${k}" value="${esc(k === 'token' ? getTok() : GH[k] ?? '')}" autocomplete="off" spellcheck="false">${h ? `<small>${h}</small>` : ''}</div>`;
+const gTog = (k,l) => `<label class="sw"><input type="checkbox" data-g="${k}" ${GH[k] ? 'checked' : ''}><i></i><span>${l}</span></label>`;
+const moveBtns = (p,i) => `<span><button class="mini" data-act="up" data-p="${p}" data-i="${i}" aria-label="Move up">↑</button><button class="mini" data-act="down" data-p="${p}" data-i="${i}" aria-label="Move down">↓</button><button class="mini danger" data-act="del" data-p="${p}" data-i="${i}" aria-label="Delete">✕</button></span>`;
+const listUI = (p, title, itemFn, addLabel) => `<div class="grp"><h5>${title}</h5>${(get(p) || []).map((it,i) => `<div class="li"><div class="li-head"><b>#${i+1}</b>${moveBtns(p,i)}</div>${itemFn(it, `${p}.${i}`, i)}</div>`).join('')}<button class="mini add" data-act="add" data-p="${p}">+ ${addLabel}</button></div>`;
+const grp = (t, inner) => `<div class="grp"><h5>${t}</h5>${inner}</div>`;
+
+/* ---- tabs ---- */
+const TABS = [['general','General'],['theme','Theme'],['sections','Sections'],['channels','Channels'],['videos','Videos'],['extras','Extras'],['github','GitHub'],['backup','Backup']];
+function renderTabs(){ $('#dr-tabs').innerHTML = TABS.map(([k,l]) => `<button class="dr-tab ${k === tab ? 'on' : ''}" role="tab" data-tab="${k}">${l}</button>`).join(''); }
+$('#dr-tabs').addEventListener('click', e => { const b = e.target.closest('[data-tab]'); if (b){ tab = b.dataset.tab; renderTabs(); renderTab(); } });
+
+const TAB_VIEWS = {
+  general: () =>
+    grp('Brand & hero',
+      `<div class="row3">${fText('site.brand1','Brand 1')}${fText('site.brand2','Brand 2 (colored)')}${fText('site.brandNum','Number')}</div>` +
+      fText('site.owner','Creator name') + fText('site.statusText','Status line') +
+      `<div class="row">${fText('site.tagline1','Title line 1')}${fText('site.tagline2','Title line 2 (colored)')}</div>` +
+      fArea('site.lead','Intro text',3) +
+      fText('site.heroImage','Hero image path or URL','e.g. 1000018709.png or https://… (or upload in the GitHub tab)') +
+      fText('site.subscribers','Subscriber count','Leave empty to hide, e.g. 12.4K')) +
+    grp('Buttons & links',
+      fText('site.primaryUrl','Main YouTube channel URL','Used by Subscribe / Join buttons','url') +
+      `<div class="row3">${fText('site.subscribeLabel','Subscribe label')}${fText('site.joinLabel','Join label')}${fText('site.watchLabel','Watch label')}</div>` +
+      fText('site.enterLabel','Channel card button')) +
+    grp('Navigation labels', `<div class="row">${fText('site.navVideos','Videos')}${fText('site.navChannels','Channels')}${fText('site.navGames','Games')}${fText('site.navAbout','About')}</div>`) +
+    grp('Section headings',
+      `<div class="row3">${fText('site.videosEyebrow','Videos tag')}${fText('site.videosTitle','Videos title')}${fText('site.videosAccent','Accent word')}</div>` +
+      `<div class="row3">${fText('site.channelsEyebrow','Channels tag')}${fText('site.channelsTitle','Channels title')}${fText('site.channelsAccent','Accent word')}</div>` +
+      `<div class="row3">${fText('site.gamesEyebrow','Games tag')}${fText('site.gamesTitle','Games title')}${fText('site.gamesAccent','Accent word')}</div>` +
+      `<div class="row3">${fText('site.aboutEyebrow','About tag')}${fText('site.aboutTitle','About title')}${fText('site.aboutAccent','Accent word')}</div>`) +
+    grp('About', fText('site.aboutHead','Left card title') + fArea('site.aboutText','Left card text',4) + fText('site.aboutHead2','Right card title')) +
+    grp('Call to action', fText('site.ctaEyebrow','Small tag') + fArea('site.ctaTitle','Headline',2,'Press Enter for a new line') + fArea('site.ctaText','Text',2) + fText('site.ctaButton','Button text')) +
+    grp('Footer & SEO', fText('site.footerText','Footer text','{year} becomes the current year') + fText('site.seoTitle','Browser / Google title') + fArea('site.seoDesc','Google description',3)),
+
+  theme: () =>
+    grp('Presets', `<div class="presets">${PRESETS.map((p,i) => `<button style="background:linear-gradient(135deg,${p.accent} 55%,${p.cyan} 55%)" title="${p.n}" aria-label="${p.n} preset" data-act="preset" data-i="${i}"></button>`).join('')}</div>`) +
+    grp('Colors', `<div class="row3">${fColor('theme.accent','Main')}${fColor('theme.accent2','Light')}${fColor('theme.cyan','Highlight')}</div><div class="row">${fColor('theme.bg','Background')}${fColor('theme.card','Cards')}</div>`) +
+    grp('Liquid glass', fTog('theme.glass','Liquid glass surfaces') + fTog('theme.orbs','Glowing background orbs') + fRange('theme.blur','Glass blur',0,50) + fRange('theme.glassOpacity','Glass opacity %',2,40)) +
+    grp('Shape & fonts', fRange('theme.radius','Corner radius (video cards)',0,28) + fSel('theme.displayFont','Heading font',FONTS_D) + fSel('theme.bodyFont','Body font',FONTS_B)) +
+    grp('Effects',
+      fTog('theme.scanlines','CRT scanlines') + fTog('theme.grain','Film grain') + fTog('theme.glitch','Glitch title') + fTog('theme.spotlight','Mouse spotlight') +
+      fTog('theme.xpbar','XP progress bar') + fTog('theme.level','Level badge in nav') + fTog('theme.achievements','Achievement popups') + fTog('theme.heroChips','Floating hero tags') + fTog('theme.ticker','Scrolling ticker')),
+
+  sections: () =>
+    grp('Show / hide sections', fTog('sections.videos','Videos') + fTog('sections.channels','Channels') + fTog('sections.games','Games (needs at least 1 game in Extras)') + fTog('sections.about','About') + fTog('sections.cta','Call-to-action banner')) +
+    `<div class="note">Section order is fixed. Hiding a section also hides its menu link.</div>`,
+
+  channels: () =>
+    listUI('channels','Channel cards', (c,p) =>
+      fText(p+'.name','Name') + fText(p+'.handle','Handle') + fText(p+'.cls','Class tag') + fText(p+'.url','Channel URL','','url') + fArea(p+'.desc','Description',2) +
+      listUI(p+'.bars','Stat bars', (b,bp) => `<div class="row">${fText(bp+'.l','Label')}${fNum(bp+'.v','Value 0-100',0,100)}</div>`, 'Add stat bar'), 'Add channel'),
+
+  videos: () =>
+    grp('Feed', fText('videos.channelId','YouTube channel ID','Starts with UC… Changing it reloads the feed') + fNum('videos.pageSize','Cards per page',3,30) + fTog('videos.showFeatured','Big featured latest video')) +
+    grp('Add pinned video', `<div class="f"><label>YouTube URL (video or short)</label><input type="url" id="pin-url" placeholder="https://youtube.com/watch?v=…"></div><div class="f"><label>Title</label><input type="text" id="pin-title" placeholder="Video title"></div><button class="mini add" data-act="pin-add">+ Pin video</button>`) +
+    listUI('videos.pinned','Pinned videos (show first)', (v,p) => `<div class="pv"><img src="${thumb(v.id)}" alt="" onerror="this.style.visibility='hidden'"><span style="color:var(--muted);font-size:.74rem">${esc(v.id)}</span></div>${fText(p+'.title','Title')}${fText(p+'.url','URL','','url')}`, 'Pin another (use form above)'),
+
+  extras: () =>
+    listUI('games','Games (shows the Games section)', (g,p) => `<div class="row">${fText(p+'.name','Game')}${fText(p+'.tag','Tag / genre')}</div>${fText(p+'.url','Link (optional)','','url')}`, 'Add game') +
+    listUI('aboutStats','About stats', (s,p) => `<div class="row">${fText(p+'.v','Value')}${fText(p+'.l','Label')}</div>`, 'Add stat') +
+    listUI('ticker','Ticker words', (w,p) => fText(p,'Word'), 'Add word') +
+    listUI('heroChips','Floating hero tags (first 3 shown)', (w,p) => fText(p,'Tag'), 'Add tag') +
+    listUI('social','Extra footer links (TikTok, Instagram…)', (s,p) => `<div class="row">${fText(p+'.label','Label')}${fText(p+'.url','URL','','url')}</div>`, 'Add link'),
+
+  github: () =>
+    `<ul class="chk" id="chk">${checksHTML()}</ul>` +
+    `<div class="note"><b>How auto-save works:</b> every change is committed into this page's own HTML file in your GitHub repo (only the settings block changes). GitHub Pages redeploys in about a minute. <b>Before this works, upload this page to your repo as index.html.</b></div>` +
+    grp('Step 1 · Create a token', `<ol class="steps"><li>Press the button. GitHub opens the token page.</li><li><b>Token name:</b> gamers-edge. <b>Expiration:</b> 90 days is fine.</li><li><b>Repository access → Only select repositories</b> → pick your site repo.</li><li><b>Permissions → Repository permissions → Contents → Read and write.</b></li><li>Press <b>Generate token</b> and copy it (starts with <b>github_pat_</b>).</li></ol><button class="mini add" data-act="tok-open" type="button">Open GitHub token page ↗</button>`) +
+    grp('Step 2 · Your repository', `<div class="row">${gText('owner','Owner (username)')}${gText('repo','Repository')}</div><div class="row">${gText('branch','Branch','Auto-fixed if wrong')}${gText('path','File path')}</div>`) +
+    grp('Step 3 · Paste the token', `<div class="f"><label>Personal access token</label><div class="tokrow"><input type="password" data-g="token" value="${esc(getTok())}" autocomplete="off" spellcheck="false" placeholder="github_pat_…"><button class="mini" data-act="tok-show" type="button">Show</button><button class="mini" data-act="tok-paste" type="button">Paste</button></div><small>Stays in this browser only. It is never written into the page or the repo.</small></div>` + gTog('remember','Remember token on this device') + gTog('autosave','Auto-commit every change (2.5 s after you stop typing)')) +
+    `<div class="btnrow"><button class="mini" data-act="gh-test" type="button">Save &amp; test connection</button><button class="mini" data-act="gh-save" type="button">Commit now</button></div>` +
+    grp('Upload hero image', `<div class="f"><label>Pick an image (PNG / JPG / WebP, max 5 MB). It is committed to <b>assets/</b> and set as the hero.</label><input type="file" id="hero-file" accept="image/png,image/jpeg,image/webp"></div>`),
+
+  backup: () =>
+    grp('Backup', `<div class="btnrow"><button class="mini" data-act="export">Download settings (.json)</button><button class="mini" data-act="copy">Copy settings</button><button class="mini" data-act="discard">Discard unsaved changes</button></div><div class="f"><label>Import settings file</label><input type="file" id="import-file" accept="application/json"></div>`) +
+    grp('Admin key', `<div class="f"><label>New admin key</label><input type="password" id="new-key" placeholder="At least 6 characters" autocomplete="new-password"></div><button class="mini add" data-act="key">Change admin key</button><div class="note warn" style="margin-top:12px">The key only hides the editor. What really protects your repo is the GitHub token — nobody can commit without it.</div>`) +
+    grp('Session', `<div class="btnrow"><button class="mini" data-act="lock">Lock editor</button></div>`)
+};
+function renderTab(){ const y = body.scrollTop; body.innerHTML = TAB_VIEWS[tab](); body.scrollTop = y; }
+
+/* ---- live editing ---- */
+function onChange(p){
+  const m = /^videos\.pinned\.(\d+)\.url$/.exec(p);
+  if (m){ const it = CONFIG.videos.pinned[+m[1]]; it.id = getId(it.url) || it.id; }
+  applyAll();
+  if (p.startsWith('videos') || p.startsWith('sections')) renderVideos();
+  scheduleSave();
+}
+body.addEventListener('input', e => {
+  const el = e.target;
+  if (el.dataset.g){
+    const k = el.dataset.g;
+    if (k === 'token') setTok(el.value.trim()); else GH[k] = el.type === 'checkbox' ? el.checked : el.value.trim();
+    if (k === 'remember') setTok(getTok() || safeGet('ge_tok') || '');
+    if (k !== 'autosave' && k !== 'remember') GH.verified = false;
+    saveGH(); const ck = $('#chk'); if (ck) ck.innerHTML = checksHTML(); return;
+  }
+  const p = el.dataset.p; if (!p) return;
+  const v = el.type === 'checkbox' ? el.checked : (el.type === 'number' || el.type === 'range') ? Number(el.value) : el.value;
+  set(p, v); onChange(p);
+  if (el.type === 'range'){ const lab = el.closest('.f').querySelector('label b'); if (lab) lab.textContent = v; }
+});
+body.addEventListener('change', e => {
+  const el = e.target;
+  if (el.dataset.p === 'videos.channelId'){ FEED = []; loadFeed(); }
+  if (el.id === 'hero-file' && el.files[0]) uploadHero(el.files[0]);
+  if (el.id === 'import-file' && el.files[0]) importFile(el.files[0]);
+});
+body.addEventListener('click', async e => {
+  const b = e.target.closest('[data-act]'); if (!b) return;
+  const act = b.dataset.act, p = b.dataset.p, i = Number(b.dataset.i);
+  if (act === 'add' || act === 'del' || act === 'up' || act === 'down'){
+    const arr = get(p); if (!Array.isArray(arr)) return;
+    if (act === 'add'){ if (p === 'videos.pinned') return setStatus('Use the form above to pin a video', 'err'); arr.push(clone(TEMPLATES[p.split('.').pop()])); }
+    if (act === 'del') arr.splice(i, 1);
+    if (act === 'up' && i > 0) [arr[i-1], arr[i]] = [arr[i], arr[i-1]];
+    if (act === 'down' && i < arr.length - 1) [arr[i+1], arr[i]] = [arr[i], arr[i+1]];
+    renderTab(); onChange(p); return;
+  }
+  if (act === 'pin-add'){
+    const url = $('#pin-url').value.trim(), title = $('#pin-title').value.trim(), id = getId(url);
+    if (!id || !title) return setStatus('Enter a valid YouTube URL and a title', 'err');
+    CONFIG.videos.pinned.unshift({id, url, title, ts:Date.now()}); renderTab(); onChange('videos.pinned'); return;
+  }
+  if (act === 'preset'){ const pr = PRESETS[i]; Object.assign(CONFIG.theme, {accent:pr.accent, accent2:pr.accent2, cyan:pr.cyan}); renderTab(); onChange('theme'); return; }
+  if (act === 'tok-open') return void window.open('https://github.com/settings/personal-access-tokens/new', '_blank', 'noopener');
+  if (act === 'tok-show'){ const inp = $('[data-g=token]'); const show = inp.type === 'password'; inp.type = show ? 'text' : 'password'; b.textContent = show ? 'Hide' : 'Show'; return; }
+  if (act === 'tok-paste'){
+    try { const t = (await navigator.clipboard.readText()).trim(); if (!t) return setStatus('Clipboard is empty', 'err'); setTok(t); GH.verified = false; saveGH(); renderTab(); setStatus('Token pasted. Now press Save & test.', 'ok'); }
+    catch(err){ setStatus('Browser blocked paste. Paste into the box with Ctrl+V.', 'err'); }
+    return;
+  }
+  if (act === 'gh-test') return testGH();
+  if (act === 'gh-save') return pushToGitHub();
+  if (act === 'export'){ const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([JSON.stringify(CONFIG, null, 2)], {type:'application/json'})); a.download = 'gamers-edge-settings.json'; a.click(); return; }
+  if (act === 'copy'){ try { await navigator.clipboard.writeText(JSON.stringify(CONFIG, null, 2)); setStatus('Settings copied', 'ok'); } catch(err){ setStatus('Copy blocked by browser', 'err'); } return; }
+  if (act === 'discard'){ if (!confirm('Throw away all unsaved changes?')) return; CONFIG = JSON.parse(SAVED); safeSet('ge_draft', ''); applyAll(); renderVideos(); renderTab(); setStatus('Reverted to last saved', 'ok'); return; }
+  if (act === 'key'){
+    const k = $('#new-key').value.trim(); if (k.length < 6) return setStatus('Key must be 6+ characters', 'err');
+    const h = await sha256(k); if (!h) return setStatus('Needs HTTPS to hash the key', 'err');
+    CONFIG.adminHash = h; $('#new-key').value = ''; scheduleSave(); setStatus('Key changed — saving…', 'busy'); return;
+  }
+  if (act === 'lock'){ sessionStorage.removeItem('ge_unlocked'); drawer.classList.remove('open'); fab.classList.remove('show'); }
+});
+function importFile(file){
+  const r = new FileReader();
+  r.onload = () => { try { const c = JSON.parse(r.result); if (!c.site || !c.theme) throw 0; CONFIG = c; applyAll(); renderVideos(); loadFeed(); renderTab(); scheduleSave(); } catch(e){ setStatus('Not a valid settings file', 'err'); } };
+  r.readAsText(file);
+}
+
+/* ---- GitHub commit ---- */
+const b64enc = s => { const bytes = new TextEncoder().encode(s); let bin = ''; bytes.forEach(c => bin += String.fromCharCode(c)); return btoa(bin); };
+const b64dec = s => new TextDecoder().decode(Uint8Array.from(atob(s.replace(/\s/g, '')), c => c.charCodeAt(0)));
+const buf2b64 = buf => { const u = new Uint8Array(buf); let bin = ''; for (let i = 0; i < u.length; i += 0x8000) bin += String.fromCharCode.apply(null, u.subarray(i, i + 0x8000)); return btoa(bin); };
+async function gh(method, url, payload){
+  const tok = getTok(); if (!tok) throw Object.assign(new Error('Add a GitHub token in the GitHub tab first'), {status:0});
+  if (!GH.owner || !GH.repo) throw Object.assign(new Error('Set owner and repository in the GitHub tab'), {status:0});
+  const r = await fetch('https://api.github.com' + url, {method, headers:{'Authorization':'Bearer ' + tok, 'Accept':'application/vnd.github+json', 'X-GitHub-Api-Version':'2022-11-28', ...(payload ? {'Content-Type':'application/json'} : {})}, body: payload ? JSON.stringify(payload) : undefined});
+  const data = await r.json().catch(() => ({}));
+  if (!r.ok) throw Object.assign(new Error(data.message || ('HTTP ' + r.status)), {status:r.status});
+  return data;
+}
+const fileUrl = path => `/repos/${GH.owner}/${GH.repo}/contents/${path.split('/').map(encodeURIComponent).join('/')}`;
+function injectConfig(html){
+  const re = /(<script id="site-config" type="application\/json">)([\s\S]*?)(<\/script>)/;
+  if (!re.test(html)) return null;
+  const json = JSON.stringify(CONFIG, null, 2).replace(/</g, '\\u003c');
+  return html.replace(re, (m, a, _x, c) => a + '\n' + json + '\n' + c);
+}
+async function testGH(){
+  const tok = getTok();
+  if (!tok) return setStatus('Paste your token first (Step 3)', 'err');
+  if (!/^(github_pat_|ghp_|gho_|ghu_|ghs_)/.test(tok)) return setStatus('That does not look like a GitHub token. It should start with github_pat_', 'err');
+  setStatus('Testing connection…', 'busy');
+  try {
+    const r = await gh('GET', `/repos/${GH.owner}/${GH.repo}`);
+    if (!(r.permissions && r.permissions.push)){
+      GH.verified = false; saveGH();
+      setStatus(`Token can read ${r.full_name} but not write. Give it Contents: Read and write.`, 'err');
+    } else {
+      let f;
+      try { f = await gh('GET', fileUrl(GH.path) + `?ref=${encodeURIComponent(GH.branch)}`); }
+      catch(e){
+        if (e.status === 404 && r.default_branch && r.default_branch !== GH.branch){ GH.branch = r.default_branch; f = await gh('GET', fileUrl(GH.path) + `?ref=${encodeURIComponent(GH.branch)}`); }
+        else throw e;
+      }
+      GH.verified = true; saveGH();
+      setStatus(`Connected to ${r.full_name} · ${f.path} found · write access OK`, 'ok');
+    }
+  } catch(e){
+    GH.verified = false; saveGH();
+    setStatus(e.status === 401 ? 'Token invalid or expired' : e.status === 404 ? `Not found. Check owner/repo, and that ${GH.path} is uploaded to the repo.` : 'Test failed: ' + e.message, 'err');
+  }
+  const ck = $('#chk'); if (ck) ck.innerHTML = checksHTML();
+  if (tab === 'github'){ const y = body.scrollTop; renderTab(); body.scrollTop = y; }
+}
+async function pushToGitHub(){
+  clearTimeout(saveTimer);
+  if (saving){ queued = true; return; }
+  saving = true; setStatus('Committing to GitHub…', 'busy');
+  try {
+    for (let attempt = 0; attempt < 2; attempt++){
+      const file = await gh('GET', fileUrl(GH.path) + `?ref=${encodeURIComponent(GH.branch)}`);
+      const next = injectConfig(b64dec(file.content));
+      if (!next) throw new Error(`"${GH.path}" in the repo has no site-config block. Upload this page to the repo first.`);
+      try {
+        await gh('PUT', fileUrl(GH.path), {message:'Update site settings via admin panel', content:b64enc(next), sha:file.sha, branch:GH.branch});
+        SAVED = JSON.stringify(CONFIG); safeSet('ge_draft', '');
+        setStatus('Saved to GitHub ✓ ' + new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'}) + ' · live in ~1 min', 'ok');
+        break;
+      } catch(e){ if (e.status === 409 && attempt === 0) continue; throw e; }
+    }
+  } catch(e){
+    const hint = e.status === 401 ? 'Token invalid or expired' : e.status === 403 || e.status === 404 ? 'No access — check token scope, repo name, path' : e.message;
+    setStatus('GitHub error
