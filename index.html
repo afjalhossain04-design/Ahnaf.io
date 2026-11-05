@@ -1271,7 +1271,11 @@ async function pushToGitHub(){
       } catch(e){ if (e.status === 409 && attempt === 0) continue; throw e; }
     }
   } catch(e){
-    const hint = e.status === 401 ? 'Token invalid or expired' : e.status === 403 || e.status === 404 ? 'No access — check token scope, repo name, path' : e.message;
+    const where = `${GH.owner}/${GH.repo} · ${GH.path} · ${GH.branch}`;
+    const hint = e.status === 401 ? 'Token invalid, expired or revoked. Make a new one.'
+      : e.status === 403 ? 'Token has no write permission. Set Contents: Read and write. (' + e.message + ')'
+      : e.status === 404 ? 'Not found: ' + where + '. Check the owner/repo spelling, that the file is uploaded, and that the token was given access to THIS repo.'
+      : e.message;
     setStatus('GitHub error: ' + hint, 'err');
   } finally { saving = false; if (queued){ queued = false; pushToGitHub(); } }
 }
@@ -1287,8 +1291,8 @@ async function uploadHero(file){
 function scheduleSave(){
   safeSet('ge_draft', JSON.stringify(CONFIG));
   clearTimeout(saveTimer);
-  if (GH.autosave && getTok()){ setStatus('Unsaved changes — auto-saving…', 'busy'); saveTimer = setTimeout(pushToGitHub, 2500); }
-  else setStatus(getTok() ? 'Unsaved — click Save now' : 'Saved in this browser only — add a GitHub token to publish', 'err');
+  if (GH.autosave && getTok() && GH.verified){ setStatus('Unsaved changes — auto-saving…', 'busy'); saveTimer = setTimeout(pushToGitHub, 2500); }
+  else setStatus(!getTok() ? 'Saved in this browser only — add a GitHub token to publish' : GH.verified ? 'Unsaved — click Save now' : 'Unsaved — open the GitHub tab and press Save & test connection first', 'err');
 }
 $('#dr-save').addEventListener('click', () => { if (getTok()) pushToGitHub(); else { setStatus('Add a GitHub token first (GitHub tab)', 'err'); tab = 'github'; renderTabs(); renderTab(); } });
 addEventListener('beforeunload', e => { if (saveTimer || saving){ e.preventDefault(); e.returnValue = ''; } });
